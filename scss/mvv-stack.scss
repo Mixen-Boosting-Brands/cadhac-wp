@@ -1,0 +1,70 @@
+.cards-stack {
+    position: relative;
+    min-height: 660px;
+
+    &__card {
+        /* Layout */
+        pointer-events: auto;
+        position: absolute !important; // override Bootstrap .card
+        top: 0;
+        left: 0;
+        width: 100%;
+        cursor: pointer;
+
+        /* Stack positioning */
+        transform: translateY(calc(var(--i) * 155px));
+        z-index: calc(10 - var(--i));
+
+        /* Visual */
+        background: #fafafa;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+
+        /* Motion */
+        transition:
+            transform 280ms ease,
+            box-shadow 280ms ease,
+            background-color 200ms ease;
+
+        /* Separator cue for stacked cards */
+        &:not(.is-active) {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+
+            &::after {
+                content: "";
+                position: absolute;
+                left: 1.5rem;
+                right: 1.5rem;
+                bottom: 0;
+                height: 1px;
+                background: rgba(0, 0, 0, 0.06);
+            }
+        }
+
+        /* Depth by index (visual clarity) */
+        &[data-index="1"] {
+            box-shadow: 0 18px 35px rgba(0, 0, 0, 0.14);
+        }
+
+        &[data-index="2"] {
+            box-shadow: 0 26px 50px rgba(0, 0, 0, 0.18);
+        }
+
+        /* Active state */
+        &.is-active {
+            z-index: 999;
+            background: #ffffff;
+            transform: translateY(calc(var(--i) * 155px)) scale(1.02);
+            box-shadow: 0 30px 75px rgba(0, 0, 0, 0.22);
+        }
+    }
+
+    &-indicator {
+        position: absolute;
+        bottom: -2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: #6b6b6b;
+    }
+}
