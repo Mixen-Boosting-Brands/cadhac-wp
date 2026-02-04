@@ -65,9 +65,15 @@
                     <img
                         class="logo img-fluid"
                         alt=""
-                        src="./assets/images/logo-light@2x.png"
-                        data-theme-light="./assets/images/logo-light@2x.png"
-                        data-theme-dark="./assets/images/logo-dark@2x.png"
+                        src="<?php echo esc_url(
+                            get_template_directory_uri(),
+                        ); ?>/assets/images/logo-light@2x.png"
+                        data-theme-light="<?php echo esc_url(
+                            get_template_directory_uri(),
+                        ); ?>/assets/images/logo-light@2x.png"
+                        data-theme-dark="<?php echo esc_url(
+                            get_template_directory_uri(),
+                        ); ?>/assets/images/logo-dark@2x.png"
                     />
                 </a>
                 <nav role="navigation">
@@ -182,9 +188,15 @@
                                     id="logo-navbar"
                                     class="logo img-fluid"
                                     alt=""
-                                    src="./assets/images/logo-light@2x.png"
-                                    data-theme-light="./assets/images/logo-light@2x.png"
-                                    data-theme-dark="./assets/images/logo-dark@2x.png"
+                                    src="<?php echo esc_url(
+                                        get_template_directory_uri(),
+                                    ); ?>/assets/images/logo-light@2x.png"
+                                    data-theme-light="<?php echo esc_url(
+                                        get_template_directory_uri(),
+                                    ); ?>/assets/images/logo-light@2x.png"
+                                    data-theme-dark="<?php echo esc_url(
+                                        get_template_directory_uri(),
+                                    ); ?>/assets/images/logo-dark@2x.png"
                                 />
                             </a>
                         </div>
