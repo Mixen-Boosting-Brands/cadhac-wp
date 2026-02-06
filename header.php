@@ -79,43 +79,43 @@
                 <nav role="navigation">
                     <ul id="navmenu" class="list-unstyled mb-0">
                         <li>
-                            <a class="anchor" id="btn-nav-1" href="#"
+                            <a href="#"
                                 >Inicio</a
                             >
                         </li>
                         <li>
-                            <a class="anchor" id="btn-nav-2" href="#"
+                            <a href="#"
                                 >Noticias</a
                             >
                         </li>
                         <li>
-                            <a class="anchor" id="btn-nav-3" href="#"
+                            <a href="#"
                                 >Historia</a
                             >
                         </li>
                         <li>
-                            <a class="anchor" id="btn-nav-4" href="#"
+                            <a href="#"
                                 >Trabajo</a
                             >
                         </li>
                         <li>
-                            <a class="anchor" id="btn-nav-5" href="#">Amores</a>
+                            <a href="#">Amores</a>
                         </li>
                         <li>
-                            <a class="anchor" id="btn-nav-6" href="#"
+                            <a href="#"
                                 >Mediateca</a
                             >
                         </li>
                         <li>
-                            <a class="anchor" id="btn-nav-7" href="#"
+                            <a href="#"
                                 >Vacantes</a
                             >
                         </li>
                         <li>
-                            <a class="anchor" id="btn-nav-8" href="#">Prensa</a>
+                            <a href="#">Prensa</a>
                         </li>
                         <li>
-                            <a class="anchor" id="btn-nav-9" href="#"
+                            <a href="#"
                                 >Contacto</a
                             >
                         </li>
@@ -204,9 +204,11 @@
                             <nav class="d-none d-lg-block" role="navigation">
                                 <ul class="list-inline mb-0">
                                     <li class="list-inline-item">
-                                        <a class="active rounded-pill" href="<?php echo esc_url(
-                                            home_url(),
-                                        ); ?>"
+                                        <a class="<?php if (
+                                            is_home()
+                                        ): ?>active<?php endif; ?> rounded-pill" href="<?php echo esc_url(
+     home_url(),
+ ); ?>"
                                             >Inicio</a
                                         >
                                     </li>
@@ -226,7 +228,9 @@
                                         >
                                     </li>
                                     <li class="list-inline-item">
-                                        <a class="rounded-pill" href="#"
+                                        <a class="<?php if (
+                                            is_page(2214)
+                                        ): ?>active bg-highlighted<?php endif; ?>rounded-pill" href="#"
                                             >Amores</a
                                         >
                                     </li>
