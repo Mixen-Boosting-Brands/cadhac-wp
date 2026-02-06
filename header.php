@@ -172,7 +172,7 @@
                         <div class="col-6 col-md-3">
                             <a class="rounded-pill" href="#" target="_blank">
                                 <i class="fa-solid fa-hand-holding-heart"></i>
-                                ¡Quiero ayudar!
+                                Quiero ayudar
                             </a>
                         </div>
                     </div>
