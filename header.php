@@ -1,5 +1,5 @@
 <!doctype html>
-<html <?php language_attributes(); ?> id="html-root" data-bs-theme="light">
+<html <?php language_attributes(); ?>
     <head>
         <meta charset="<?php bloginfo("charset"); ?>" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
