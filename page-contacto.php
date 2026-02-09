@@ -102,7 +102,9 @@ get_header(); ?>
                             class="col-3 col-sm-2 col-lg-3 text-center"
                         >
                             <img
-                                src="assets/images/contacto/ico-1@2x.png"
+                                src="<?php echo esc_url(
+                                    get_template_directory_uri(),
+                                ); ?>/assets/images/contacto/ico-1@2x.png"
                                 alt="Teléfono general"
                                 class="ico"
                             />
@@ -121,7 +123,9 @@ get_header(); ?>
                             class="col-3 col-sm-2 col-lg-3 text-center"
                         >
                             <img
-                                src="assets/images/contacto/ico-2@2x.png"
+                                src="<?php echo esc_url(
+                                    get_template_directory_uri(),
+                                ); ?>/assets/images/contacto/ico-2@2x.png"
                                 alt="Ubicación"
                                 class="ico"
                             />
@@ -139,7 +143,9 @@ get_header(); ?>
                             class="col-3 col-sm-2 col-lg-3 text-center"
                         >
                             <img
-                                src="assets/images/contacto/ico-3@2x.png"
+                                src="<?php echo esc_url(
+                                    get_template_directory_uri(),
+                                ); ?>/assets/images/contacto/ico-3@2x.png"
                                 alt="Horario de atención"
                                 id="ico-horario"
                                 class="ico"
