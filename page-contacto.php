@@ -110,7 +110,7 @@ get_header(); ?>
                             />
                         </div>
                         <div class="col-9 col-sm-10 col-lg-9">
-                            <h4>Teléfono generall:</h4>
+                            <h4>Teléfono general:</h4>
                             <p>
                                 <a href="tel:+558183435058"
                                     >+55 81 8343 5058</a
