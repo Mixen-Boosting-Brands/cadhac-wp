@@ -546,3 +546,9 @@ function html5_shortcode_demo_2( $atts, $content = null ) {
 
     return null;
 }
+
+/*------------------------------------*\
+    Custom Helpers
+\*------------------------------------*/
+
+require get_template_directory() . '/inc/acf-helpers.php';
