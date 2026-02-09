@@ -5,7 +5,7 @@ Template Name: Prensa
 get_header(); ?>
 
 <?php get_template_part("template-parts/banners/banner-options", null, [
-    "handle" => "pagina_contacto",
+    "handle" => "pagina_prensa",
 ]); ?>
 
 <section class="pt-60 pb-30">
