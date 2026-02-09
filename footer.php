@@ -171,7 +171,9 @@
                                                     <a href="#">Trabajo</a>
                                                 </li>
                                                 <li>
-                                                    <a href="#">Amores</a>
+                                                    <a href="<?php echo esc_url(
+                                                        get_permalink(2214),
+                                                    ); ?>">Amores</a>
                                                 </li>
                                             </ul>
                                         </nav>
@@ -189,7 +191,9 @@
                                                     <a href="#">Prensa</a>
                                                 </li>
                                                 <li>
-                                                    <a href="#">Contacto</a>
+                                                    <a href="<?php echo esc_url(
+                                                        get_permalink(5334),
+                                                    ); ?>">Contacto</a>
                                                 </li>
                                             </ul>
                                         </nav>
@@ -228,7 +232,9 @@
                     <div class="col-12 text-center">
                         <p>
                             <small>
-                                <a href="#">Aviso de Privacidad</a> | Design by:
+                                <a href="<?php echo esc_url(
+                                    get_permalink(2931),
+                                ); ?>">Aviso de Privacidad</a> | Design by:
                                 <a href="https://mixen.mx/" target="_blank"
                                     >Mixen</a
                                 >
