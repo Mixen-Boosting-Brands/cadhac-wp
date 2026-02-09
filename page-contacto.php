@@ -45,72 +45,9 @@ get_header(); ?>
                 </p>
             </div>
             <div class="col-lg-6">
-                <div
-                    class="card card-contacto rounded-5 mb-4 mb-lg-0 p-4"
-                    data-aos="fade-up"
-                    data-aos-duration="1000"
-                    data-aos-delay="100"
-                >
-                    <div class="row mb-md-3">
-                        <div
-                            class="col-3 col-sm-2 col-lg-3 text-center"
-                        >
-                            <img
-                                src="<?php echo esc_url(
-                                    get_template_directory_uri(),
-                                ); ?>/assets/images/contacto/ico-1@2x.png"
-                                alt="Teléfono general"
-                                class="ico"
-                            />
-                        </div>
-                        <div class="col-9 col-sm-10 col-lg-9">
-                            <h4>Teléfono general:</h4>
-                            <p>
-                                <a href="tel:+558183435058"
-                                    >+55 81 8343 5058</a
-                                >
-                            </p>
-                        </div>
-                    </div>
-                    <div class="row mb-md-3">
-                        <div
-                            class="col-3 col-sm-2 col-lg-3 text-center"
-                        >
-                            <img
-                                src="<?php echo esc_url(
-                                    get_template_directory_uri(),
-                                ); ?>/assets/images/contacto/ico-2@2x.png"
-                                alt="Ubicación"
-                                class="ico"
-                            />
-                        </div>
-                        <div class="col-9 col-sm-10 col-lg-9">
-                            <h4>Ubicación:</h4>
-                            <address>
-                                Vancouver 156, Vista Hermosa, 64620
-                                Monterrey, N.L.
-                            </address>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div
-                            class="col-3 col-sm-2 col-lg-3 text-center"
-                        >
-                            <img
-                                src="<?php echo esc_url(
-                                    get_template_directory_uri(),
-                                ); ?>/assets/images/contacto/ico-3@2x.png"
-                                alt="Horario de atención"
-                                id="ico-horario"
-                                class="ico"
-                            />
-                        </div>
-                        <div class="col-9 col-sm-10 col-lg-9">
-                            <h4>Horario de atención:</h4>
-                            <p>Lunes a Viernes: 9:00 - 13:00 hrs</p>
-                        </div>
-                    </div>
-                </div>
+                <?php get_template_part(
+                    "template-parts/contact/contact-card",
+                ); ?>
             </div>
         </div>
     </div>
