@@ -190,7 +190,9 @@
                                                     <a href="#">Vacantes</a>
                                                 </li>
                                                 <li>
-                                                    <a href="#">Prensa</a>
+                                                    <a href="<?php echo esc_url(
+                                                        get_permalink(8693),
+                                                    ); ?>">Prensa</a>
                                                 </li>
                                                 <li>
                                                     <a href="<?php echo esc_url(

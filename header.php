@@ -114,7 +114,9 @@
                             >
                         </li>
                         <li>
-                            <a href="#">Prensa</a>
+                            <a href="<?php echo esc_url(
+                                get_permalink(8693),
+                            ); ?>">Prensa</a>
                         </li>
                         <li>
                             <a href="<?php echo esc_url(
@@ -223,7 +225,11 @@
                                         >
                                     </li>
                                     <li class="list-inline-item">
-                                        <a class="rounded-pill" href="#"
+                                        <a class="<?php if (
+                                            is_page(8693)
+                                        ): ?>active<?php endif; ?> rounded-pill" href="<?php echo esc_url(
+     get_permalink(8693),
+ ); ?>"
                                             >Prensa</a
                                         >
                                     </li>
