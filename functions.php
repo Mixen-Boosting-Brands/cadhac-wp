@@ -552,3 +552,4 @@ function html5_shortcode_demo_2( $atts, $content = null ) {
 \*------------------------------------*/
 
 require get_template_directory() . '/inc/acf-helpers.php';
+require get_template_directory() . '/inc/contact-helpers.php';
