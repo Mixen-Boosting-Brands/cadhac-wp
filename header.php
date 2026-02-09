@@ -127,7 +127,7 @@
                 </nav>
                 <a href="<?php echo esc_url(
                     get_permalink(5334),
-                ); ?>" class="anchor btn btn-primary rounded-pill"
+                ); ?>" class="anchor btn btn-primary rounded-pill mb-4"
                     >Contáctanos</a
                 >
                 <?php get_template_part(
