@@ -198,55 +198,9 @@
                             </div>
                             <div class="col-6 offset-md-2">
                                 <h5 class="mb-2 mb-md-4">Contacto</h5>
-                                <ul class="list-unstyled">
-                                    <li>
-                                        <address>
-                                            Vancouver 156,<br />
-                                            Vista Hermosa,<br />
-                                            Monterrey, N.L. 64620
-                                        </address>
-                                    </li>
-                                    <li>
-                                        <a
-                                            href="tel:+528183435058"
-                                            target="_blank"
-                                            >81 8343 5058</a
-                                        >
-                                    </li>
-                                    <li>
-                                        <a
-                                            href="mailto:cadhac@cadhac.org"
-                                            target="_blank"
-                                            >cadhac@cadhac.org</a
-                                        >
-                                    </li>
-                                </ul>
-                                <ul class="social list-inline mb-4 mb-md-0">
-                                    <li class="list-inline-item">
-                                        <a
-                                            href="https://www.instagram.com/"
-                                            target="_blank"
-                                        >
-                                            <i class="fab fa-instagram"></i>
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a
-                                            href="https://x.com/"
-                                            target="_blank"
-                                        >
-                                            <i class="fab fa-x-twitter"></i>
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a
-                                            href="https://www.youtube.com/"
-                                            target="_blank"
-                                        >
-                                            <i class="fab fa-youtube"></i>
-                                        </a>
-                                    </li>
-                                </ul>
+                                <?php get_template_part(
+                                    "template-parts/contact/footer-contact",
+                                ); ?>
                             </div>
                         </div>
                     </div>
