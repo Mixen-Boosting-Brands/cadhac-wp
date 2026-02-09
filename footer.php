@@ -1,3 +1,4 @@
+		<?php if (is_home()): ?>
 		<section class="pt-30 pb-60">
             <div class="container-fluid">
                 <div class="row mb-4">
@@ -88,6 +89,7 @@
                 </div>
             </div>
         </section>
+         <?php endif; ?>
 
         <?php if (is_home()): ?>
         <section
