@@ -250,7 +250,8 @@
                                         >
                                     </li>
                                     <li class="list-inline-item">
-                                        <a class="rounded-pill" href="#"
+                                        <a class="<?php if (is_page(5334)):
+                                        endif; ?> rounded-pill" href="#"
                                             >Contacto</a
                                         >
                                     </li>
