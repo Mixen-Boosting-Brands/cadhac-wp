@@ -5,7 +5,7 @@ Template Name: Contacto
 get_header(); ?>
 
 <?php get_template_part("template-parts/banners/banner-options", null, [
-    "handle" => "contacto",
+    "handle" => "pagina_contacto",
 ]); ?>
 
 <section class="pt-60 pb-30">
