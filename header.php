@@ -130,39 +130,9 @@
                 ); ?>" class="anchor btn btn-primary rounded-pill"
                     >Contáctanos</a
                 >
-                <div id="social">
-                    <ul class="list-inline">
-                        <li class="list-inline-item">
-                            <a href="#" target="_blank">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#" target="_blank">
-                                <i class="fa-brands fa-x-twitter"></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#" target="_blank">
-                                <i class="fab fa-youtube"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div id="contacto-menu">
-                    <ul class="list-unstyled">
-                        <li>
-                            <i class="far fa-envelope"></i>
-                            <a href="mailto:cadhac@cadhac.org"
-                                >cadhac@cadhac.org</a
-                            >
-                        </li>
-                        <li>
-                            <i class="fas fa-phone"></i>
-                            <a href="tel:+528183435058">81 8343 5058</a>
-                        </li>
-                    </ul>
-                </div>
+                <?php get_template_part(
+                    "template-parts/contact/header-contact",
+                ); ?>
             </div>
         </div>
 
