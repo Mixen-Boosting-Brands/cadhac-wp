@@ -99,7 +99,9 @@
                             >
                         </li>
                         <li>
-                            <a href="#">Amores</a>
+                            <a href="<?php echo esc_url(
+                                get_permalink(2214),
+                            ); ?>">Amores</a>
                         </li>
                         <li>
                             <a href="#"
@@ -115,29 +117,33 @@
                             <a href="#">Prensa</a>
                         </li>
                         <li>
-                            <a href="#"
+                            <a href="<?php echo esc_url(
+                                get_permalink(5334),
+                            ); ?>"
                                 >Contacto</a
                             >
                         </li>
                     </ul>
                 </nav>
-                <a href="#" class="anchor btn btn-primary rounded-pill" id="btn-contacto"
+                <a href="<?php echo esc_url(
+                    get_permalink(5334),
+                ); ?>" class="anchor btn btn-primary rounded-pill"
                     >Contáctanos</a
                 >
                 <div id="social">
                     <ul class="list-inline">
                         <li class="list-inline-item">
-                            <a href="#">
+                            <a href="#" target="_blank">
                                 <i class="fab fa-instagram"></i>
                             </a>
                         </li>
                         <li class="list-inline-item">
-                            <a href="#">
+                            <a href="#" target="_blank">
                                 <i class="fa-brands fa-x-twitter"></i>
                             </a>
                         </li>
                         <li class="list-inline-item">
-                            <a href="#">
+                            <a href="#" target="_blank">
                                 <i class="fab fa-youtube"></i>
                             </a>
                         </li>
@@ -230,7 +236,9 @@
                                     <li class="list-inline-item">
                                         <a class="<?php if (
                                             is_page(2214)
-                                        ): ?>active bg-highlighted<?php endif; ?>rounded-pill" href="#"
+                                        ): ?>active bg-highlighted<?php endif; ?>rounded-pill" href="<?php echo esc_url(
+    get_permalink(2214),
+); ?>"
                                             >Amores</a
                                         >
                                     </li>
@@ -252,7 +260,9 @@
                                     <li class="list-inline-item">
                                         <a class="<?php if (
                                             is_page(5334)
-                                        ): ?>active<?php endif; ?> rounded-pill" href="#"
+                                        ): ?>active<?php endif; ?> rounded-pill" href="<?php echo esc_url(
+     get_permalink(5334),
+ ); ?>"
                                             >Contacto</a
                                         >
                                     </li>
