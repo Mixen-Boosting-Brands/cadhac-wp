@@ -46,7 +46,7 @@ get_header(); ?>
             </div>
             <div class="col-lg-6">
                 <?php get_template_part(
-                    "template-parts/contact/contact-card",
+                    "template-parts/contact/card-contact",
                 ); ?>
             </div>
         </div>
