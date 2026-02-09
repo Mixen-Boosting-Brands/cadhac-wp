@@ -4,55 +4,9 @@ Template Name: Contacto
 */
 get_header(); ?>
 
-<section>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <h1
-                    class="lh-1"
-                    data-aos="fade-up"
-                    data-aos-duration="1000"
-                >
-                    Estamos aquí<br />
-                    para <span>escucharte</span>
-                </h1>
-                <p
-                    data-aos="fade-up"
-                    data-aos-duration="1000"
-                    data-aos-delay="100"
-                >
-                    CADHAC es un espacio seguro de acompañamiento y
-                    orientación.
-                </p>
-                <p
-                    data-aos="fade-up"
-                    data-aos-duration="1000"
-                    data-aos-delay="200"
-                >
-                    Si necesitas ayuda, información o deseas ponerte en
-                    contacto con nosotras y nosotros, estamos aquí para
-                    escucharte.
-                </p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <div
-                    class="arrow-right home-image container-image bp-center rounded-5 p-4"
-                    style="
-                        background-image: url(&quot;<?php echo esc_url(
-                            get_template_directory_uri(),
-                        ); ?>/assets/images/bg-j-10.png&quot;);
-                    "
-                    data-aos="fade-up"
-                    data-aos="fade-up"
-                    data-aos-duration="1000"
-                    data-aos-delay="300"
-                ></div>
-            </div>
-        </div>
-    </div>
-</section>
+<?php get_template_part("template-parts/banners/banner-options", null, [
+    "handle" => "contacto",
+]); ?>
 
 <section class="pt-60 pb-30">
     <div class="container-fluid">
