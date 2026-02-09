@@ -4,49 +4,9 @@ Template Name: Prensa
 */
 get_header(); ?>
 
-<section>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <h1
-                    class="lh-1"
-                    data-aos="fade-up"
-                    data-aos-duration="1000"
-                >
-                    Sala
-                    <span>de</span><br />
-                    prensa
-                </h1>
-                <p
-                    data-aos="fade-up"
-                    data-aos-duration="1000"
-                    data-aos-delay="100"
-                >
-                    Información clara y verificada sobre derechos
-                    humanos en Nuevo León, desde una relación
-                    responsable con los medios de comunicación para
-                    fortalecer la memoria, la verdad y la justicia.
-                </p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <div
-                    class="arrow-right home-image container-image bp-center rounded-5 p-4"
-                    style="
-                        background-image: url(&quot;<?php echo esc_url(
-                            get_template_directory_uri(),
-                        ); ?>/assets/images/bg-j-9.png&quot;);
-                    "
-                    data-aos="fade-up"
-                    data-aos="fade-up"
-                    data-aos-duration="1000"
-                    data-aos-delay="200"
-                ></div>
-            </div>
-        </div>
-    </div>
-</section>
+<?php get_template_part("template-parts/banners/banner-options", null, [
+    "handle" => "pagina_contacto",
+]); ?>
 
 <section class="pt-60 pb-30">
     <div class="container-fluid">
