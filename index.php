@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 
 <?php get_template_part("template-parts/banners/banner-options", null, [
-    "handle" => "pagina_contacto",
+    "handle" => "pagina_home",
 ]); ?>
 
 <section class="tabulador pt-60 pb-30">
