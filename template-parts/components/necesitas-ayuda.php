@@ -10,6 +10,9 @@ $texto_inferior = $data["texto_inferior"] ?? "";
 
 $tarjeta_1 = $data["tarjeta_1"] ?? null;
 $tarjeta_2 = $data["tarjeta_2"] ?? null;
+
+$icono_1 = $tarjeta_1["icono"] ?? "";
+$icono_2 = $tarjeta_2["icono"] ?? "";
 ?>
 
 <section class="<?php if (
@@ -56,13 +59,15 @@ $tarjeta_2 = $data["tarjeta_2"] ?? null;
                                 </h1>
                             <?php endif; ?>
 
-                            <img
-                                src="<?php echo esc_url(
-                                    get_template_directory_uri(),
-                                ); ?>/assets/images/necesitas-ayuda/ico-1@2x.png"
-                                class="ico my-5"
-                                alt=""
-                            />
+                            <?php if (!empty($icono_1)): ?>
+                                <img
+                                    src="<?php echo esc_url($icono_1); ?>"
+                                    class="ico my-5"
+                                    alt="<?php echo esc_attr(
+                                        $tarjeta_1["titulo"] ?? "",
+                                    ); ?>"
+                                />
+                            <?php endif; ?>
 
                             <?php if (!empty($tarjeta_1["texto"])): ?>
                                 <div class="card-body">
@@ -95,13 +100,15 @@ $tarjeta_2 = $data["tarjeta_2"] ?? null;
                                 </h1>
                             <?php endif; ?>
 
-                            <img
-                                src="<?php echo esc_url(
-                                    get_template_directory_uri(),
-                                ); ?>/assets/images/necesitas-ayuda/ico-2@2x.png"
-                                class="ico my-5"
-                                alt=""
-                            />
+                            <?php if (!empty($icono_2)): ?>
+                                <img
+                                    src="<?php echo esc_url($icono_2); ?>"
+                                    class="ico my-5"
+                                    alt="<?php echo esc_attr(
+                                        $tarjeta_2["titulo"] ?? "",
+                                    ); ?>"
+                                />
+                            <?php endif; ?>
 
                             <?php if (!empty($tarjeta_2["texto"])): ?>
                                 <div class="card-body">
