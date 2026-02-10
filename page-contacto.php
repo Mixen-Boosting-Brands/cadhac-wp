@@ -8,42 +8,51 @@ get_header(); ?>
     "handle" => "pagina_contacto",
 ]); ?>
 
+<?php
+$pagina_contacto = get_field("pagina_contacto", "option");
+
+$bloque_2 = $pagina_contacto["bloque_2"] ?? null;
+
+if (!$bloque_2) {
+    return;
+}
+
+$texto_superior = $bloque_2["texto_superior"] ?? "";
+$texto_inferior = $bloque_2["texto_inferior"] ?? "";
+?>
+
 <section class="pt-60 pb-30">
     <div class="container-fluid">
-        <div class="row mb-4">
-            <div class="col-12">
-                <h1
-                    class="lh-1"
-                    data-aos="fade-up"
-                    data-aos-duration="1000"
-                >
-                    No estás <span>sola</span><br />
-                    no estás solo.
-                </h1>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-6">
-                <p
-                    data-aos="fade-up"
-                    data-aos-duration="1000"
-                    data-aos-delay="100"
-                >
-                    Si tú o tu familia atraviesan una situación de
-                    desaparición, detención arbitraria, abuso policial u
-                    otra violación a derechos humanos, puedes
-                    comunicarte directamente con CADHAC.
-                </p>
-                <p
-                    data-aos="fade-up"
-                    data-aos-duration="1000"
-                    data-aos-delay="200"
-                >
-                    <strong
-                        >La atención es gratuita y confidencial.</strong
+        <!-- Título -->
+        <?php if (!empty($texto_superior)): ?>
+            <div class="row mb-4">
+                <div class="col-12">
+                    <h1
+                        class="lh-1"
+                        data-aos="fade-up"
+                        data-aos-duration="1000"
                     >
-                </p>
+                        <?php echo wp_kses_post($texto_superior); ?>
+                    </h1>
+                </div>
             </div>
+        <?php endif; ?>
+
+        <div class="row">
+            <!-- Texto -->
+            <?php if (!empty($texto_inferior)): ?>
+                <div class="col-lg-6">
+                    <div
+                        data-aos="fade-up"
+                        data-aos-duration="1000"
+                        data-aos-delay="100"
+                    >
+                        <?php echo wp_kses_post($texto_inferior); ?>
+                    </div>
+                </div>
+            <?php endif; ?>
+
+            <!-- Card reutilizable -->
             <div class="col-lg-6">
                 <?php get_template_part(
                     "template-parts/contact/card-contact",
