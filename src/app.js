@@ -3,7 +3,7 @@ window.bootstrap = require("bootstrap/dist/js/bootstrap.bundle.js");
 
 // Local Scripts
 import "../src/tab-pane-fix";
-import "../src/theme-toggle";
+// import "../src/theme-toggle";
 import "../src/smooth-scrolling";
 import "../src/form-ajax";
 import "../src/aos";
@@ -131,20 +131,6 @@ document.addEventListener("keydown", (event) => {
         cerrarMenu();
     }
 });
-
-// Efectos parallax
-import ParallaxEffect from "./parallax";
-
-// Configuración de los elementos parallax
-const parallaxConfig = [
-    {
-        selector: "#cuchara",
-        range: 200, // Rango de movimiento en px
-        speed: 0.3, // Velocidad del efecto
-        direction: 1, // -1 = hacia arriba, 1 = hacia abajo
-    },
-    // Añadir más elementos aquí
-];
 
 // Inicializar cuando el DOM esté listo
 document.addEventListener("DOMContentLoaded", () => {
