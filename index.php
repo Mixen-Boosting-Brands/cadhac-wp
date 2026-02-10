@@ -282,34 +282,97 @@ $imagen_descanso = $pagina_home["imagen_de_descanso"] ?? "";
 </section>
 <?php endif; ?>
 
+<?php
+$pagina_home = get_field("pagina_home", "option");
+
+$bloque_2 = $pagina_home["bloque_2"] ?? null;
+
+if (!$bloque_2) {
+    return;
+}
+
+$texto_superior = $bloque_2["texto_superior"] ?? "";
+$texto_inferior = $bloque_2["texto_inferior"] ?? "";
+
+$imagen_1 = $bloque_2["imagen_1"] ?? "";
+$imagen_2 = $bloque_2["imagen_2"] ?? "";
+?>
+
 <section id="comunidad" class="py-30">
     <div class="container-fluid">
+        <!-- Título -->
+        <?php if (!empty($texto_superior)): ?>
+            <div class="row mb-4">
+                <div class="col-12">
+
+                    <h1
+                        data-aos="fade-right"
+                        data-aos-duration="1000"
+                    >
+                        <?php echo wp_kses_post($texto_superior); ?>
+                    </h1>
+
+                </div>
+            </div>
+        <?php endif; ?>
+
         <div class="row mb-4">
-            <div class="col-12">
-                <h1 data-aos="fade-right" data-aos-duration="1000">
-                    Somos apoyo mútuo,<br>
-                    <span>somos comunidad.</span>
-                </h1>
-            </div>
-        </div>
-        <div class="row mb-4">
-            <div class="col-lg-4 my-auto">
-                <img id="thumb-comunidad-1" class="img-fluid mb-3 mb-lg-0" src="<?php echo esc_url(
-                    get_template_directory_uri(),
-                ); ?>/assets/images/thumb-comunidad-1.png" alt="" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
-            </div>
-            <div class="col-lg-4 my-auto">
-                <p data-aos="fade-in" data-aos-duration="1000" data-aos-delay="100"><strong>CADHAC</strong> es un espacio seguro desde donde <strong>acompañamos a personas y familias</strong> en la búsqueda de verdad, justicia y dignidad. Desde hace <strong>más de 30 años</strong> defendemos derechos humanos desde el poder de la comunidad.</p>
-            </div>
-            <div class="col-lg-4 my-auto text-end">
-                <img id="thumb-comunidad-2" class="img-fluid" src="<?php echo esc_url(
-                    get_template_directory_uri(),
-                ); ?>/assets/images/thumb-comunidad-2.png" alt="" data-aos="fade-down" data-aos-duration="1000" data-aos-delay="100">
-            </div>
+            <!-- Imagen 1 -->
+            <?php if (!empty($imagen_1)): ?>
+                <div class="col-lg-4 my-auto">
+
+                    <img
+                        id="thumb-comunidad-1"
+                        class="img-fluid mb-3 mb-lg-0"
+                        src="<?php echo esc_url($imagen_1); ?>"
+                        alt="Comunidad CADHAC"
+                        data-aos="fade-up"
+                        data-aos-duration="1000"
+                        data-aos-delay="100"
+                        loading="lazy"
+                        decoding="async"
+                    >
+
+                </div>
+            <?php endif; ?>
+
+            <!-- Texto -->
+            <?php if (!empty($texto_inferior)): ?>
+                <div class="col-lg-4 my-auto">
+
+                    <div
+                        data-aos="fade-in"
+                        data-aos-duration="1000"
+                        data-aos-delay="100"
+                    >
+                        <?php echo wp_kses_post($texto_inferior); ?>
+                    </div>
+
+                </div>
+            <?php endif; ?>
+
+            <!-- Imagen 2 -->
+            <?php if (!empty($imagen_2)): ?>
+                <div class="col-lg-4 my-auto text-end">
+
+                    <img
+                        id="thumb-comunidad-2"
+                        class="img-fluid"
+                        src="<?php echo esc_url($imagen_2); ?>"
+                        alt="Comunidad CADHAC"
+                        data-aos="fade-down"
+                        data-aos-duration="1000"
+                        data-aos-delay="100"
+                        loading="lazy"
+                        decoding="async"
+                    >
+
+                </div>
+            <?php endif; ?>
         </div>
         <div class="row">
             <div class="col-12 text-end arrow-right">
-                <a href="#">
+                <a href="<?php echo esc_url(get_permalink(373)); ?>">
                     <h2>
                         Conoce nuestra historia
                         <i class="fa-solid fa-arrow-right-long"></i>
