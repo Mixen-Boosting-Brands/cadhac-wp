@@ -1,39 +1,8 @@
 <?php get_header(); ?>
 
-<section>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <h1 class="lh-1" data-aos="fade-up" data-aos-duration="1000">
-                    Promovemos y defendemos<br />
-                    <span>la dignidad humana</span>
-                </h1>
-                <p data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
-                    Toda persona puede levantarse si el entorno la
-                    acompaña. CADHAC busca ser parte de ese entorno.
-                </p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <div
-                    class="arrow-right home-image container-image rounded-5 p-4"
-                    style="
-                        background-image: url(&quot;<?php echo esc_url(
-                            get_template_directory_uri(),
-                        ); ?>/assets/images/bg-j-1.png&quot;);
-                    "
-                    data-aos="fade-up" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200"
-                >
-                    <a href="#">
-                        Contáctanos
-                        <i class="fa-solid fa-arrow-right-long"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+<?php get_template_part("template-parts/banners/banner-options", null, [
+    "handle" => "pagina_contacto",
+]); ?>
 
 <section class="tabulador pt-60 pb-30">
     <div class="container-fluid">
