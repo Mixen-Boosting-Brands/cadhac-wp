@@ -12,7 +12,9 @@ $tarjeta_1 = $data["tarjeta_1"] ?? null;
 $tarjeta_2 = $data["tarjeta_2"] ?? null;
 ?>
 
-<section class="py-60">
+<section class="<?php if (
+    is_home()
+): ?>pt-60 pb-30<?php else: ?>py-60<?php endif; ?>">
     <div class="container-fluid">
         <!-- Intro -->
         <div class="row mb-4">
