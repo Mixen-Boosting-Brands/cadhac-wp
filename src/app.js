@@ -133,6 +133,4 @@ document.addEventListener("keydown", (event) => {
 });
 
 // Inicializar cuando el DOM esté listo
-document.addEventListener("DOMContentLoaded", () => {
-    const parallax = new ParallaxEffect(parallaxConfig);
-});
+document.addEventListener("DOMContentLoaded", () => {});
