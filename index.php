@@ -258,17 +258,29 @@
     </div>
 </section>
 
+<?php
+$pagina_home = get_field("pagina_home", "option");
+
+$imagen_descanso = $pagina_home["imagen_de_descanso"] ?? "";
+?>
+
+<?php if (!empty($imagen_descanso)): ?>
 <section>
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 text-center">
-                <img class="img-fluid rounded-5" src="<?php echo esc_url(
-                    get_template_directory_uri(),
-                ); ?>/assets/images/img-manos.png" alt="">
+                <img
+                    class="img-fluid rounded-5"
+                    src="<?php echo esc_url($imagen_descanso); ?>"
+                    alt="Imagen de descanso CADHAC"
+                    loading="lazy"
+                    decoding="async"
+                >
             </div>
         </div>
     </div>
 </section>
+<?php endif; ?>
 
 <section id="comunidad" class="py-30">
     <div class="container-fluid">
