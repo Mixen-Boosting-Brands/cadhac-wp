@@ -62,15 +62,33 @@ $texto_inferior = $bloque_2["texto_inferior"] ?? "";
     </div>
 </section>
 
+<?php
+$pagina_contacto = get_field("pagina_contacto", "option");
+
+$bloque_3 = $pagina_contacto["bloque_3"] ?? null;
+
+if (!$bloque_3) {
+    return;
+}
+
+$texto_superior = $bloque_3["texto_superior"] ?? "";
+$texto_inferior = $bloque_3["texto_inferior"] ?? "";
+?>
+
 <section class="py-30">
     <div class="container-fluid">
-        <div class="row mb-4">
-            <div class="col-12">
-                <h1 data-aos="fade-up" data-aos-duration="1000">
-                    Escríbenos.
-                </h1>
+        <!-- Título -->
+        <?php if (!empty($texto_superior)): ?>
+            <div class="row mb-4">
+                <div class="col-12">
+
+                    <h1 data-aos="fade-up" data-aos-duration="1000">
+                        <?php echo wp_kses_post($texto_superior); ?>
+                    </h1>
+
+                </div>
             </div>
-        </div>
+        <?php endif; ?>
         <div class="row">
             <div class="col-lg-6 mb-4 mb-xl-0">
                 <div id="form-messages"></div>
@@ -186,26 +204,17 @@ $texto_inferior = $bloque_2["texto_inferior"] ?? "";
                     </div>
                 </form>
             </div>
+            <!-- Texto -->
             <div class="col-lg-6">
-                <p
-                    data-aos="fade-up"
-                    data-aos-duration="1000"
-                    data-aos-delay="100"
-                >
-                    Puedes escribirnos para solicitar orientación,
-                    compartir información, proponer una alianza,
-                    solicitar una reunión o hacer una consulta general.
-                </p>
-                <p
-                    data-aos="fade-up"
-                    data-aos-duration="1000"
-                    data-aos-delay="200"
-                >
-                    <strong
-                        >Nuestro equipo dará seguimiento a tu
-                        mensaje.</strong
+                <?php if (!empty($texto_inferior)): ?>
+                    <div
+                        data-aos="fade-up"
+                        data-aos-duration="1000"
+                        data-aos-delay="100"
                     >
-                </p>
+                        <?php echo wp_kses_post($texto_inferior); ?>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
     </div>
