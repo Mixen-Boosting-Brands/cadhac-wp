@@ -4,257 +4,176 @@
     "handle" => "pagina_home",
 ]); ?>
 
+<?php $cats = get_categories([
+    "taxonomy" => "category",
+    "hide_empty" => true,
+]); ?>
+
 <section class="tabulador pt-60 pb-30">
     <div class="container-fluid">
+
+        <!-- HEADER -->
         <div class="row" data-aos="fade-up" data-aos-duration="1000">
+
             <div class="col-6 my-auto">
                 <h1>Noticias</h1>
             </div>
+
             <div class="col-6 my-auto text-end">
-                <ul
-                    class="nav nav-pills mb-0"
-                    id="pills-noticias"
-                    role="tablist"
-                >
-                    <li class="nav-item" role="presentation">
-                        <button
-                            class="nav-link rounded-pill active"
-                            id="pills-blog-tab"
-                            data-bs-toggle="pill"
-                            data-bs-target="#pills-blog"
-                            type="button"
-                            role="tab"
-                            aria-controls="pills-blog"
-                            aria-selected="true"
-                        >
-                            Blog
-                        </button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button
-                            class="nav-link rounded-pill"
-                            id="pills-comunicados-tab"
-                            data-bs-toggle="pill"
-                            data-bs-target="#pills-comunicados"
-                            type="button"
-                            role="tab"
-                            aria-controls="pills-comunicados"
-                            aria-selected="false"
-                        >
-                            Comunicados
-                        </button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button
-                            class="nav-link rounded-pill"
-                            id="pills-eventos-y-actividades-tab"
-                            data-bs-toggle="pill"
-                            data-bs-target="#pills-eventos-y-actividades"
-                            type="button"
-                            role="tab"
-                            aria-controls="pills-eventos-y-actividades"
-                            aria-selected="false"
-                        >
-                            Eventos y actividades
-                        </button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button
-                            class="nav-link rounded-pill"
-                            id="pills-actualizaciones-tab"
-                            data-bs-toggle="pill"
-                            data-bs-target="#pills-actualizaciones"
-                            type="button"
-                            role="tab"
-                            aria-controls="pills-actualizaciones"
-                            aria-selected="false"
-                        >
-                            Actualizaciones
-                        </button>
-                    </li>
+
+                <ul class="nav nav-pills mb-0" id="pills-noticias" role="tablist">
+
+                    <?php
+                    $i = 0;
+                    foreach ($cats as $cat):
+                        $active = $i === 0 ? "active" : ""; ?>
+
+                        <li class="nav-item" role="presentation">
+                            <button
+                                class="nav-link rounded-pill <?php echo $active; ?>"
+                                id="pills-<?php echo esc_attr(
+                                    $cat->slug,
+                                ); ?>-tab"
+                                data-bs-toggle="pill"
+                                data-bs-target="#pills-<?php echo esc_attr(
+                                    $cat->slug,
+                                ); ?>"
+                                type="button"
+                                role="tab"
+                            >
+                                <?php echo esc_html($cat->name); ?>
+                            </button>
+                        </li>
+
+                    <?php $i++;
+                    endforeach;
+                    ?>
+
                 </ul>
+
             </div>
         </div>
-        <div class="row"data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
+
+
+
+        <div class="row" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
             <div class="col-12">
                 <hr />
             </div>
         </div>
+
+
+
         <div class="row">
             <div class="col-12">
+
                 <p>
                     Descubre relatos, aprendizajes y voces que mantienen
                     viva la memoria y fortalecen nuestra comunidad.
                 </p>
+
+
+
                 <div class="tab-content" id="pills-noticiasContent">
-                    <div
-                        class="tab-pane fade show active"
-                        id="pills-blog"
-                        role="tabpanel"
-                        aria-labelledby="pills-blog-tab"
-                        tabindex="0"
-                    >
-                        <div class="row">
-                            <!-- One Third Card -->
-                            <div class="col-lg-4">
-                                <div
-                                    class="card rounded-5 mb-4 mb-lg-0"
-                                >
-                                    <img
-                                        src="<?php echo esc_url(
-                                            get_template_directory_uri(),
-                                        ); ?>/assets/images/thumb-card.png"
-                                        class="card-img-top rounded-5"
-                                        alt=""
-                                    />
-                                    <div class="card-body">
-                                        <date class="card-date">
-                                            29 Ene 2026
-                                        </date>
-                                        <a href="#">
-                                            <h1 class="card-title">
-                                                Caminos de esperanza
-                                            </h1>
-                                        </a>
-                                        <p class="card-text">
-                                            En esta entrada exploramos
-                                            cómo el acompañamiento
-                                            emocional transforma
-                                            procesos complejos y
-                                            dolorosos. Conversamos con
-                                            familias que...
-                                        </p>
-                                        <div class="text-end">
-                                            <a
-                                                href="#"
-                                                class="btn-card"
-                                            >
-                                                <i
-                                                    class="fas fa-arrow-right"
-                                                ></i>
-                                            </a>
+
+                    <?php
+                    $i = 0;
+                    foreach ($cats as $cat):
+                        $active = $i === 0 ? "show active" : ""; ?>
+
+                        <div
+                            class="tab-pane fade <?php echo $active; ?>"
+                            id="pills-<?php echo esc_attr($cat->slug); ?>"
+                            role="tabpanel"
+                        >
+
+                            <div class="row">
+
+                                <?php
+                                $q = new WP_Query([
+                                    "post_type" => "post",
+                                    "posts_per_page" => 3,
+                                    "cat" => $cat->term_id,
+                                ]);
+
+                                if ($q->have_posts()):
+                                    while ($q->have_posts()):
+                                        $q->the_post(); ?>
+
+                                        <div class="col-lg-4">
+                                            <div class="card rounded-5 mb-4 mb-lg-0">
+
+                                                <?php if (
+                                                    has_post_thumbnail()
+                                                ): ?>
+                                                    <img
+                                                        src="<?php echo esc_url(
+                                                            get_the_post_thumbnail_url(
+                                                                get_the_ID(),
+                                                                "large",
+                                                            ),
+                                                        ); ?>"
+                                                        class="card-img-top rounded-5"
+                                                        alt="<?php echo esc_attr(
+                                                            get_the_title(),
+                                                        ); ?>"
+                                                        loading="lazy"
+                                                    />
+                                                <?php endif; ?>
+
+                                                <div class="card-body">
+
+                                                    <date class="card-date">
+                                                        <?php echo get_the_date(
+                                                            "d M Y",
+                                                        ); ?>
+                                                    </date>
+
+                                                    <a href="<?php the_permalink(); ?>">
+                                                        <h1 class="card-title">
+                                                            <?php the_title(); ?>
+                                                        </h1>
+                                                    </a>
+
+                                                    <p class="card-text">
+                                                        <?php echo wp_trim_words(
+                                                            get_the_excerpt(),
+                                                            18,
+                                                        ); ?>
+                                                    </p>
+
+                                                    <div class="text-end">
+                                                        <a
+                                                            href="<?php the_permalink(); ?>"
+                                                            class="btn-card"
+                                                        >
+                                                            <i class="fas fa-arrow-right"></i>
+                                                        </a>
+                                                    </div>
+
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
+
+                                <?php
+                                    endwhile;
+                                    wp_reset_postdata();
+                                endif;
+                                ?>
+
                             </div>
 
-                            <!-- One Third Card -->
-                            <div class="col-lg-4">
-                                <div
-                                    class="card rounded-5 mb-4 mb-lg-0"
-                                >
-                                    <img
-                                        src="<?php echo esc_url(
-                                            get_template_directory_uri(),
-                                        ); ?>/assets/images/thumb-card.png"
-                                        class="card-img-top rounded-5"
-                                        alt=""
-                                    />
-                                    <div class="card-body">
-                                        <date class="card-date">
-                                            29 Ene 2026
-                                        </date>
-                                        <a href="#">
-                                            <h1 class="card-title">
-                                                Caminos de esperanza
-                                            </h1>
-                                        </a>
-                                        <p class="card-text">
-                                            En esta entrada exploramos
-                                            cómo el acompañamiento
-                                            emocional transforma
-                                            procesos complejos y
-                                            dolorosos. Conversamos con
-                                            familias que...
-                                        </p>
-                                        <div class="text-end">
-                                            <a
-                                                href="#"
-                                                class="btn-card"
-                                            >
-                                                <i
-                                                    class="fas fa-arrow-right"
-                                                ></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- One Third Card -->
-                            <div class="col-lg-4">
-                                <div
-                                    class="card rounded-5 mb-4 mb-lg-0"
-                                >
-                                    <img
-                                        src="<?php echo esc_url(
-                                            get_template_directory_uri(),
-                                        ); ?>/assets/images/thumb-card.png"
-                                        class="card-img-top rounded-5"
-                                        alt=""
-                                    />
-                                    <div class="card-body">
-                                        <date class="card-date">
-                                            29 Ene 2026
-                                        </date>
-                                        <a href="#">
-                                            <h1 class="card-title">
-                                                Caminos de esperanza
-                                            </h1>
-                                        </a>
-                                        <p class="card-text">
-                                            En esta entrada exploramos
-                                            cómo el acompañamiento
-                                            emocional transforma
-                                            procesos complejos y
-                                            dolorosos. Conversamos con
-                                            familias que...
-                                        </p>
-                                        <div class="text-end">
-                                            <a
-                                                href="#"
-                                                class="btn-card"
-                                            >
-                                                <i
-                                                    class="fas fa-arrow-right"
-                                                ></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
-                    </div>
-                    <div
-                        class="tab-pane fade"
-                        id="pills-comunicados"
-                        role="tabpanel"
-                        aria-labelledby="pills-comunicados-tab"
-                        tabindex="0"
-                    >
-                        Comunicados
-                    </div>
-                    <div
-                        class="tab-pane fade"
-                        id="pills-eventos-y-actividades"
-                        role="tabpanel"
-                        aria-labelledby="pills-eventos-y-actividades-tab"
-                        tabindex="0"
-                    >
-                        Eventos
-                    </div>
-                    <div
-                        class="tab-pane fade"
-                        id="pills-actualizaciones"
-                        role="tabpanel"
-                        aria-labelledby="pills-actualizaciones-tab"
-                        tabindex="0"
-                    >
-                        Actualizaciones
-                    </div>
+
+                    <?php $i++;
+                    endforeach;
+                    ?>
+
                 </div>
+
             </div>
         </div>
+
     </div>
 </section>
 
