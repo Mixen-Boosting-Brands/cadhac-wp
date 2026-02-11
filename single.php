@@ -15,7 +15,7 @@
                             <?php post_class("single-article"); ?>
                         >
 
-                            <!-- FEATURED IMAGE -->
+                            <!-- Featured Image -->
                             <?php if (has_post_thumbnail()): ?>
 
                                 <div class="post-thumbnail mb-4">
@@ -27,16 +27,12 @@
 
                             <?php endif; ?>
 
-
-
-                            <!-- TITLE -->
+                            <!-- Título -->
                             <h1 class="post-title mb-3">
                                 <?php the_title(); ?>
                             </h1>
 
-
-
-                            <!-- META -->
+                            <!-- Meta -->
                             <div class="post-meta text-muted mb-4">
 
                                 <span class="me-3">
@@ -63,42 +59,35 @@
                                         ); ?>
                                     </span>
                                 <?php endif; ?>
-
                             </div>
 
-
-
-                            <!-- CONTENT -->
+                            <!-- Contenido -->
                             <div class="post-content mb-5">
                                 <?php the_content(); ?>
                             </div>
 
-
-
-                            <!-- FOOTER META -->
-                            <footer class="post-footer">
-
-                                <div class="mb-2">
-                                    <strong>Categorías:</strong>
-                                    <?php the_category(", "); ?>
-                                </div>
-
-                                <?php if (get_the_tags()): ?>
+                            <!-- Footer Meta -->
+                            <div class="card post-footer">
+                                <div class="card-body">
                                     <div class="mb-2">
-                                        <strong>Tags:</strong>
-                                        <?php the_tags("", ", "); ?>
+                                        <strong>Categorías:</strong>
+                                        <?php the_category(", "); ?>
                                     </div>
-                                <?php endif; ?>
 
-                                <?php edit_post_link(
-                                    "Editar post",
-                                    '<div class="mt-3">',
-                                    "</div>",
-                                ); ?>
+                                    <?php if (get_the_tags()): ?>
+                                        <div class="mb-2">
+                                            <strong>Tags:</strong>
+                                            <?php the_tags("", ", "); ?>
+                                        </div>
+                                    <?php endif; ?>
 
-                            </footer>
-
-
+                                    <?php edit_post_link(
+                                        "Editar post",
+                                        '<div class="mt-3">',
+                                        "</div>",
+                                    ); ?>
+                                </div>
+                            </div>
 
                             <?php comments_template(); ?>
 
