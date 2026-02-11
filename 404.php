@@ -29,14 +29,7 @@
                         <i class="fa-solid fa-arrow-left me-2"></i>
                         Volver al inicio
                     </a>
-
-                    <!-- Buscador opcional -->
-                    <div class="mt-4">
-                        <?php get_search_form(); ?>
-                    </div>
-
                 </div>
-
             </div>
         </div>
     </div>
