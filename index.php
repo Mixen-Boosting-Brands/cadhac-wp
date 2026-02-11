@@ -102,17 +102,19 @@
                                             <div class="card rounded-5 mb-4 mb-lg-0">
 
                                                 <?php if (!empty($image)): ?>
-                                                    <img
-                                                        src="<?php echo esc_url(
-                                                            $image,
-                                                        ); ?>"
-                                                        class="card-img-top rounded-5"
-                                                        alt="<?php echo esc_attr(
-                                                            get_the_title(),
-                                                        ); ?>"
-                                                        loading="lazy"
-                                                        decoding="async"
-                                                    />
+                                                    <a href="<?php the_permalink(); ?>">
+                                                        <img
+                                                            src="<?php echo esc_url(
+                                                                $image,
+                                                            ); ?>"
+                                                            class="card-img-top rounded-5"
+                                                            alt="<?php echo esc_attr(
+                                                                get_the_title(),
+                                                            ); ?>"
+                                                            loading="lazy"
+                                                            decoding="async"
+                                                        />
+                                                    </a>
                                                 <?php endif; ?>
 
                                                 <div class="card-body">
