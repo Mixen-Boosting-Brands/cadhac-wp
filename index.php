@@ -6,6 +6,9 @@
 
 <?php $cats = get_categories([
     "taxonomy" => "category",
+    "include" => [34, 86, 92, 12, 10, 11],
+    "orderby" => "name", // Orden alfabético
+    "order" => "ASC",
     "hide_empty" => true,
 ]); ?>
 
