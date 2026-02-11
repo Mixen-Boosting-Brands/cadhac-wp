@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-<section class="archive archive-category py-60">
+<section class="archive archive-category pt-30">
     <div class="container-fluid">
         <!-- Header -->
         <div class="row mb-4">
