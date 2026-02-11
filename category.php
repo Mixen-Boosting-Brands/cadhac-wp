@@ -41,13 +41,7 @@
         <!-- Pagination -->
         <div class="row mt-4">
             <div class="col-12 text-center">
-
-                <?php the_posts_pagination([
-                    "mid_size" => 2,
-                    "prev_text" => "← Anterior",
-                    "next_text" => "Siguiente →",
-                ]); ?>
-
+                <?php echo bootstrap_pagination(); ?>
             </div>
         </div>
 
