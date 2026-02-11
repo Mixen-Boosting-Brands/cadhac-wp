@@ -1,4 +1,4 @@
-		<?php if (is_home()): ?>
+		<?php if (is_front_page() || is_home()): ?>
             <?php
             $pagina_home = get_field("pagina_home", "option");
             $tarjetas = $pagina_home["tarjetas"] ?? null;
@@ -84,11 +84,11 @@
                                                     !empty($card["texto"])
                                                 ): ?>
                                                     <div class="card-body">
-                                                        <p class="card-text">
-                                                            <?php echo esc_html(
+                                                        <div class="card-text">
+                                                            <?php echo wp_kses_post(
                                                                 $card["texto"],
                                                             ); ?>
-                                                        </p>
+                                                        </div>
                                                     </div>
                                                 <?php endif; ?>
 
@@ -116,7 +116,7 @@
             <?php endif; ?>
         <?php endif; ?>
 
-        <?php if (is_home()): ?>
+        <?php if (is_front_page() || is_home()): ?>
             <?php $banner_amores = get_field("banner_amores", "option"); ?>
 
             <?php if ($banner_amores): ?>
