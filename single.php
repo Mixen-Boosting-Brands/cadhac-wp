@@ -67,7 +67,7 @@
                             </div>
 
                             <!-- Footer Meta -->
-                            <div class="card post-footer">
+                            <div class="card post-footer rounded-5">
                                 <div class="card-body">
                                     <div class="mb-2">
                                         <strong>Categorías:</strong>
