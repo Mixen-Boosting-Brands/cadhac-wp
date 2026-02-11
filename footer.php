@@ -1,138 +1,270 @@
 		<?php if (is_home()): ?>
-		<section class="pt-30 pb-60">
-            <div class="container-fluid">
-                <div class="row mb-4">
-                    <div class="col-12">
-                        <h1 data-aos="fade-up" data-aos-duration="1000">
-                            Cómo<br>
-                            acompañamos
-                        </h1>
-                        <p data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">Guiamos, informamos y fortalecemos a quienes enfrentan momentos difíciles, siempre con empatía y respeto.</p>
-                    </div>
-                </div>
-                <div class="row mb-5">
-                    <div class="col-md-6 col-lg-3">
-                        <div class="card card-ico-center rounded-5 mb-4 mb-lg-0" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
-                            <div>
-                                <img
-                                    src="<?php echo esc_url(
-                                        get_template_directory_uri(),
-                                    ); ?>/assets/images/como-acompanamos/ico-1@2x.png"
-                                    class="ico"
-                                    alt=""
-                                />
-                                <div class="card-body">
-                                    <p class="card-text">Acompañamiento a familias de personas desaparecidas.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="card card-ico-center rounded-5 mb-4 mb-lg-0" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
-                            <div>
-                                <img
-                                    src="<?php echo esc_url(
-                                        get_template_directory_uri(),
-                                    ); ?>/assets/images/como-acompanamos/ico-2@2x.png"
-                                    class="ico"
-                                    alt=""
-                                />
-                                <div class="card-body">
-                                    <p class="card-text">Atención a niñas, niños y adolescentes afectados por violencia.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="card card-ico-center rounded-5 mb-4 mb-lg-0" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
-                            <div>
-                                <img
-                                    src="<?php echo esc_url(
-                                        get_template_directory_uri(),
-                                    ); ?>/assets/images/como-acompanamos/ico-3@2x.png"
-                                    class="ico"
-                                    alt=""
-                                />
-                                <div class="card-body">
-                                    <p class="card-text">Incidencia pública (políticas, leyes, formación).</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="card card-ico-center rounded-5 mb-4 mb-lg-0" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
-                            <div>
-                                <img
-                                    src="<?php echo esc_url(
-                                        get_template_directory_uri(),
-                                    ); ?>/assets/images/como-acompanamos/ico-4@2x.png"
-                                    class="ico"
-                                    alt=""
-                                />
-                                <div class="card-body">
-                                    <p class="card-text">Documentación,
-                                    análisis y memoria.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12 text-end arrow-right">
-                        <a href="#">
-                            <h2>
-                                Conoce nuestro trabajo
-                                <i class="fa-solid fa-arrow-right-long"></i>
-                            </h2>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-         <?php endif; ?>
+            <?php
+            $pagina_home = get_field("pagina_home", "option");
 
-        <?php if (is_home()): ?>
-        <section
-            class="cta py-60"
-            style="
-                background-image: url(&quot;<?php echo esc_url(
-                    get_template_directory_uri(),
-                ); ?>/assets/images/bg-cta-home.png&quot;);
-            "
-        >
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="w-100 arrow-right p-5 text-center"">
-                            <h1>
-                                <span class="highlighted serif" data-aos="fade-in" data-aos-duration="1000">Amores</span
-                                ><br />
-                                es un colectivo de
-                                <span class="highlighted" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">familias</span
-                                ><br />
-                                que
-                                <span class="highlighted" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">buscan</span> a
-                                personas<br />
-                                desaparecidas más de 13<br />
-                                años caminando
-                                <span class="highlighted" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">juntos.</span>
-                            </h1>
-                            <p>
-                                <i
-                                    class="fa-solid fa-star-of-life highlighted"
-                                ></i>
-                            </p>
+            $tarjetas = $pagina_home["tarjetas"] ?? null;
+
+            if (!$tarjetas) {
+                return;
+            }
+
+            $texto_superior = $tarjetas["texto_superior"] ?? "";
+            $texto_inferior = $tarjetas["texto_inferior"] ?? "";
+
+            $t1 = $tarjetas["tarjeta_1"] ?? null;
+            $t2 = $tarjetas["tarjeta_2"] ?? null;
+            $t3 = $tarjetas["tarjeta_3"] ?? null;
+            $t4 = $tarjetas["tarjeta_4"] ?? null;
+            ?>
+
+            <section class="pt-30 pb-60">
+                <div class="container-fluid">
+                    <!-- Intro -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+
+                            <?php if (!empty($texto_superior)): ?>
+                                <h1
+                                    data-aos="fade-up"
+                                    data-aos-duration="1000"
+                                >
+                                    <?php echo wp_kses_post($texto_superior); ?>
+                                </h1>
+                            <?php endif; ?>
+
+                            <?php if (!empty($texto_inferior)): ?>
+                                <div
+                                    data-aos="fade-up"
+                                    data-aos-duration="1000"
+                                    data-aos-delay="100"
+                                >
+                                    <?php echo wp_kses_post($texto_inferior); ?>
+                                </div>
+                            <?php endif; ?>
+
+                        </div>
+                    </div>
+
+                    <div class="row mb-5">
+                        <!-- Tarjeta 1 -->
+                        <?php if ($t1): ?>
+                            <div class="col-md-6 col-lg-3">
+                                <div
+                                    class="card card-ico-center rounded-5 mb-4 mb-lg-0"
+                                    data-aos="fade-up"
+                                    data-aos-duration="1000"
+                                    data-aos-delay="100"
+                                >
+                                    <div>
+
+                                        <?php if (!empty($t1["icono"])): ?>
+                                            <img
+                                                src="<?php echo esc_url(
+                                                    $t1["icono"],
+                                                ); ?>"
+                                                class="ico"
+                                                alt=""
+                                                loading="lazy"
+                                                decoding="async"
+                                            />
+                                        <?php endif; ?>
+
+                                        <?php if (!empty($t1["texto"])): ?>
+                                            <div class="card-body">
+                                                <p class="card-text">
+                                                    <?php echo esc_html(
+                                                        $t1["texto"],
+                                                    ); ?>
+                                                </p>
+                                            </div>
+                                        <?php endif; ?>
+
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+
+                        <!-- Tarjeta 2 -->
+                        <?php if ($t2): ?>
+                            <div class="col-md-6 col-lg-3">
+                                <div
+                                    class="card card-ico-center rounded-5 mb-4 mb-lg-0"
+                                    data-aos="fade-up"
+                                    data-aos-duration="1000"
+                                    data-aos-delay="200"
+                                >
+                                    <div>
+
+                                        <?php if (!empty($t2["icono"])): ?>
+                                            <img
+                                                src="<?php echo esc_url(
+                                                    $t2["icono"],
+                                                ); ?>"
+                                                class="ico"
+                                                alt=""
+                                                loading="lazy"
+                                                decoding="async"
+                                            />
+                                        <?php endif; ?>
+
+                                        <?php if (!empty($t2["texto"])): ?>
+                                            <div class="card-body">
+                                                <p class="card-text">
+                                                    <?php echo esc_html(
+                                                        $t2["texto"],
+                                                    ); ?>
+                                                </p>
+                                            </div>
+                                        <?php endif; ?>
+
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+
+                        <!-- Tarjeta 3 -->
+                        <?php if ($t3): ?>
+                            <div class="col-md-6 col-lg-3">
+                                <div
+                                    class="card card-ico-center rounded-5 mb-4 mb-lg-0"
+                                    data-aos="fade-up"
+                                    data-aos-duration="1000"
+                                    data-aos-delay="300"
+                                >
+                                    <div>
+
+                                        <?php if (!empty($t3["icono"])): ?>
+                                            <img
+                                                src="<?php echo esc_url(
+                                                    $t3["icono"],
+                                                ); ?>"
+                                                class="ico"
+                                                alt=""
+                                                loading="lazy"
+                                                decoding="async"
+                                            />
+                                        <?php endif; ?>
+
+                                        <?php if (!empty($t3["texto"])): ?>
+                                            <div class="card-body">
+                                                <p class="card-text">
+                                                    <?php echo esc_html(
+                                                        $t3["texto"],
+                                                    ); ?>
+                                                </p>
+                                            </div>
+                                        <?php endif; ?>
+
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+
+                        <!-- Tarjeta 4 -->
+                        <?php if ($t4): ?>
+                            <div class="col-md-6 col-lg-3">
+                                <div
+                                    class="card card-ico-center rounded-5 mb-4 mb-lg-0"
+                                    data-aos="fade-up"
+                                    data-aos-duration="1000"
+                                    data-aos-delay="400"
+                                >
+                                    <div>
+
+                                        <?php if (!empty($t4["icono"])): ?>
+                                            <img
+                                                src="<?php echo esc_url(
+                                                    $t4["icono"],
+                                                ); ?>"
+                                                class="ico"
+                                                alt=""
+                                                loading="lazy"
+                                                decoding="async"
+                                            />
+                                        <?php endif; ?>
+
+                                        <?php if (!empty($t4["texto"])): ?>
+                                            <div class="card-body">
+                                                <p class="card-text">
+                                                    <?php echo esc_html(
+                                                        $t4["texto"],
+                                                    ); ?>
+                                                </p>
+                                            </div>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 text-end arrow-right">
                             <a href="#">
                                 <h2>
-                                    Conoce más
+                                    Conoce nuestro trabajo
                                     <i class="fa-solid fa-arrow-right-long"></i>
                                 </h2>
                             </a>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        <?php endif; ?>
+
+        <?php if (is_home()): ?>
+            <?php
+            $banner_amores = get_field("banner_amores", "option");
+
+            if (!$banner_amores) {
+                return;
+            }
+
+            $texto = $banner_amores["texto"] ?? "";
+            $imagen = $banner_amores["imagen"] ?? "";
+            ?>
+
+            <?php if (!empty($imagen)): ?>
+            <section
+                class="cta py-60"
+                style="background-image:url('<?php echo esc_url($imagen); ?>');"
+            >
+            <?php else: ?>
+            <section class="cta py-60">
+            <?php endif; ?>
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+
+                            <div class="w-100 arrow-right p-5 text-center">
+
+                                <!-- TEXTO -->
+                                <?php if (!empty($texto)): ?>
+                                    <div class="cta-text">
+                                        <?php echo wp_kses_post($texto); ?>
+                                    </div>
+                                <?php endif; ?>
+
+
+
+                                <!-- LINK HARDCODED -->
+                                <a href="<?php echo esc_url(
+                                    get_permalink(2214),
+                                ); ?>">
+                                    <h2>
+                                        Conoce más
+                                        <i class="fa-solid fa-arrow-right-long"></i>
+                                    </h2>
+                                </a>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </section>
         <?php endif; ?>
 
         <footer class="pt-60 pb-30">
