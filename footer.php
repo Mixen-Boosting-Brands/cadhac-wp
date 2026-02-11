@@ -267,6 +267,8 @@
             </section>
         <?php endif; ?>
 
+        <?php get_template_part("template-parts/components/necesitas-ayuda"); ?>
+
         <footer class="pt-60 pb-30">
             <div class="container-fluid">
                 <div class="row mb-3 mb-md-5">

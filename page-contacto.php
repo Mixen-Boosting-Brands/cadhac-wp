@@ -220,6 +220,4 @@ $texto_inferior = $bloque_3["texto_inferior"] ?? "";
     </div>
 </section>
 
-<?php get_template_part("template-parts/components/necesitas-ayuda"); ?>
-
 <?php get_footer(); ?>

@@ -383,6 +383,4 @@ $imagen_2 = $bloque_2["imagen_2"] ?? "";
     </div>
 </section>
 
-<?php get_template_part("template-parts/components/necesitas-ayuda"); ?>
-
 <?php get_footer(); ?>
