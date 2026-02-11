@@ -204,63 +204,77 @@ $valores = $pagina_historia["valores"] ?? null;
     </div>
 </section>
 
+<?php
+$pagina_historia = get_field("pagina_historia", "option");
+
+if (!$pagina_historia) {
+    return;
+}
+
+$bloque_3 = $pagina_historia["bloque_3"] ?? null;
+
+if (!$bloque_3) {
+    return;
+}
+
+$texto_superior = $bloque_3["texto_superior"] ?? "";
+$texto_inferior = $bloque_3["texto_inferior"] ?? "";
+$documento = $bloque_3["documento_descargable"] ?? "";
+$imagen = $bloque_3["imagen"] ?? "";
+?>
+
 <section class="pt-60 pb-30">
     <div class="container-fluid">
         <div class="row">
+            <!-- Columna texto -->
             <div class="col-lg-6">
-                <h1
-                    class="lh-1"
-                    data-aos="fade-up"
-                    data-aos-duration="1000"
-                >
-                    Más de 30<br />
-                    años <span>acompañando</span>
-                </h1>
-                <p
-                    data-aos="fade-up"
-                    data-aos-duration="1000"
-                    data-aos-delay="100"
-                >
-                    A lo largo de los años, CADHAC ha caminado junto a
-                    personas y comunidades en momentos difíciles,
-                    <strong
-                        >apostando siempre por la escucha, el respeto y
-                        la acción</strong
-                    >.
-                </p>
-                <p
-                    data-aos="fade-up"
-                    data-aos-duration="1000"
-                    data-aos-delay="200"
-                >
-                    Nuestro trabajo se ha transformado con el tiempo,
-                    pero el corazón sigue siendo el mismo: estar
-                    presentes, acompañar y no soltar.
-                </p>
-                <a
-                    class="btn btn-primary rounded-pill"
-                    href="#"
-                    download
-                    data-aos="fade-up"
-                    data-aos-duration="1000"
-                    data-aos-delay="300"
-                >
-                    <i class="fa-solid fa-circle-arrow-down"></i>
-                    Descargar Memoria CADHAC - 30 años</a
-                >
+                <?php if (!empty($texto_superior)): ?>
+                    <h1
+                        class="lh-1"
+                        data-aos="fade-up"
+                        data-aos-duration="1000"
+                    >
+                        <?php echo wp_kses_post($texto_superior); ?>
+                    </h1>
+                <?php endif; ?>
+
+                <?php if (!empty($texto_inferior)): ?>
+                    <div
+                        data-aos="fade-up"
+                        data-aos-duration="1000"
+                        data-aos-delay="100"
+                    >
+                        <?php echo wp_kses_post($texto_inferior); ?>
+                    </div>
+                <?php endif; ?>
+
+                <?php if (!empty($documento)): ?>
+                    <a
+                        class="btn btn-primary rounded-pill"
+                        href="<?php echo esc_url($documento); ?>"
+                        download
+                        data-aos="fade-up"
+                        data-aos-duration="1000"
+                        data-aos-delay="300"
+                    >
+                        <i class="fa-solid fa-circle-arrow-down"></i>
+                        Descargar documento
+                    </a>
+                <?php endif; ?>
             </div>
+
+            <!-- Columna imagen -->
             <div class="col-lg-6">
-                <div
-                    class="arrow-right home-image container-image bp-center rounded-5 p-4"
-                    style="
-                        background-image: url(&quot;<?php echo esc_url(
-                            get_template_directory_uri(),
-                        ); ?>/assets/images/bg-acompanamiento-2.png&quot;);
-                    "
-                    data-aos="fade-up"
-                    data-aos="fade-up"
-                    data-aos-duration="1000"
-                ></div>
+                <?php if (!empty($imagen)): ?>
+                    <div
+                        class="arrow-right home-image container-image bp-center rounded-5 p-4"
+                        style="background-image:url('<?php echo esc_url(
+                            $imagen,
+                        ); ?>');"
+                        data-aos="fade-up"
+                        data-aos-duration="1000"
+                    ></div>
+                <?php endif; ?>
             </div>
         </div>
     </div>
