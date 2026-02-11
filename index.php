@@ -12,7 +12,6 @@
 <!-- Noticias -->
 <section class="tabulador pt-60 pb-30">
     <div class="container-fluid">
-
         <!-- Header -->
         <div class="row" data-aos="fade-up" data-aos-duration="1000">
             <div class="col-6 my-auto">
@@ -65,16 +64,20 @@
                 </p>
 
                 <div class="tab-content" id="pills-noticiasContent">
+
                     <?php
                     $i = 0;
                     foreach ($cats as $cat):
                         $active = $i === 0 ? "show active" : ""; ?>
+
                         <div
                             class="tab-pane fade <?php echo $active; ?>"
                             id="pills-<?php echo esc_attr($cat->slug); ?>"
                             role="tabpanel"
                         >
+
                             <div class="row">
+
                                 <?php
                                 $q = new WP_Query([
                                     "post_type" => "post",
@@ -84,45 +87,52 @@
 
                                 if ($q->have_posts()):
                                     while ($q->have_posts()):
-                                        $q->the_post(); ?>
+
+                                        $q->the_post();
+
+                                        $image = get_post_card_image(
+                                            get_the_ID(),
+                                        );
+                                        ?>
 
                                         <div class="col-lg-4">
                                             <div class="card rounded-5 mb-4 mb-lg-0">
-                                                <?php if (
-                                                    has_post_thumbnail()
-                                                ): ?>
+
+                                                <?php if (!empty($image)): ?>
                                                     <img
                                                         src="<?php echo esc_url(
-                                                            get_the_post_thumbnail_url(
-                                                                get_the_ID(),
-                                                                "large",
-                                                            ),
+                                                            $image,
                                                         ); ?>"
                                                         class="card-img-top rounded-5"
                                                         alt="<?php echo esc_attr(
                                                             get_the_title(),
                                                         ); ?>"
                                                         loading="lazy"
+                                                        decoding="async"
                                                     />
                                                 <?php endif; ?>
 
                                                 <div class="card-body">
+
                                                     <date class="card-date">
                                                         <?php echo get_the_date(
                                                             "d M Y",
                                                         ); ?>
                                                     </date>
+
                                                     <a href="<?php the_permalink(); ?>">
                                                         <h1 class="card-title">
                                                             <?php the_title(); ?>
                                                         </h1>
                                                     </a>
+
                                                     <p class="card-text">
                                                         <?php echo wp_trim_words(
                                                             get_the_excerpt(),
                                                             18,
                                                         ); ?>
                                                     </p>
+
                                                     <div class="text-end">
                                                         <a
                                                             href="<?php the_permalink(); ?>"
@@ -131,19 +141,24 @@
                                                             <i class="fas fa-arrow-right"></i>
                                                         </a>
                                                     </div>
+
                                                 </div>
                                             </div>
                                         </div>
+
                                 <?php
                                     endwhile;
                                     wp_reset_postdata();
                                 endif;
                                 ?>
+
                             </div>
                         </div>
+
                     <?php $i++;
                     endforeach;
                     ?>
+
                 </div>
             </div>
         </div>

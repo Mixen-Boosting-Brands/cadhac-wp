@@ -3,7 +3,7 @@ function get_post_card_image($post_id)
 {
     // 1. Featured image
     if (has_post_thumbnail($post_id)) {
-        return get_the_post_thumbnail_url($post_id, "large");
+        return get_the_post_thumbnail_url($post_id, "card");
     }
 
     // 2. Buscar primera imagen en content
