@@ -7,7 +7,7 @@
 <?php $cats = get_categories([
     "taxonomy" => "category",
     "include" => [34, 86, 92, 12, 10, 11],
-    "orderby" => "name", // Orden alfabético
+    "orderby" => "name",
     "order" => "ASC",
     "hide_empty" => true,
 ]); ?>
@@ -15,6 +15,7 @@
 <!-- Noticias -->
 <section class="tabulador pt-60 pb-30">
     <div class="container-fluid">
+
         <!-- Header -->
         <div class="row" data-aos="fade-up" data-aos-duration="1000">
             <div class="col-6 my-auto">
@@ -23,7 +24,6 @@
 
             <div class="col-6 my-auto text-end">
                 <ul class="nav nav-pills mb-0" id="pills-noticias" role="tablist">
-
                     <?php
                     $i = 0;
                     foreach ($cats as $cat):
@@ -67,31 +67,52 @@
                 </p>
 
                 <div class="tab-content" id="pills-noticiasContent">
-
                     <?php
                     $i = 0;
                     foreach ($cats as $cat):
-                        $active = $i === 0 ? "show active" : ""; ?>
+
+                        $active = $i === 0 ? "show active" : "";
+
+                        // CACHE KEY
+                        $cache_key = "home_news_cat_" . $cat->term_id;
+
+                        // Intentar obtener caché
+                        $posts = get_transient($cache_key);
+
+                        if ($posts === false) {
+                            $q = new WP_Query([
+                                "post_type" => "post",
+                                "posts_per_page" => 3,
+                                "cat" => $cat->term_id,
+
+                                // Performance flags
+                                "no_found_rows" => true,
+                                "update_post_meta_cache" => false,
+                                "update_post_term_cache" => false,
+                            ]);
+
+                            $posts = $q->posts;
+
+                            // Guardar caché 6 horas
+                            set_transient(
+                                $cache_key,
+                                $posts,
+                                HOUR_IN_SECONDS * 6,
+                            );
+                        }
+                        ?>
 
                         <div
                             class="tab-pane fade <?php echo $active; ?>"
                             id="pills-<?php echo esc_attr($cat->slug); ?>"
                             role="tabpanel"
                         >
-
                             <div class="row">
+                                <?php if (!empty($posts)): ?>
+                                    <?php
+                                    foreach ($posts as $post):
 
-                                <?php
-                                $q = new WP_Query([
-                                    "post_type" => "post",
-                                    "posts_per_page" => 3,
-                                    "cat" => $cat->term_id,
-                                ]);
-
-                                if ($q->have_posts()):
-                                    while ($q->have_posts()):
-
-                                        $q->the_post();
+                                        setup_postdata($post);
 
                                         $image = get_post_card_image(
                                             get_the_ID(),
@@ -151,12 +172,11 @@
                                             </div>
                                         </div>
 
-                                <?php
-                                    endwhile;
+                                    <?php
+                                    endforeach;
                                     wp_reset_postdata();
-                                endif;
-                                ?>
-
+                                    ?>
+                                <?php endif; ?>
                             </div>
                         </div>
 
