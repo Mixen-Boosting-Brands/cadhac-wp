@@ -254,6 +254,33 @@
                                     </li>
                                 </ul>
                             </nav>
+                            <!-- Search -->
+                            <div class="header-search d-inline-block ms-3">
+
+                                <form
+                                    role="search"
+                                    method="get"
+                                    class="search-form"
+                                    action="<?php echo esc_url(
+                                        home_url("/"),
+                                    ); ?>"
+                                >
+
+                                    <input
+                                        type="search"
+                                        class="search-field"
+                                        placeholder="Buscar…"
+                                        value="<?php echo get_search_query(); ?>"
+                                        name="s"
+                                    />
+
+                                    <button type="submit" class="search-submit">
+                                        <i class="fa-solid fa-magnifying-glass"></i>
+                                    </button>
+
+                                </form>
+
+                            </div>
                             <a
                                 id="mburger"
                                 class="d-lg-none"
