@@ -209,7 +209,9 @@
                                                 <li>
                                                     <a href="<?php echo esc_url(
                                                         get_permalink(2214),
-                                                    ); ?>">Amores</a>
+                                                    ); ?>"><?php echo esc_html(
+    get_the_title(2214),
+); ?></a>
                                                 </li>
                                             </ul>
                                         </nav>
@@ -226,12 +228,16 @@
                                                 <li>
                                                     <a href="<?php echo esc_url(
                                                         get_permalink(8693),
-                                                    ); ?>">Prensa</a>
+                                                    ); ?>"><?php echo esc_html(
+    get_the_title(8693),
+); ?></a>
                                                 </li>
                                                 <li>
                                                     <a href="<?php echo esc_url(
                                                         get_permalink(5334),
-                                                    ); ?>">Contacto</a>
+                                                    ); ?>"><?php echo esc_html(
+    get_the_title(5334),
+); ?></a>
                                                 </li>
                                             </ul>
                                         </nav>
