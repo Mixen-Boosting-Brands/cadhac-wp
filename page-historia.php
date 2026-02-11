@@ -280,26 +280,53 @@ $imagen = $bloque_3["imagen"] ?? "";
     </div>
 </section>
 
+<?php
+$pagina_historia = get_field("pagina_historia", "option");
+
+if (!$pagina_historia) {
+    return;
+}
+
+$bloque_4 = $pagina_historia["bloque_4"] ?? null;
+
+if (!$bloque_4) {
+    return;
+}
+
+$imagen = $bloque_4["imagen"] ?? "";
+$texto = $bloque_4["texto"] ?? "";
+?>
+
 <section>
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 text-center">
-                <div
-                    class="bottom-text-image container-image bp-center rounded-5 p-4"
-                    style="
-                        background-image: url(&quot;<?php echo esc_url(
-                            get_template_directory_uri(),
-                        ); ?>/assets/images/bg-j-4.png&quot;);
-                    "
-                    data-aos="fade-up"
-                    data-aos="fade-up"
-                    data-aos-duration="1000"
-                    data-aos-delay="200"
-                >
-                    <h1>
-                        Nuestra historia continúa, junto a las personas.
-                    </h1>
-                </div>
+                <?php if (!empty($imagen)): ?>
+                    <div
+                        class="bottom-text-image container-image bp-center rounded-5 p-4"
+                        style="background-image:url('<?php echo esc_url(
+                            $imagen,
+                        ); ?>');"
+                        data-aos="fade-up"
+                        data-aos-duration="1000"
+                        data-aos-delay="200"
+                    >
+                <?php else: ?>
+                    <div
+                        class="bottom-text-image container-image bp-center rounded-5 p-4"
+                        data-aos="fade-up"
+                        data-aos-duration="1000"
+                        data-aos-delay="200"
+                    >
+                <?php endif; ?>
+
+                        <?php if (!empty($texto)): ?>
+                            <h1>
+                                <?php echo wp_kses_post($texto); ?>
+                            </h1>
+                        <?php endif; ?>
+
+                    </div>
             </div>
         </div>
     </div>
