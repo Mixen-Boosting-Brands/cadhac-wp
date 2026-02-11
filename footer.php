@@ -116,7 +116,6 @@
             <?php endif; ?>
         <?php endif; ?>
 
-        <?php if (is_front_page() || is_home()): ?>
             <?php $banner_amores = get_field("banner_amores", "option"); ?>
 
             <?php if ($banner_amores): ?>
@@ -163,7 +162,6 @@
                         </div>
                     </section>
             <?php endif; ?>
-        <?php endif; ?>
 
         <?php get_template_part("template-parts/components/necesitas-ayuda"); ?>
 
