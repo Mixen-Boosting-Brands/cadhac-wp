@@ -118,10 +118,8 @@
 
         <?php if (is_front_page() || is_home()): ?>
             <?php
-            $banner_amores = get_field("banner_amores", "option");
-            echo "<pre>";
-            var_dump($banner_amores);
-            echo "</pre>";
+            $pagina_home = get_field("pagina_home", "option");
+            $banner_amores = $pagina_home["banner_amores"] ?? null;
             ?>
 
             <?php if ($banner_amores): ?>
@@ -141,32 +139,31 @@
                 <?php else: ?>
                     <section class="cta py-60">
                 <?php endif; ?>
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="w-100 arrow-right p-5 text-center">
 
-                                        <?php if (!empty($texto)): ?>
-                                            <div class="cta-text">
-                                                <?php echo wp_kses_post(
-                                                    $texto,
-                                                ); ?>
-                                            </div>
-                                        <?php endif; ?>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="w-100 arrow-right p-5 text-center">
 
-                                        <a href="<?php echo esc_url(
-                                            get_permalink(2214),
-                                        ); ?>">
-                                            <h2>
-                                                Conoce más
-                                                <i class="fa-solid fa-arrow-right-long"></i>
-                                            </h2>
-                                        </a>
-                                    </div>
+                                    <?php if (!empty($texto)): ?>
+                                        <div class="cta-text">
+                                            <?php echo wp_kses_post($texto); ?>
+                                        </div>
+                                    <?php endif; ?>
+
+                                    <a href="<?php echo esc_url(
+                                        get_permalink(2214),
+                                    ); ?>">
+                                        <h2>
+                                            Conoce más
+                                            <i class="fa-solid fa-arrow-right-long"></i>
+                                        </h2>
+                                    </a>
                                 </div>
                             </div>
                         </div>
-                    </section>
+                    </div>
+                </section>
             <?php endif; ?>
         <?php endif; ?>
 
