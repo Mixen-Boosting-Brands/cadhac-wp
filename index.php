@@ -9,18 +9,17 @@
     "hide_empty" => true,
 ]); ?>
 
+<!-- Noticias -->
 <section class="tabulador pt-60 pb-30">
     <div class="container-fluid">
 
-        <!-- HEADER -->
+        <!-- Header -->
         <div class="row" data-aos="fade-up" data-aos-duration="1000">
-
             <div class="col-6 my-auto">
                 <h1>Noticias</h1>
             </div>
 
             <div class="col-6 my-auto text-end">
-
                 <ul class="nav nav-pills mb-0" id="pills-noticias" role="tablist">
 
                     <?php
@@ -48,13 +47,9 @@
                     <?php $i++;
                     endforeach;
                     ?>
-
                 </ul>
-
             </div>
         </div>
-
-
 
         <div class="row" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
             <div class="col-12">
@@ -62,33 +57,24 @@
             </div>
         </div>
 
-
-
         <div class="row">
             <div class="col-12">
-
                 <p>
                     Descubre relatos, aprendizajes y voces que mantienen
                     viva la memoria y fortalecen nuestra comunidad.
                 </p>
 
-
-
                 <div class="tab-content" id="pills-noticiasContent">
-
                     <?php
                     $i = 0;
                     foreach ($cats as $cat):
                         $active = $i === 0 ? "show active" : ""; ?>
-
                         <div
                             class="tab-pane fade <?php echo $active; ?>"
                             id="pills-<?php echo esc_attr($cat->slug); ?>"
                             role="tabpanel"
                         >
-
                             <div class="row">
-
                                 <?php
                                 $q = new WP_Query([
                                     "post_type" => "post",
@@ -102,7 +88,6 @@
 
                                         <div class="col-lg-4">
                                             <div class="card rounded-5 mb-4 mb-lg-0">
-
                                                 <?php if (
                                                     has_post_thumbnail()
                                                 ): ?>
@@ -122,26 +107,22 @@
                                                 <?php endif; ?>
 
                                                 <div class="card-body">
-
                                                     <date class="card-date">
                                                         <?php echo get_the_date(
                                                             "d M Y",
                                                         ); ?>
                                                     </date>
-
                                                     <a href="<?php the_permalink(); ?>">
                                                         <h1 class="card-title">
                                                             <?php the_title(); ?>
                                                         </h1>
                                                     </a>
-
                                                     <p class="card-text">
                                                         <?php echo wp_trim_words(
                                                             get_the_excerpt(),
                                                             18,
                                                         ); ?>
                                                     </p>
-
                                                     <div class="text-end">
                                                         <a
                                                             href="<?php the_permalink(); ?>"
@@ -150,30 +131,22 @@
                                                             <i class="fas fa-arrow-right"></i>
                                                         </a>
                                                     </div>
-
                                                 </div>
                                             </div>
                                         </div>
-
                                 <?php
                                     endwhile;
                                     wp_reset_postdata();
                                 endif;
                                 ?>
-
                             </div>
-
                         </div>
-
                     <?php $i++;
                     endforeach;
                     ?>
-
                 </div>
-
             </div>
         </div>
-
     </div>
 </section>
 
