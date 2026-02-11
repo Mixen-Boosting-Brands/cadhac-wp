@@ -1,103 +1,125 @@
 <?php get_header(); ?>
 
-<section>
+<section class="single-post py-60">
     <div class="container-fluid">
+
         <div class="row">
             <div class="col-lg-8 offset-lg-2">
+
                 <?php if (have_posts()):
                     while (have_posts()):
                         the_post(); ?>
-              		<!-- article -->
-              		<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-             			<!-- post thumbnail -->
-             			<?php if (has_post_thumbnail()):// Check if Thumbnail exists.
-                     ?>
-                				<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
-               					<?php the_post_thumbnail();
-                    // Fullsize image for the single post.
-                    ?>
-                				</a>
-             			<?php endif; ?>
-             			<!-- /post thumbnail -->
+                        <article
+                            id="post-<?php the_ID(); ?>"
+                            <?php post_class("single-article"); ?>
+                        >
 
-             			<!-- post title -->
-             			<h1>
-                				<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a>
-             			</h1>
-             			<!-- /post title -->
+                            <!-- HEADER -->
+                            <header class="mb-4">
 
-             			<!-- post details -->
-             			<span class="date">
-                				<time datetime="<?php the_time("Y-m-d"); ?> <?php the_time(
-     "H:i",
- ); ?>">
-               					<?php the_date(); ?> <?php the_time(); ?>
-                				</time>
-             			</span>
-             			<span class="author"><?php esc_html_e(
-                    "Published by",
-                    "html5blank",
-                ); ?> <?php the_author_posts_link(); ?></span>
-             			<span class="comments"><?php if (comments_open(get_the_ID())) {
-                    comments_popup_link(
-                        __("Leave your thoughts", "html5blank"),
-                        __("1 Comment", "html5blank"),
-                        __("% Comments", "html5blank"),
-                    );
-                } ?></span>
-             			<!-- /post details -->
+                                <!-- Title -->
+                                <h1 class="post-title mb-3">
+                                    <?php the_title(); ?>
+                                </h1>
 
-             			<?php the_content();
-                        // Dynamic Content.
-                        ?>
+                                <!-- Meta -->
+                                <div class="post-meta text-muted mb-4">
 
-             			<?php the_tags(__("Tags: ", "html5blank"), ", ", "<br>");
-                        // Separated by commas with a line break at the end.
-                        ?>
+                                    <span class="me-3">
+                                        <i class="fa-regular fa-calendar"></i>
+                                        <time datetime="<?php echo get_the_date(
+                                            "c",
+                                        ); ?>">
+                                            <?php echo get_the_date("d M Y"); ?>
+                                        </time>
+                                    </span>
 
-             			<p><?php
-                esc_html_e("Categorised in: ", "html5blank");
-                the_category(", ");
+                                    <span class="me-3">
+                                        <i class="fa-regular fa-user"></i>
+                                        <?php the_author_posts_link(); ?>
+                                    </span>
 
-                        // Separated by commas.
-                        ?></p>
+                                    <?php if (comments_open()): ?>
+                                        <span>
+                                            <i class="fa-regular fa-comments"></i>
+                                            <?php comments_popup_link(
+                                                "Sin comentarios",
+                                                "1 comentario",
+                                                "% comentarios",
+                                            ); ?>
+                                        </span>
+                                    <?php endif; ?>
 
-             			<p><?php
-                esc_html_e("This post was written by ", "html5blank");
-                the_author();
-                ?></p>
+                                </div>
 
-             			<?php edit_post_link();
-                        // Always handy to have Edit Post Links available.
-                        ?>
+                            </header>
 
-             			<?php comments_template(); ?>
 
-              		</article>
-              		<!-- /article -->
 
-               	<?php
-                    endwhile; ?>
-               	<?php
-                else:
-                     ?>
+                            <!-- FEATURED IMAGE -->
+                            <?php if (has_post_thumbnail()): ?>
 
-              		<!-- article -->
-              		<article>
+                                <div class="post-thumbnail mb-4">
 
-             			<h1><?php esc_html_e(
-                    "Sorry, nothing to display.",
-                    "html5blank",
-                ); ?></h1>
+                                    <?php the_post_thumbnail("large", [
+                                        "class" => "img-fluid rounded-5 w-100",
+                                        "loading" => "eager",
+                                    ]); ?>
 
-              		</article>
-              		<!-- /article -->
+                                </div>
 
-           	<?php
+                            <?php endif; ?>
+
+
+
+                            <!-- CONTENT -->
+                            <div class="post-content mb-5">
+                                <?php the_content(); ?>
+                            </div>
+
+
+
+                            <!-- FOOTER META -->
+                            <footer class="post-footer">
+
+                                <!-- Categories -->
+                                <div class="mb-2">
+                                    <strong>Categorías:</strong>
+                                    <?php the_category(", "); ?>
+                                </div>
+
+                                <!-- Tags -->
+                                <?php if (get_the_tags()): ?>
+                                    <div class="mb-2">
+                                        <strong>Tags:</strong>
+                                        <?php the_tags("", ", "); ?>
+                                    </div>
+                                <?php endif; ?>
+
+                                <!-- Edit link -->
+                                <?php edit_post_link(
+                                    "Editar post",
+                                    '<div class="mt-3">',
+                                    "</div>",
+                                ); ?>
+
+                            </footer>
+
+
+
+                            <!-- COMMENTS -->
+                            <?php comments_template(); ?>
+
+                        </article>
+
+                <?php
+                    endwhile;
                 endif; ?>
+
             </div>
         </div>
+
     </div>
 </section>
 
