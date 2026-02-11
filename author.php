@@ -1,81 +1,49 @@
 <?php get_header(); ?>
 
-	<main role="main" aria-label="Content">
-		<!-- section -->
-		<section>
+<section class="archive archive-author pt-30">
+    <div class="container-fluid">
 
-		<?php if ( have_posts() ): the_post(); ?>
+        <!-- Header -->
+        <div class="row mb-4">
+            <div class="col-lg-8 offset-lg-2">
+                <h1 class="mb-3">
+                    <?php the_author(); ?>
+                </h1>
 
-			<h1><?php esc_html_e( 'Author Archives for ', 'html5blank' ); echo get_the_author(); ?></h1>
+                <?php if (get_the_author_meta("description")): ?>
+                    <div class="text-muted">
+                        <?php the_author_meta("description"); ?>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
 
-		<?php if ( get_the_author_meta( 'description' ) ) : ?>
+        <!-- Posts Grid -->
+        <div class="row">
+            <?php if (have_posts()): ?>
 
-		<?php echo get_avatar( get_the_author_meta( 'user_email' ) ); ?>
+                <?php while (have_posts()):
+                    the_post();
 
-			<h2><?php esc_html_e( 'About ', 'html5blank' ); echo get_the_author(); ?></h2>
+                    get_template_part("template-parts/cards/post-card");
+                endwhile; ?>
 
-			<?php echo wpautop( get_the_author_meta( 'description' ) ); ?>
+            <?php else: ?>
 
-		<?php endif; ?>
+                <div class="col-12 text-center">
+                    <p>Este autor no tiene publicaciones aún.</p>
+                </div>
 
-		<?php rewind_posts(); while ( have_posts() ) : the_post(); ?>
+            <?php endif; ?>
+        </div>
 
-			<!-- article -->
-			<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-
-				<!-- post thumbnail -->
-				<?php if ( has_post_thumbnail() ) : // Check if Thumbnail exists. ?>
-					<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
-						<?php the_post_thumbnail( array( 120, 120 ) ); // Declare pixel size you need inside the array. ?>
-					</a>
-				<?php endif; ?>
-				<!-- /post thumbnail -->
-
-				<!-- post title -->
-				<h2>
-					<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a>
-				</h2>
-				<!-- /Post title -->
-
-				<!-- post details -->
-				<span class="date">
-					<time datetime="<?php the_time( 'Y-m-d' ); ?> <?php the_time( 'H:i' ); ?>">
-						<?php the_date(); ?> <?php the_time(); ?>
-					</time>
-				</span>
-				<span class="author"><?php esc_html_e( 'Published by', 'html5blank' ); ?> <?php the_author_posts_link(); ?></span>
-				<span class="comments"><?php comments_popup_link( __( 'Leave your thoughts', 'html5blank' ), __( '1 Comment', 'html5blank' ), __( '% Comments', 'html5blank' ) ); ?></span>
-				<!-- /post details -->
-
-				<?php html5wp_excerpt( 'html5wp_index' ); // Build your custom callback length in functions.php. ?>
-
-				<br class="clear">
-
-				<?php edit_post_link(); ?>
-
-			</article>
-			<!-- /article -->
-
-		<?php endwhile; ?>
-
-		<?php else : ?>
-
-			<!-- article -->
-			<article>
-
-				<h2><?php esc_html_e( 'Sorry, nothing to display.', 'html5blank' ); ?></h2>
-
-			</article>
-			<!-- /article -->
-
-		<?php endif; ?>
-
-			<?php get_template_part( 'pagination' ); ?>
-
-		</section>
-		<!-- /section -->
-	</main>
-
-<?php get_sidebar(); ?>
+        <!-- Pagination -->
+        <div class="row mt-4">
+            <div class="col-12 text-center">
+                <?php echo bootstrap_pagination(); ?>
+            </div>
+        </div>
+    </div>
+</section>
 
 <?php get_footer(); ?>

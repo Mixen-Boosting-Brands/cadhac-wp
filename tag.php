@@ -1,19 +1,49 @@
 <?php get_header(); ?>
 
-	<main role="main" aria-label="Content">
-		<!-- section -->
-		<section>
+<section class="archive archive-tag pt-30">
+    <div class="container-fluid">
 
-			<h1><?php esc_html_e( 'Tag Archive: ', 'html5blank' ); echo single_tag_title( '', false ); ?></h1>
+        <!-- Header -->
+        <div class="row mb-4">
+            <div class="col-lg-8 offset-lg-2">
+                <h1 class="mb-3">
+                    <?php single_tag_title(); ?>
+                </h1>
 
-			<?php get_template_part( 'loop' ); ?>
+                <?php if (tag_description()): ?>
+                    <div class="text-muted">
+                        <?php echo tag_description(); ?>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
 
-			<?php get_template_part( 'pagination' ); ?>
+        <!-- Posts Grid -->
+        <div class="row">
+            <?php if (have_posts()): ?>
 
-		</section>
-		<!-- /section -->
-	</main>
+                <?php while (have_posts()):
+                    the_post();
 
-<?php get_sidebar(); ?>
+                    get_template_part("template-parts/cards/post-card");
+                endwhile; ?>
+
+            <?php else: ?>
+
+                <div class="col-12 text-center">
+                    <p>No hay publicaciones con este tag.</p>
+                </div>
+
+            <?php endif; ?>
+        </div>
+
+        <!-- Pagination -->
+        <div class="row mt-4">
+            <div class="col-12 text-center">
+                <?php echo bootstrap_pagination(); ?>
+            </div>
+        </div>
+    </div>
+</section>
 
 <?php get_footer(); ?>
