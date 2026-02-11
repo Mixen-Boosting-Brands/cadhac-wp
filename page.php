@@ -1,45 +1,59 @@
 <?php get_header(); ?>
 
-	<main role="main" aria-label="Content">
-		<!-- section -->
-		<section>
+<section class="single-page py-60">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2">
 
-			<h1><?php the_title(); ?></h1>
+                <?php if (have_posts()):
+                    while (have_posts()):
+                        the_post(); ?>
 
-		<?php if ( have_posts()) : while ( have_posts() ) : the_post(); ?>
+                        <article
+                            id="page-<?php the_ID(); ?>"
+                            <?php post_class("single-article"); ?>
+                        >
 
-			<!-- article -->
-			<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+                            <!-- Featured Image -->
+                            <?php if (has_post_thumbnail()): ?>
 
-				<?php the_content(); ?>
+                                <div class="post-thumbnail mb-4">
+                                    <?php the_post_thumbnail("large", [
+                                        "class" => "img-fluid rounded-5 w-100",
+                                        "loading" => "eager",
+                                        "alt" => get_the_title(),
+                                    ]); ?>
+                                </div>
 
-				<?php comments_template( '', true ); // Remove if you don't want comments. ?>
+                            <?php endif; ?>
 
-				<br class="clear">
+                            <!-- Título -->
+                            <h1 class="post-title mb-3">
+                                <?php the_title(); ?>
+                            </h1>
 
-				<?php edit_post_link(); ?>
+                            <!-- Contenido -->
+                            <div class="post-content mb-5">
+                                <?php the_content(); ?>
+                            </div>
 
-			</article>
-			<!-- /article -->
 
-		<?php endwhile; ?>
+                            <!-- Edit link (solo admin) -->
+                            <?php edit_post_link(
+                                "Editar página",
+                                '<div class="mt-3">',
+                                "</div>",
+                            ); ?>
 
-		<?php else : ?>
+                        </article>
 
-			<!-- article -->
-			<article>
+                <?php
+                    endwhile;
+                endif; ?>
 
-				<h2><?php esc_html_e( 'Sorry, nothing to display.', 'html5blank' ); ?></h2>
-
-			</article>
-			<!-- /article -->
-
-		<?php endif; ?>
-
-		</section>
-		<!-- /section -->
-	</main>
-
-<?php get_sidebar(); ?>
+            </div>
+        </div>
+    </div>
+</section>
 
 <?php get_footer(); ?>

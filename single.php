@@ -21,6 +21,7 @@
                                     <?php the_post_thumbnail("large", [
                                         "class" => "img-fluid rounded-5 w-100",
                                         "loading" => "eager",
+                                        "alt" => get_the_title(),
                                     ]); ?>
                                 </div>
 
