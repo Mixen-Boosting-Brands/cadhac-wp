@@ -182,112 +182,117 @@
                                 />
                             </a>
                         </div>
-                        <div class="col-6 col-lg-9 my-auto text-end">
-                            <nav class="d-none d-lg-block" role="navigation">
-                                <ul class="list-inline mb-0">
-                                    <li class="list-inline-item">
-                                        <a class="<?php if (
-                                            is_home()
-                                        ): ?>active<?php endif; ?> rounded-pill" href="<?php echo esc_url(
+                        <div class="col-6 col-lg-9 my-auto">
+                            <div class="nav-wrapper d-flex align-items-center justify-content-end">
+                                <nav class="d-none d-lg-block" role="navigation">
+                                    <ul class="list-inline mb-0">
+                                        <li class="list-inline-item">
+                                            <a class="<?php if (
+                                                is_home()
+                                            ): ?>active<?php endif; ?> rounded-pill" href="<?php echo esc_url(
      home_url(),
  ); ?>"
-                                            >Inicio</a
-                                        >
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a class="rounded-pill" href="#"
-                                            >Noticias</a
-                                        >
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a class="rounded-pill" href="#"
-                                            >Historia</a
-                                        >
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a class="rounded-pill" href="#"
-                                            >Trabajo</a
-                                        >
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a class="<?php if (
-                                            is_page(2214)
-                                        ): ?>active bg-highlighted<?php endif; ?>rounded-pill" href="<?php echo esc_url(
+                                                >Inicio</a
+                                            >
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a class="rounded-pill" href="#"
+                                                >Noticias</a
+                                            >
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a class="rounded-pill" href="#"
+                                                >Historia</a
+                                            >
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a class="rounded-pill" href="#"
+                                                >Trabajo</a
+                                            >
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a class="<?php if (
+                                                is_page(2214)
+                                            ): ?>active bg-highlighted<?php endif; ?>rounded-pill" href="<?php echo esc_url(
     get_permalink(2214),
 ); ?>"
-                                            ><?php echo esc_html(
-                                                get_the_title(2214),
-                                            ); ?></a
-                                        >
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a class="rounded-pill" href="#"
-                                            >Mediateca</a
-                                        >
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a class="rounded-pill" href="#"
-                                            >Vacantes</a
-                                        >
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a class="<?php if (
-                                            is_page(8693)
-                                        ): ?>active<?php endif; ?> rounded-pill" href="<?php echo esc_url(
+                                                ><?php echo esc_html(
+                                                    get_the_title(2214),
+                                                ); ?></a
+                                            >
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a class="rounded-pill" href="#"
+                                                >Mediateca</a
+                                            >
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a class="rounded-pill" href="#"
+                                                >Vacantes</a
+                                            >
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a class="<?php if (
+                                                is_page(8693)
+                                            ): ?>active<?php endif; ?> rounded-pill" href="<?php echo esc_url(
      get_permalink(8693),
  ); ?>"
-                                            ><?php echo esc_html(
-                                                get_the_title(8693),
-                                            ); ?></a
-                                        >
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a class="<?php if (
-                                            is_page(5334)
-                                        ): ?>active<?php endif; ?> rounded-pill" href="<?php echo esc_url(
+                                                ><?php echo esc_html(
+                                                    get_the_title(8693),
+                                                ); ?></a
+                                            >
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a class="<?php if (
+                                                is_page(5334)
+                                            ): ?>active<?php endif; ?> rounded-pill" href="<?php echo esc_url(
      get_permalink(5334),
  ); ?>"
-                                            ><?php echo esc_html(
-                                                get_the_title(5334),
-                                            ); ?></a
-                                        >
-                                    </li>
-                                </ul>
-                            </nav>
-                            <!-- Search -->
-                            <div class="header-search d-inline-block ms-3">
+                                                ><?php echo esc_html(
+                                                    get_the_title(5334),
+                                                ); ?></a
+                                            >
+                                        </li>
+                                    </ul>
+                                </nav>
 
-                                <form
-                                    role="search"
-                                    method="get"
-                                    class="search-form"
-                                    action="<?php echo esc_url(
-                                        home_url("/"),
-                                    ); ?>"
+                                <!-- Search -->
+                                <div class="header-search d-inline-block ms-3">
+
+                                    <form
+                                        role="search"
+                                        method="get"
+                                        class="search-form"
+                                        action="<?php echo esc_url(
+                                            home_url("/"),
+                                        ); ?>"
+                                    >
+
+                                        <input
+                                            type="search"
+                                            class="search-field"
+                                            placeholder="Buscar…"
+                                            value="<?php echo get_search_query(); ?>"
+                                            name="s"
+                                        />
+
+                                        <button type="submit" class="search-submit">
+                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                        </button>
+
+                                    </form>
+
+                                </div>
+
+                                <!-- Burger -->
+                                <a
+                                    id="mburger"
+                                    class="d-lg-none"
+                                    href="javascript:void(0)"
                                 >
-
-                                    <input
-                                        type="search"
-                                        class="search-field"
-                                        placeholder="Buscar…"
-                                        value="<?php echo get_search_query(); ?>"
-                                        name="s"
-                                    />
-
-                                    <button type="submit" class="search-submit">
-                                        <i class="fa-solid fa-magnifying-glass"></i>
-                                    </button>
-
-                                </form>
-
+                                    <i class="fas fa-bars"></i>
+                                </a>
                             </div>
-                            <a
-                                id="mburger"
-                                class="d-lg-none"
-                                href="javascript:void(0)"
-                            >
-                                <i class="fas fa-bars"></i>
-                            </a>
                         </div>
                     </div>
                 </div>
