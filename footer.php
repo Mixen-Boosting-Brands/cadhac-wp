@@ -201,7 +201,11 @@
                                                     <a href="#">Noticias</a>
                                                 </li>
                                                 <li>
-                                                    <a href="#">Historia</a>
+                                                    <a href="<?php echo esc_url(
+                                                        get_permalink(373),
+                                                    ); ?>"><?php echo esc_html(
+    get_the_title(373),
+); ?></a>
                                                 </li>
                                                 <li>
                                                     <a href="#">Trabajo</a>

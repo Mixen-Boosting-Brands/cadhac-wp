@@ -89,8 +89,8 @@
                             >
                         </li>
                         <li>
-                            <a href="#"
-                                >Historia</a
+                            <a href="<?php echo esc_url(get_permalink(373)); ?>"
+                                ><?php echo esc_html(get_the_title(373)); ?></a
                             >
                         </li>
                         <li>
@@ -201,8 +201,12 @@
                                             >
                                         </li>
                                         <li class="list-inline-item">
-                                            <a class="rounded-pill" href="#"
-                                                >Historia</a
+                                            <a class="rounded-pill" href="<?php echo esc_url(
+                                                get_permalink(373),
+                                            ); ?>"
+                                                ><?php echo esc_html(
+                                                    get_the_title(373),
+                                                ); ?></a
                                             >
                                         </li>
                                         <li class="list-inline-item">
