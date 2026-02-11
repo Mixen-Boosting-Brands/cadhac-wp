@@ -202,7 +202,7 @@
                                         </li>
                                         <li class="list-inline-item">
                                             <a class="<?php if (
-                                                is_page(8693)
+                                                is_page(373)
                                             ): ?>active<?php endif; ?> rounded-pill" href="<?php echo esc_url(
      get_permalink(373),
  ); ?>"
