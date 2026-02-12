@@ -145,9 +145,9 @@ if (empty($items)) {
 </section>
 
 <?php
-/* =========================
-   CF → pagina_trabajo
-========================= */
+/* ==========================================================
+   CF → pagina_trabajo / bloque_2
+========================================================== */
 
 $pagina_trabajo = get_field("pagina_trabajo", "option");
 
@@ -155,32 +155,30 @@ if (!$pagina_trabajo) {
     return;
 }
 
-$bloque_2 = $pagina_trabajo["bloque_2"] ?? null;
+$bloque = $pagina_trabajo["bloque_2"] ?? null;
 
-if (!$bloque_2) {
+if (!$bloque) {
     return;
 }
 
-/* =========================
-   Textos superiores
-========================= */
+/* ==========================================================
+   Textos
+========================================================== */
 
-$texto_superior = $bloque_2["texto_superior"] ?? "";
-$texto_inferior = $bloque_2["texto_inferior"] ?? "";
+$texto_superior = $bloque["texto_superior"] ?? "";
+$texto_inferior = $bloque["texto_inferior"] ?? "";
 
-/* =========================
-   Tarjetas
-========================= */
+/* ==========================================================
+   Tarjetas (4 grupos)
+========================================================== */
 
-$tarjetas = [
-    $bloque_2["tarjeta_1"] ?? null,
-    $bloque_2["tarjeta_2"] ?? null,
-    $bloque_2["tarjeta_3"] ?? null,
-    $bloque_2["tarjeta_4"] ?? null,
-];
+$tarjetas = [];
 
-/* Filtrar vacías */
-$tarjetas = array_filter($tarjetas);
+for ($i = 1; $i <= 4; $i++) {
+    if (!empty($bloque["tarjeta_" . $i])) {
+        $tarjetas[] = $bloque["tarjeta_" . $i];
+    }
+}
 
 if (empty($tarjetas)) {
     return;
@@ -201,13 +199,13 @@ if (empty($tarjetas)) {
                 <?php endif; ?>
 
                 <?php if ($texto_inferior): ?>
-                    <p
+                    <div
                         data-aos="fade-up"
                         data-aos-duration="1000"
                         data-aos-delay="100"
                     >
                         <?php echo wp_kses_post($texto_inferior); ?>
-                    </p>
+                    </div>
                 <?php endif; ?>
 
             </div>
@@ -217,17 +215,24 @@ if (empty($tarjetas)) {
         <div class="row mb-5">
 
             <?php
-            $delay = 0;
+            $delay = 100;
 
             foreach ($tarjetas as $tarjeta):
 
-                $imagen = $tarjeta["imagen"] ?? "";
+                $imagen = $tarjeta["imagen"] ?? null;
+                $icono = $tarjeta["icono"] ?? null;
                 $titulo = $tarjeta["titulo"] ?? "";
                 $texto = $tarjeta["texto"] ?? "";
-                $texto_bottom = $tarjeta["texto_inferior"] ?? "";
-                $icono = $tarjeta["icono"] ?? "";
+                $texto_inf = $tarjeta["texto_inferior"] ?? "";
+
+                $img_url = $imagen["url"] ?? "";
+                $img_alt = $imagen["alt"] ?? "";
+
+                $ico_url = $icono["url"] ?? "";
+                $ico_alt = $icono["alt"] ?? "";
                 ?>
 
+                <!-- Horizontal Card -->
                 <div class="col-12">
 
                     <div
@@ -236,20 +241,17 @@ if (empty($tarjetas)) {
                         data-aos-duration="1000"
                         data-aos-delay="<?php echo esc_attr($delay); ?>"
                     >
+
                         <div class="row g-0">
 
-                            <!-- Imagen -->
+                            <!-- Image -->
                             <div class="col-md-4 card-img-col">
 
-                                <?php if ($imagen): ?>
+                                <?php if ($img_url): ?>
                                     <img
-                                        src="<?php echo esc_url(
-                                            $imagen["url"],
-                                        ); ?>"
+                                        src="<?php echo esc_url($img_url); ?>"
                                         class="card-img-left rounded-start"
-                                        alt="<?php echo esc_attr(
-                                            $imagen["alt"] ?: $titulo,
-                                        ); ?>"
+                                        alt="<?php echo esc_attr($img_alt); ?>"
                                         loading="lazy"
                                         decoding="async"
                                     />
@@ -259,13 +261,12 @@ if (empty($tarjetas)) {
 
                             <!-- Content -->
                             <div class="col-md-8">
-
                                 <div class="card-body">
 
                                     <div class="row">
 
+                                        <!-- Title -->
                                         <div class="col-10 my-auto">
-
                                             <?php if ($titulo): ?>
                                                 <h1 class="card-title">
                                                     <?php echo wp_kses_post(
@@ -273,62 +274,61 @@ if (empty($tarjetas)) {
                                                     ); ?>
                                                 </h1>
                                             <?php endif; ?>
-
                                         </div>
 
+                                        <!-- Icon -->
                                         <div class="col-2 my-auto text-end">
-
-                                            <?php if ($icono): ?>
+                                            <?php if ($ico_url): ?>
                                                 <img
                                                     src="<?php echo esc_url(
-                                                        $icono["url"],
+                                                        $ico_url,
                                                     ); ?>"
                                                     class="ico"
                                                     alt="<?php echo esc_attr(
-                                                        $icono["alt"] ?:
-                                                        $titulo,
+                                                        $ico_alt,
                                                     ); ?>"
                                                     loading="lazy"
                                                     decoding="async"
                                                 />
                                             <?php endif; ?>
-
                                         </div>
 
                                     </div>
 
+                                    <!-- Texto -->
                                     <?php if ($texto): ?>
-                                        <p>
+                                        <div>
                                             <?php echo wp_kses_post($texto); ?>
-                                        </p>
+                                        </div>
                                     <?php endif; ?>
 
-                                    <?php if ($texto_bottom): ?>
+                                    <!-- Texto inferior (FIX WYSIWYG) -->
+                                    <?php if ($texto_inf): ?>
+
                                         <hr />
-                                        <p class="text-tertiary">
-                                            <strong>
-                                                <?php echo wp_kses_post(
-                                                    $texto_bottom,
-                                                ); ?>
-                                            </strong>
-                                        </p>
+
+                                        <div class="text-tertiary">
+                                            <?php echo wp_kses_post(
+                                                $texto_inf,
+                                            ); ?>
+                                        </div>
+
                                     <?php endif; ?>
 
                                 </div>
-
                             </div>
 
                         </div>
+
                     </div>
 
                 </div>
 
-            <?php $delay += 100;
+                <?php $delay += 100;
             endforeach;
             ?>
 
         </div>
-
     </div>
 </section>
 
