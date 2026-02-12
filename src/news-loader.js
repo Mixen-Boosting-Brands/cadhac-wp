@@ -15,7 +15,9 @@ document.addEventListener("shown.bs.tab", function (e) {
     })
         .then((r) => r.text())
         .then((html) => {
-            target.innerHTML = html;
+            target.innerHTML =
+                html + target.querySelector(".row:last-child")?.outerHTML || "";
+
             target.dataset.loaded = true;
 
             if (window.AOS) AOS.refresh();

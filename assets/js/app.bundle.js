@@ -88,7 +88,7 @@ eval("{function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterabl
   \****************************/
 () {
 
-eval("{document.addEventListener(\"shown.bs.tab\", function (e) {\n  var btn = e.target;\n  var target = document.querySelector(btn.dataset.bsTarget);\n  if (!target || target.dataset.loaded) return;\n  var cat = target.dataset.cat;\n  fetch(\"/wp-admin/admin-ajax.php\", {\n    method: \"POST\",\n    headers: {\n      \"Content-Type\": \"application/x-www-form-urlencoded\"\n    },\n    body: \"action=load_news_tab&cat=\".concat(cat)\n  }).then(function (r) {\n    return r.text();\n  }).then(function (html) {\n    target.innerHTML = html;\n    target.dataset.loaded = true;\n    if (window.AOS) AOS.refresh();\n  });\n});\n\n//# sourceURL=webpack://cadhac/./src/news-loader.js?\n}");
+eval("{document.addEventListener(\"shown.bs.tab\", function (e) {\n  var btn = e.target;\n  var target = document.querySelector(btn.dataset.bsTarget);\n  if (!target || target.dataset.loaded) return;\n  var cat = target.dataset.cat;\n  fetch(\"/wp-admin/admin-ajax.php\", {\n    method: \"POST\",\n    headers: {\n      \"Content-Type\": \"application/x-www-form-urlencoded\"\n    },\n    body: \"action=load_news_tab&cat=\".concat(cat)\n  }).then(function (r) {\n    return r.text();\n  }).then(function (html) {\n    var _target$querySelector;\n    target.innerHTML = html + ((_target$querySelector = target.querySelector(\".row:last-child\")) === null || _target$querySelector === void 0 ? void 0 : _target$querySelector.outerHTML) || \"\";\n    target.dataset.loaded = true;\n    if (window.AOS) AOS.refresh();\n  });\n});\n\n//# sourceURL=webpack://cadhac/./src/news-loader.js?\n}");
 
 /***/ },
 
