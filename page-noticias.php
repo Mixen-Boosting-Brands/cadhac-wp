@@ -10,9 +10,7 @@ get_header(); ?>
 
  /* =========================
    Categorías base (HOME)
-========================= */<?php
-
-$cats = get_categories([
+========================= */<?php $cats = get_categories([
     "taxonomy" => "category",
     "include" => [34, 86, 92, 12, 10, 11],
     "orderby" => "name",
@@ -109,7 +107,7 @@ $cats = get_categories([
                 ========================= -->
                 <?php $first_three = array_slice($posts, 0, 3); ?>
 
-                <div class="row">
+                <div class="row mb-4">
 
                     <?php foreach ($first_three as $post): ?>
                         <?php
@@ -184,7 +182,7 @@ $cats = get_categories([
                     $image = get_post_card_image(get_the_ID());
                     ?>
 
-                <div class="row">
+                <div class="row mb-4">
 
                     <div
                         class="col-12"
