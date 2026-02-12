@@ -8,9 +8,11 @@ get_header(); ?>
     "handle" => "pagina_noticias",
 ]); ?>
 
- /* =========================
+<!-- =========================
    Categorías base (HOME)
-========================= */<?php $cats = get_categories([
+========================= -->
+
+<?php $cats = get_categories([
     "taxonomy" => "category",
     "include" => [34, 86, 92, 12, 10, 11],
     "orderby" => "name",
