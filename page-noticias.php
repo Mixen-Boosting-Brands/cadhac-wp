@@ -85,19 +85,29 @@ foreach ($cats as $cat):
 
     $cache_key = "page_news_cat_" . $cat->term_id;
 
-    $posts = get_transient($cache_key);
+    $post_ids = get_transient($cache_key);
 
-    if ($posts === false) {
+    if ($post_ids === false) {
         $q = new WP_Query([
             "post_type" => "post",
             "posts_per_page" => 5,
             "cat" => $cat->term_id,
             "no_found_rows" => true,
+            "fields" => "ids", // ⚡ solo IDs
         ]);
 
-        $posts = $q->posts;
+        $post_ids = $q->posts;
 
-        set_transient($cache_key, $posts, HOUR_IN_SECONDS * 6);
+        set_transient($cache_key, $post_ids, HOUR_IN_SECONDS * 6);
+    }
+
+    /* Convertir IDs → posts reales */
+    $posts = [];
+
+    if (!empty($post_ids)) {
+        foreach ($post_ids as $id) {
+            $posts[] = get_post($id);
+        }
     }
     ?>
 
