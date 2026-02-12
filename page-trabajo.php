@@ -185,7 +185,7 @@ if (empty($tarjetas)) {
 }
 ?>
 
-<section class="py-30">
+<section class="pt-30">
     <div class="container-fluid">
 
         <!-- Header -->
