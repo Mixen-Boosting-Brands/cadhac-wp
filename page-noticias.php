@@ -107,21 +107,12 @@ foreach ($cats as $cat):
         data-cat="<?php echo esc_attr($cat->term_id); ?>"
     >
 
-        <?php /* =========================
-           SOLO PRIMER TAB RENDER
-        ========================= */
+        <?php if ($i === 0 && !empty($posts)):
+            // Pasar posts al template
+            set_query_var("news_posts", $posts);
 
-        if ($i === 0 && !empty($posts)) {
-            include locate_template("template-parts/noticias/layout-mixed.php");
-        } else {
-             ?>
-
-            <div class="news-loading text-center py-5">
-                Cargando…
-            </div>
-
-        <?php
-        } ?>
+            get_template_part("template-parts/noticias/layout", "mixed");
+        endif; ?>
 
         <!-- CTA -->
         <div class="row">
