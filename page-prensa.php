@@ -25,17 +25,19 @@ $banner_imagen = $banner["imagen"] ?? "";
 <section class="pt-60 pb-30">
     <div class="container-fluid">
 
-        <!-- Header -->
+        <!-- =========================
+             BANNER TEXTOS
+        ========================== -->
         <div class="row mb-4">
             <div class="col-12">
 
-                <?php if (!empty($banner_texto_superior)): ?>
+                <?php if ($banner_texto_superior): ?>
                     <h1 data-aos="fade-up" data-aos-duration="1000">
                         <?php echo wp_kses_post($banner_texto_superior); ?>
                     </h1>
                 <?php endif; ?>
 
-                <?php if (!empty($banner_texto_inferior)): ?>
+                <?php if ($banner_texto_inferior): ?>
                     <div
                         data-aos="fade-up"
                         data-aos-duration="1000"
@@ -48,7 +50,10 @@ $banner_imagen = $banner["imagen"] ?? "";
             </div>
         </div>
 
-        <?php if (!empty($banner_imagen)): ?>
+        <!-- =========================
+             BANNER IMAGEN
+        ========================== -->
+        <?php if ($banner_imagen): ?>
             <div class="row mb-5">
                 <div class="col-12">
                     <img
@@ -64,7 +69,48 @@ $banner_imagen = $banner["imagen"] ?? "";
 
         <?php
         /* =====================================================
-           LOGOS
+           TARJETAS — TEXTOS SUPERIORES
+        ===================================================== */
+
+        $tarjetas_group = $pagina_prensa["tarjetas"] ?? null;
+
+        if (!$tarjetas_group) {
+            return;
+        }
+
+        $texto_sup = $tarjetas_group["texto_superior"] ?? "";
+        $texto_inf = $tarjetas_group["texto_inferior"] ?? "";
+        ?>
+
+        <!-- =========================
+             PRESS KIT INTRO
+        ========================== -->
+        <div class="row mb-4">
+            <div class="col-12">
+
+                <?php if ($texto_sup): ?>
+                    <h1 data-aos="fade-up" data-aos-duration="1000">
+                        <?php echo wp_kses_post($texto_sup); ?>
+                    </h1>
+                <?php endif; ?>
+
+                <?php if ($texto_inf): ?>
+                    <div
+                        data-aos="fade-up"
+                        data-aos-duration="1000"
+                        data-aos-delay="100"
+                    >
+                        <?php echo wp_kses_post($texto_inf); ?>
+                    </div>
+                <?php endif; ?>
+
+            </div>
+        </div>
+
+
+        <?php
+        /* =====================================================
+           LOGOS — AHORA DESPUÉS DEL INTRO ✔
         ===================================================== */
 
         $logos_group = $pagina_prensa["logos"] ?? null;
@@ -106,45 +152,9 @@ $banner_imagen = $banner["imagen"] ?? "";
 
         <?php
         /* =====================================================
-           TARJETAS
+           CARDS PRESS KIT
         ===================================================== */
 
-        $tarjetas_group = $pagina_prensa["tarjetas"] ?? null;
-
-        if (!$tarjetas_group) {
-            return;
-        }
-
-        $texto_sup = $tarjetas_group["texto_superior"] ?? "";
-        $texto_inf = $tarjetas_group["texto_inferior"] ?? "";
-        ?>
-
-        <!-- Intro tarjetas -->
-        <div class="row mb-4">
-            <div class="col-12">
-
-                <?php if (!empty($texto_sup)): ?>
-                    <h1 data-aos="fade-up" data-aos-duration="1000">
-                        <?php echo wp_kses_post($texto_sup); ?>
-                    </h1>
-                <?php endif; ?>
-
-                <?php if (!empty($texto_inf)): ?>
-                    <div
-                        data-aos="fade-up"
-                        data-aos-duration="1000"
-                        data-aos-delay="100"
-                    >
-                        <?php echo wp_kses_post($texto_inf); ?>
-                    </div>
-                <?php endif; ?>
-
-            </div>
-        </div>
-
-
-        <?php
-        /* Tarjetas individuales */
         $cards = [
             $tarjetas_group["tarjeta_1"] ?? null,
             $tarjetas_group["tarjeta_2"] ?? null,
@@ -163,6 +173,7 @@ $banner_imagen = $banner["imagen"] ?? "";
 
                 <?php
                 $delay = 100;
+
                 foreach ($cards as $card):
 
                     $icono = $card["icono"] ?? "";
@@ -179,7 +190,7 @@ $banner_imagen = $banner["imagen"] ?? "";
                         >
                             <div>
 
-                                <?php if (!empty($icono)): ?>
+                                <?php if ($icono): ?>
                                     <img
                                         src="<?php echo esc_url($icono); ?>"
                                         class="ico"
@@ -190,13 +201,13 @@ $banner_imagen = $banner["imagen"] ?? "";
 
                                 <div class="card-body">
 
-                                    <?php if (!empty($texto)): ?>
+                                    <?php if ($texto): ?>
                                         <div class="card-text mb-3">
                                             <?php echo wp_kses_post($texto); ?>
                                         </div>
                                     <?php endif; ?>
 
-                                    <?php if (!empty($archivo)): ?>
+                                    <?php if ($archivo): ?>
                                         <a
                                             class="btn btn-primary rounded-pill"
                                             href="<?php echo esc_url(
@@ -224,7 +235,9 @@ $banner_imagen = $banner["imagen"] ?? "";
         ?>
 
 
-        <!-- CTA -->
+        <!-- =========================
+             CTA
+        ========================== -->
         <div class="row">
             <div class="col-12 text-center">
                 <a
