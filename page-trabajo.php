@@ -9,128 +9,139 @@ get_header(); ?>
 ]); ?>
 
 <?php
-$pagina_home = get_field("pagina_home", "option");
+/* =========================
+   CF → pagina_trabajo
+========================= */
 
-$imagen_descanso = $pagina_home["imagen_de_descanso"] ?? "";
-?>
+$pagina_trabajo = get_field("pagina_trabajo", "option");
 
-<?php if (!empty($imagen_descanso)): ?>
-<section>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12 text-center">
-                <img
-                    class="img-fluid rounded-5"
-                    src="<?php echo esc_url($imagen_descanso); ?>"
-                    alt="Imagen de descanso CADHAC"
-                    loading="lazy"
-                    decoding="async"
-                >
-            </div>
-        </div>
-    </div>
-</section>
-<?php endif; ?>
-
-<?php
-$pagina_home = get_field("pagina_home", "option");
-
-$bloque_2 = $pagina_home["bloque_2"] ?? null;
-
-if (!$bloque_2) {
+if (!$pagina_trabajo) {
     return;
 }
 
-$texto_superior = $bloque_2["texto_superior"] ?? "";
-$texto_inferior = $bloque_2["texto_inferior"] ?? "";
+$tarjetas = $pagina_trabajo["tarjetas"] ?? null;
 
-$imagen_1 = $bloque_2["imagen_1"] ?? "";
-$imagen_2 = $bloque_2["imagen_2"] ?? "";
+if (!$tarjetas) {
+    return;
+}
+
+/* =========================
+   Textos
+========================= */
+
+$texto_superior = $tarjetas["texto_superior"] ?? "";
+$texto_inferior = $tarjetas["texto_inferior"] ?? "";
+
+/* =========================
+   Tarjetas
+========================= */
+
+$items = [
+    $tarjetas["tarjeta_1"] ?? null,
+    $tarjetas["tarjeta_2"] ?? null,
+    $tarjetas["tarjeta_3"] ?? null,
+    $tarjetas["tarjeta_4"] ?? null,
+];
+
+/* Filtrar vacías */
+$items = array_filter($items);
+
+if (empty($items)) {
+    return;
+}
 ?>
 
-<section id="comunidad" class="py-30">
-    <div class="container-fluid">
-        <!-- Título -->
-        <?php if (!empty($texto_superior)): ?>
-            <div class="row mb-4">
-                <div class="col-12">
+<section class="pt-60 pb-30">
 
+    <div class="container-fluid">
+
+        <!-- =========================
+             Header
+        ========================== -->
+        <div class="row mb-4">
+
+            <div class="col-12 text-center">
+
+                <?php if ($texto_superior): ?>
                     <h1
-                        data-aos="fade-right"
+                        data-aos="fade-up"
                         data-aos-duration="1000"
                     >
                         <?php echo wp_kses_post($texto_superior); ?>
                     </h1>
+                <?php endif; ?>
 
-                </div>
-            </div>
-        <?php endif; ?>
-
-        <div class="row mb-4">
-            <!-- Imagen 1 -->
-            <?php if (!empty($imagen_1)): ?>
-                <div class="col-lg-4 my-auto">
-
-                    <img
-                        id="thumb-comunidad-1"
-                        class="img-fluid mb-3 mb-lg-0"
-                        src="<?php echo esc_url($imagen_1); ?>"
-                        alt="Comunidad CADHAC"
+                <?php if ($texto_inferior): ?>
+                    <p
                         data-aos="fade-up"
-                        data-aos-duration="1000"
-                        data-aos-delay="100"
-                        loading="lazy"
-                        decoding="async"
-                    >
-
-                </div>
-            <?php endif; ?>
-
-            <!-- Texto -->
-            <?php if (!empty($texto_inferior)): ?>
-                <div class="col-lg-4 my-auto">
-
-                    <div
-                        data-aos="fade-in"
                         data-aos-duration="1000"
                         data-aos-delay="100"
                     >
                         <?php echo wp_kses_post($texto_inferior); ?>
+                    </p>
+                <?php endif; ?>
+
+            </div>
+
+        </div>
+
+        <!-- =========================
+             Cards
+        ========================== -->
+        <div class="row mb-5">
+
+            <?php
+            $delay = 100;
+
+            foreach ($items as $item):
+
+                $icono = $item["icono"] ?? "";
+                $texto = $item["texto"] ?? "";
+                ?>
+
+                <div class="col-md-6 col-lg-3">
+
+                    <div
+                        class="card card-ico-center rounded-5 mb-4 mb-lg-0"
+                        data-aos="fade-up"
+                        data-aos-duration="1000"
+                        data-aos-delay="<?php echo esc_attr($delay); ?>"
+                    >
+
+                        <div>
+
+                            <?php if ($icono): ?>
+                                <img
+                                    src="<?php echo esc_url($icono); ?>"
+                                    class="ico"
+                                    alt=""
+                                    loading="lazy"
+                                    decoding="async"
+                                />
+                            <?php endif; ?>
+
+                            <?php if ($texto): ?>
+                                <div class="card-body">
+                                    <p class="card-text">
+                                        <?php echo wp_kses_post($texto); ?>
+                                    </p>
+                                </div>
+                            <?php endif; ?>
+
+                        </div>
+
                     </div>
 
                 </div>
-            <?php endif; ?>
 
-            <!-- Imagen 2 -->
-            <?php if (!empty($imagen_2)): ?>
-                <div class="col-lg-4 my-auto text-end">
+            <?php $delay += 100;
+            endforeach;
+            ?>
 
-                    <img
-                        id="thumb-comunidad-2"
-                        class="img-fluid"
-                        src="<?php echo esc_url($imagen_2); ?>"
-                        alt="Comunidad CADHAC"
-                        data-aos="fade-down"
-                        data-aos-duration="1000"
-                        data-aos-delay="100"
-                        loading="lazy"
-                        decoding="async"
-                    >
-
-                </div>
-            <?php endif; ?>
         </div>
-        <div class="row">
-            <div class="col-12 text-end arrow-right">
-                <a href="<?php echo esc_url(get_permalink(373)); ?>">
-                    <h2>
-                        Conoce nuestra historia
-                        <i class="fa-solid fa-arrow-right-long"></i>
-                    </h2>
-                </a>
-            </div>
-        </div>
+
     </div>
+
 </section>
 
 <?php get_footer(); ?>
