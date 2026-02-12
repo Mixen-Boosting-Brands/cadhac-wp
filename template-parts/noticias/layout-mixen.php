@@ -2,7 +2,7 @@
 $posts = get_query_var("news_posts");
 
 echo "<pre>";
-var_dump($posts);
+print_r(array_map(fn($p) => $p->ID, $posts));
 echo "</pre>";
 
 if (empty($posts)) {
@@ -29,6 +29,8 @@ if (empty($posts)) {
             data-aos-duration="1000"
         >
             <?php // Reutilizar card normal
+        // Reutilizar card normal
+        // Reutilizar card normal
             get_template_part("template-parts/cards/post-card"); ?>
         </div>
 
@@ -137,7 +139,7 @@ endif;
    ROW 3 → 2 cards
 ========================= */
 
-$last_two = array_slice($posts, 4, 2);
+$last_two = array_slice($posts, 3);
 
 if (!empty($last_two)): ?>
 
