@@ -84,8 +84,10 @@
                             >
                         </li>
                         <li>
-                            <a href="#"
-                                >Noticias</a
+                            <a href="<?php echo esc_url(
+                                get_permalink(8862),
+                            ); ?>"
+                                ><?php echo esc_html(get_the_title(8862)); ?></a
                             >
                         </li>
                         <li>
@@ -196,8 +198,14 @@
                                             >
                                         </li>
                                         <li class="list-inline-item">
-                                            <a class="rounded-pill" href="#"
-                                                >Noticias</a
+                                            <a class="<?php if (
+                                                is_page(8862)
+                                            ): ?>active<?php endif; ?> rounded-pill" href="<?php echo esc_url(
+     get_permalink(8862),
+ ); ?>"
+                                                ><?php echo esc_html(
+                                                    get_the_title(8862),
+                                                ); ?></a
                                             >
                                         </li>
                                         <li class="list-inline-item">

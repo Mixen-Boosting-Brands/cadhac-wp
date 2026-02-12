@@ -198,7 +198,11 @@
                                                     ); ?>">Inicio</a>
                                                 </li>
                                                 <li>
-                                                    <a href="#">Noticias</a>
+                                                    <a href="<?php echo esc_url(
+                                                        get_permalink(8862),
+                                                    ); ?>"><?php echo esc_html(
+    get_the_title(8862),
+); ?></a>
                                                 </li>
                                                 <li>
                                                     <a href="<?php echo esc_url(
