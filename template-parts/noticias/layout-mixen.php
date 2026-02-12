@@ -1,5 +1,6 @@
-<?php
-/**
+ <pre><?php var_dump($posts); ?></pre>
+
+<?php /**
  * Layout mixto Noticias
  * - 3 cards (1/3)
  * - 1 horizontal
@@ -30,7 +31,8 @@ if (empty($posts)) {
         >
             <?php // Reutilizas tu card normal
         // Reutilizas tu card normal
-        get_template_part("template-parts/cards/post-card"); ?>
+        // Reutilizas tu card normal
+            get_template_part("template-parts/cards/post-card"); ?>
         </div>
 
     <?php
