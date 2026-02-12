@@ -110,13 +110,15 @@ $first_three = array_slice($posts, 0, 3);
 foreach ($first_three as $post):
     setup_postdata($post); ?>
 
-    <div
-        class="col-lg-4"
-        data-aos="fade-up"
-        data-aos-duration="1000"
-    >
+<div
+    class="col-lg-4 d-flex"
+    data-aos="fade-up"
+    data-aos-duration="1000"
+>
+    <div class="w-100">
         <?php get_template_part("template-parts/cards/post-card"); ?>
     </div>
+</div>
 
 <?php
 endforeach;
@@ -217,32 +219,39 @@ endif;
      (Fix dinámico)
 ========================= -->
 <?php
-$last_two = array_slice($posts, 4);
+$remaining = array_slice($posts, 4);
 
-if ($last_two): ?>
+if (!empty($remaining)): ?>
 
 <div class="row">
 
 <?php
+$count = count($remaining);
 $delay = 200;
-$count = count($last_two);
 
-foreach ($last_two as $post):
+foreach ($remaining as $post):
 
     setup_postdata($post);
 
-    // Si solo hay 1 → full width
+    /*
+     Layout inteligente:
+
+     1 post → full
+     2 posts → half / half
+    */
     $col = $count === 1 ? "col-12" : "col-lg-6";
     ?>
 
-    <div
-        class="<?php echo $col; ?>"
-        data-aos="fade-up"
-        data-aos-duration="1000"
-        data-aos-delay="<?php echo esc_attr($delay); ?>"
-    >
+<div
+    class="<?php echo $col; ?> d-flex"
+    data-aos="fade-up"
+    data-aos-duration="1000"
+    data-aos-delay="<?php echo esc_attr($delay); ?>"
+>
+    <div class="w-100">
         <?php get_template_part("template-parts/cards/post-card"); ?>
     </div>
+</div>
 
 <?php $delay += 100;
 endforeach;
