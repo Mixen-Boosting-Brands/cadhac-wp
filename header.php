@@ -96,8 +96,10 @@
                             >
                         </li>
                         <li>
-                            <a href="#"
-                                >Trabajo</a
+                            <a href="<?php echo esc_url(
+                                get_permalink(8900),
+                            ); ?>"
+                                ><?php echo esc_html(get_the_title(8900)); ?></a
                             >
                         </li>
                         <li>
@@ -220,8 +222,12 @@
                                             >
                                         </li>
                                         <li class="list-inline-item">
-                                            <a class="rounded-pill" href="#"
-                                                >Trabajo</a
+                                            <a class="rounded-pill" href="<?php echo esc_url(
+                                                get_permalink(8900),
+                                            ); ?>"
+                                                ><?php echo esc_html(
+                                                    get_the_title(8900),
+                                                ); ?></a
                                             >
                                         </li>
                                         <li class="list-inline-item">
