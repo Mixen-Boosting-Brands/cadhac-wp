@@ -569,23 +569,40 @@ function load_news_tab()
 {
     $cat_id = intval($_POST["cat"]);
 
-    $q = new WP_Query([
-        "post_type" => "post",
-        "posts_per_page" => 5,
-        "cat" => $cat_id,
-        "no_found_rows" => true,
-    ]);
+    /* ===== Cache ===== */
 
-    if ($q->have_posts()):
+    $cache_key = "ajax_news_cat_" . $cat_id;
+    $html = get_transient($cache_key);
+
+    if ($html === false) {
+
+        $q = new WP_Query([
+            "post_type" => "post",
+            "posts_per_page" => 5,
+            "cat" => $cat_id,
+            "no_found_rows" => true,
+        ]);
 
         $posts = $q->posts;
 
-        // Reusar mismo layout
-        include locate_template(
-            "template-parts/noticias/layout-mixed.php"
-        );
+        ob_start();
 
-    endif;
+        if (!empty($posts)) {
+            include locate_template(
+                "template-parts/noticias/layout-mixed.php"
+            );
+        }
+
+        $html = ob_get_clean();
+
+        set_transient(
+            $cache_key,
+            $html,
+            HOUR_IN_SECONDS * 6
+        );
+    }
+
+    echo $html;
 
     wp_die();
 }
