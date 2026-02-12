@@ -129,6 +129,8 @@ get_header(); ?>
                                             src="<?php echo esc_url($image); ?>"
                                             class="card-img-top rounded-5"
                                             alt="<?php the_title_attribute(); ?>"
+                                            loading="lazy"
+                                            decoding="async"
                                         />
                                     </a>
                                 <?php endif; ?>
@@ -205,6 +207,8 @@ get_header(); ?>
                                                 ); ?>"
                                                 class="img-fluid rounded-start"
                                                 alt="<?php the_title_attribute(); ?>"
+                                                loading="lazy"
+                                                decoding="async"
                                             />
                                         </a>
                                     <?php endif; ?>
@@ -283,6 +287,8 @@ get_header(); ?>
                                             src="<?php echo esc_url($image); ?>"
                                             class="card-img-top rounded-5"
                                             alt="<?php the_title_attribute(); ?>"
+                                            loading="lazy"
+                                            decoding="async"
                                         />
                                     </a>
                                 <?php endif; ?>
