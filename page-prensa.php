@@ -123,7 +123,7 @@ $banner_imagen = $banner["imagen"] ?? "";
 
             if (!empty($logos)): ?>
 
-                <div class="row mb-5">
+                <div class="row mb-4">
 
                     <?php
                     $delay = 100; // Delay inicial
