@@ -248,6 +248,8 @@ $banner_imagen = $banner["imagen"] ?? "";
                 <a
                     class="btn btn-primary btn-lg rounded-pill"
                     href="<?php echo esc_url(get_category_link(86)); ?>"
+                    data-aos="fade-up"
+                    data-aos-duration="1000"
                 >
                     Ver más comunicados
                 </a>
