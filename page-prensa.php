@@ -8,216 +8,130 @@ get_header(); ?>
     "handle" => "pagina_prensa",
 ]); ?>
 
-<section class="pt-60 pb-30">
-    <div class="container-fluid">
-        <div class="row mb-4">
-            <div class="col-12">
-                <h1 data-aos="fade-up" data-aos-duration="1000">
-                    Press <span>kit</span><br />
-                    CADHAC
-                </h1>
-                <p
-                    data-aos="fade-up"
-                    data-aos-duration="1000"
-                    data-aos-delay="100"
-                >
-                    Material institucional disponible para medios de
-                    comunicación, con información verificada, recursos
-                    visuales y documentos oficiales para su correcta
-                    difusión.
-                </p>
+<?php
+/* =========================
+   TARJETAS PRESS KIT
+========================= */
+
+$tarjetas_group = $pagina_prensa["tarjetas"] ?? null;
+
+if ($tarjetas_group):
+
+    $texto_superior = $tarjetas_group["texto_superior"] ?? "";
+    $texto_inferior = $tarjetas_group["texto_inferior"] ?? "";
+
+    $cards = [
+        $tarjetas_group["tarjeta_1"] ?? null,
+        $tarjetas_group["tarjeta_2"] ?? null,
+        $tarjetas_group["tarjeta_3"] ?? null,
+        $tarjetas_group["tarjeta_4"] ?? null,
+        $tarjetas_group["tarjeta_5"] ?? null,
+    ];
+
+    // Filtrar tarjetas vacías
+    $cards = array_filter($cards);
+    ?>
+
+<!-- Intro dinámico -->
+<div class="row mb-4">
+    <div class="col-12">
+        <?php if (!empty($texto_superior)): ?>
+            <h1 data-aos="fade-up" data-aos-duration="1000">
+                <?php echo wp_kses_post($texto_superior); ?>
+            </h1>
+        <?php endif; ?>
+
+        <?php if (!empty($texto_inferior)): ?>
+            <div
+                data-aos="fade-up"
+                data-aos-duration="1000"
+                data-aos-delay="100"
+            >
+                <?php echo wp_kses_post($texto_inferior); ?>
             </div>
-        </div>
-        <div
-            class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-3 mb-5"
-        >
-            <div class="col">
-                <div
-                    class="card card-ico-center rounded-5 mb-4 mb-lg-0"
-                    data-aos="fade-up"
-                    data-aos-duration="1000"
-                    data-aos-delay="100"
-                >
-                    <div>
-                        <img
-                            src="<?php echo esc_url(
-                                get_template_directory_uri(),
-                            ); ?>/assets/images/prensa/ico-1@2x.png"
-                            class="ico"
-                            alt=""
-                        />
-                        <div class="card-body">
-                            <p class="card-text">
-                                <strong>Fotografías autorizadas:</strong
-                                ><br />
-                                (Imágenes de archivo y uso editorial)
-                            </p>
-                            <a
-                                class="btn btn-primary rounded-pill"
-                                href="#"
-                                download
-                            >
-                                <i
-                                    class="fa-solid fa-circle-arrow-down"
-                                ></i>
-                                Descargar
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div
-                    class="card card-ico-center rounded-5 mb-4 mb-lg-0"
-                    data-aos="fade-up"
-                    data-aos-duration="1000"
-                    data-aos-delay="200"
-                >
-                    <div>
-                        <img
-                            src="<?php echo esc_url(
-                                get_template_directory_uri(),
-                            ); ?>/assets/images/prensa/ico-2@2x.png"
-                            class="ico"
-                            alt=""
-                        />
-                        <div class="card-body">
-                            <p class="card-text">
-                                <strong>Biografia institucional:</strong
-                                ><br />
-                                CADHAC y Hermana Consuelo Morales.
-                            </p>
-                            <a
-                                class="btn btn-primary rounded-pill"
-                                href="#"
-                                download
-                            >
-                                <i
-                                    class="fa-solid fa-circle-arrow-down"
-                                ></i>
-                                Descargar
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div
-                    class="card card-ico-center rounded-5 mb-4 mb-lg-0"
-                    data-aos="fade-up"
-                    data-aos-duration="1000"
-                    data-aos-delay="300"
-                >
-                    <div>
-                        <img
-                            src="<?php echo esc_url(
-                                get_template_directory_uri(),
-                            ); ?>/assets/images/prensa/ico-3@2x.png"
-                            class="ico"
-                            alt=""
-                        />
-                        <div class="card-body">
-                            <p class="card-text">
-                                <strong>Perfil Institucional:</strong
-                                ><br />
-                                CADHAC y su trabajo en derechos humanos
-                                en Nuevo León.
-                            </p>
-                            <a
-                                class="btn btn-primary rounded-pill"
-                                href="#"
-                                download
-                            >
-                                <i
-                                    class="fa-solid fa-circle-arrow-down"
-                                ></i>
-                                Descargar
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div
-                    class="card card-ico-center rounded-5 mb-4 mb-lg-0"
-                    data-aos="fade-up"
-                    data-aos-duration="1000"
-                    data-aos-delay="400"
-                >
-                    <div>
-                        <img
-                            src="<?php echo esc_url(
-                                get_template_directory_uri(),
-                            ); ?>/assets/images/prensa/ico-4@2x.png"
-                            class="ico"
-                            alt=""
-                        />
-                        <div class="card-body">
-                            <p class="card-text">
-                                <strong>Línea del tiempo:</strong><br />
-                                Hitos clave de la organización.
-                            </p>
-                            <a
-                                class="btn btn-primary rounded-pill"
-                                href="#"
-                                download
-                            >
-                                <i
-                                    class="fa-solid fa-circle-arrow-down"
-                                ></i>
-                                Descargar
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div
-                    class="card card-ico-center rounded-5 mb-4 mb-lg-0"
-                    data-aos="fade-up"
-                    data-aos-duration="1000"
-                    data-aos-delay="500"
-                >
-                    <div>
-                        <img
-                            src="<?php echo esc_url(
-                                get_template_directory_uri(),
-                            ); ?>/assets/images/prensa/ico-5@2x.png"
-                            class="ico"
-                            alt=""
-                        />
-                        <div class="card-body">
-                            <p class="card-text">
-                                <strong
-                                    >Publicaciones
-                                    institucionales:</strong
-                                ><br />
-                                (25 años, memorias, informes clave)
-                            </p>
-                            <a
-                                class="btn btn-primary rounded-pill"
-                                href="#"
-                                download
-                            >
-                                <i
-                                    class="fa-solid fa-circle-arrow-down"
-                                ></i>
-                                Descargar
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12 text-center">
-                <a class="btn btn-primary btn-lg rounded-pill" href="#"
-                    >Ver más comunicados</a
-                >
-            </div>
-        </div>
+        <?php endif; ?>
     </div>
-</section>
+</div>
+
+<!-- Tarjetas -->
+<?php if (!empty($cards)): ?>
+<div
+    class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-3 mb-5"
+>
+    <?php
+    $delay = 100;
+
+    foreach ($cards as $card):
+
+        $icono = $card["icono"] ?? "";
+        $texto = $card["texto"] ?? "";
+        $archivo = $card["archivo"] ?? "";
+        ?>
+        <div class="col">
+            <div
+                class="card card-ico-center rounded-5 mb-4 mb-lg-0"
+                data-aos="fade-up"
+                data-aos-duration="1000"
+                data-aos-delay="<?php echo esc_attr($delay); ?>"
+            >
+                <div>
+
+                    <?php if (!empty($icono)): ?>
+                        <img
+                            src="<?php echo esc_url($icono); ?>"
+                            class="ico"
+                            alt=""
+                            loading="lazy"
+                        />
+                    <?php endif; ?>
+
+                    <div class="card-body">
+
+                        <?php if (!empty($texto)): ?>
+                            <div class="card-text">
+                                <?php echo wp_kses_post($texto); ?>
+                            </div>
+                        <?php endif; ?>
+
+                        <?php if (!empty($archivo)): ?>
+                            <a
+                                class="btn btn-primary rounded-pill"
+                                href="<?php echo esc_url($archivo); ?>"
+                                download
+                            >
+                                <i class="fa-solid fa-circle-arrow-down"></i>
+                                Descargar
+                            </a>
+                        <?php endif; ?>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <?php $delay += 100;
+    endforeach;
+    ?>
+</div>
+<?php endif; ?>
+
+<!-- Ver más -->
+<div class="row">
+    <div class="col-12 text-center">
+
+        <a
+            class="btn btn-primary btn-lg rounded-pill"
+            href="<?php echo esc_url(get_category_link(86)); ?>"
+        >
+            Ver más comunicados
+        </a>
+
+    </div>
+</div>
+
+<?php
+endif;
+?>
 
 <section class="pt-60 pb-30">
     <div class="container-fluid">
