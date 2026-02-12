@@ -9,6 +9,7 @@ import "../src/form-ajax";
 import "../src/aos";
 import "../src/mvv-stack";
 import "../src/scrolling-indicator";
+import "../src/news-loader";
 
 // Header
 document.addEventListener("DOMContentLoaded", function () {
