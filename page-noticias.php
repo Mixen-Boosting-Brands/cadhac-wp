@@ -8,9 +8,9 @@ get_header(); ?>
     "handle" => "pagina_noticias",
 ]); ?>
 
-<?php /* =========================
+ /* =========================
    Categorías base (HOME)
-========================= */
+========================= */<?php
 
 $cats = get_categories([
     "taxonomy" => "category",
@@ -85,11 +85,11 @@ $cats = get_categories([
             $active = $i === 0 ? "show active" : "";
 
             /* =========================
-               QUERY → 5 posts
+               QUERY → 6 posts
             ========================= */
             $q = new WP_Query([
                 "post_type" => "post",
-                "posts_per_page" => 5,
+                "posts_per_page" => 6,
                 "cat" => $cat->term_id,
                 "no_found_rows" => true,
             ]);
