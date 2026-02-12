@@ -556,3 +556,36 @@ require get_template_directory() . '/inc/acf-helpers.php';
 require get_template_directory() . '/inc/contact-helpers.php';
 require get_template_directory() . '/inc/get-post-card-image.php';
 require get_template_directory() . '/inc/cache-helpers.php';
+
+
+/*------------------------------------*\
+    AJAX Endpoint for News Loading
+\*------------------------------------*/
+
+add_action("wp_ajax_load_news_tab", "load_news_tab");
+add_action("wp_ajax_nopriv_load_news_tab", "load_news_tab");
+
+function load_news_tab()
+{
+    $cat_id = intval($_POST["cat"]);
+
+    $q = new WP_Query([
+        "post_type" => "post",
+        "posts_per_page" => 5,
+        "cat" => $cat_id,
+        "no_found_rows" => true,
+    ]);
+
+    if ($q->have_posts()):
+
+        $posts = $q->posts;
+
+        // Reusar mismo layout
+        include locate_template(
+            "template-parts/noticias/layout-mixed.php"
+        );
+
+    endif;
+
+    wp_die();
+}
