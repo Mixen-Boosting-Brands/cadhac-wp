@@ -169,7 +169,7 @@ $texto_superior = $bloque["texto_superior"] ?? "";
 $texto_inferior = $bloque["texto_inferior"] ?? "";
 
 /* ==========================================================
-   Tarjetas (4 grupos)
+   Tarjetas
 ========================================================== */
 
 $tarjetas = [];
@@ -219,20 +219,27 @@ if (empty($tarjetas)) {
 
             foreach ($tarjetas as $tarjeta):
 
-                $imagen = $tarjeta["imagen"] ?? null;
-                $icono = $tarjeta["icono"] ?? null;
+                /* ==================================================
+                   IMAGENES (URL return compatible)
+                ================================================== */
+
+                $img = $tarjeta["imagen"] ?? "";
+                $ico = $tarjeta["icono"] ?? "";
+
+                // Soporta URL o Array (future proof)
+                $img_url = is_array($img) ? $img["url"] : $img;
+                $img_alt = is_array($img) ? $img["alt"] ?? "" : "";
+
+                $ico_url = is_array($ico) ? $ico["url"] : $ico;
+                $ico_alt = is_array($ico) ? $ico["alt"] ?? "" : "";
+
+                /* ================================================== */
+
                 $titulo = $tarjeta["titulo"] ?? "";
                 $texto = $tarjeta["texto"] ?? "";
                 $texto_inf = $tarjeta["texto_inferior"] ?? "";
-
-                $img_url = $imagen["url"] ?? "";
-                $img_alt = $imagen["alt"] ?? "";
-
-                $ico_url = $icono["url"] ?? "";
-                $ico_alt = $icono["alt"] ?? "";
                 ?>
 
-                <!-- Horizontal Card -->
                 <div class="col-12">
 
                     <div
@@ -244,7 +251,7 @@ if (empty($tarjetas)) {
 
                         <div class="row g-0">
 
-                            <!-- Image -->
+                            <!-- Imagen -->
                             <div class="col-md-4 card-img-col">
 
                                 <?php if ($img_url): ?>
@@ -265,7 +272,6 @@ if (empty($tarjetas)) {
 
                                     <div class="row">
 
-                                        <!-- Title -->
                                         <div class="col-10 my-auto">
                                             <?php if ($titulo): ?>
                                                 <h1 class="card-title">
@@ -276,7 +282,6 @@ if (empty($tarjetas)) {
                                             <?php endif; ?>
                                         </div>
 
-                                        <!-- Icon -->
                                         <div class="col-2 my-auto text-end">
                                             <?php if ($ico_url): ?>
                                                 <img
@@ -295,14 +300,12 @@ if (empty($tarjetas)) {
 
                                     </div>
 
-                                    <!-- Texto -->
                                     <?php if ($texto): ?>
                                         <div>
                                             <?php echo wp_kses_post($texto); ?>
                                         </div>
                                     <?php endif; ?>
 
-                                    <!-- Texto inferior (FIX WYSIWYG) -->
                                     <?php if ($texto_inf): ?>
 
                                         <hr />
