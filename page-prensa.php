@@ -60,6 +60,9 @@ $banner_imagen = $banner["imagen"] ?? "";
                         class="img-fluid rounded-5 w-100"
                         alt="Banner prensa"
                         loading="eager"
+                        data-aos="fade-up"
+                        data-aos-duration="1000"
+                        data-aos-delay="200"
                     />
                 </div>
             </div>
@@ -142,8 +145,10 @@ $banner_imagen = $banner["imagen"] ?? "";
                             />
                         </div>
 
-                    <?php $delay += 100;endforeach; // Incremento igual que cards
-                    ?>
+                    <?php $delay += 100;endforeach;
+
+                // Incremento igual que cards
+                ?>
 
                 </div>
 
