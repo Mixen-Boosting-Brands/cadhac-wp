@@ -118,10 +118,9 @@ foreach ($cats as $cat):
     >
 
         <?php if ($i === 0 && !empty($posts)):
-            // Pasar posts al template
-            set_query_var("news_posts", $posts);
-
-            get_template_part("template-parts/noticias/layout", "mixed");
+            get_template_part("template-parts/noticias/layout", "mixed", [
+                "posts" => $posts,
+            ]);
         endif; ?>
 
         <!-- CTA -->

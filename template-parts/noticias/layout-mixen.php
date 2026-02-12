@@ -1,5 +1,5 @@
 <?php
-$posts = get_query_var("news_posts");
+$posts = $args["posts"] ?? [];
 
 echo "<pre>";
 print_r(array_map(fn($p) => $p->ID, $posts));
@@ -31,6 +31,8 @@ if (empty($posts)) {
             <?php // Reutilizar card normal
         // Reutilizar card normal
         // Reutilizar card normal
+            // Reutilizar card normal
+            // Reutilizar card normal
             get_template_part("template-parts/cards/post-card"); ?>
         </div>
 
