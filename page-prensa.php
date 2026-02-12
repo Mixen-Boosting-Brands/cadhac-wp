@@ -13,6 +13,10 @@ get_header(); ?>
    TARJETAS PRESS KIT
 ========================= */
 
+echo "<pre>";
+var_dump($pagina_prensa["tarjetas"]);
+echo "</pre>";
+
 $tarjetas_group = $pagina_prensa["tarjetas"] ?? null;
 
 if ($tarjetas_group):
