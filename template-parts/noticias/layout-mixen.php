@@ -1,15 +1,14 @@
- <pre><?php var_dump($posts); ?></pre>
+<?php
+$posts = get_query_var("news_posts");
 
-<?php /**
- * Layout mixto Noticias
- * - 3 cards (1/3)
- * - 1 horizontal
- * - 2 cards (1/2)
- */
+echo "<pre>";
+var_dump($posts);
+echo "</pre>";
 
 if (empty($posts)) {
     return;
-} ?>
+}
+?>
 
 <!-- ROW 1 → 3 cards -->
 <div class="row">
@@ -29,9 +28,7 @@ if (empty($posts)) {
             data-aos="fade-up"
             data-aos-duration="1000"
         >
-            <?php // Reutilizas tu card normal
-        // Reutilizas tu card normal
-        // Reutilizas tu card normal
+            <?php // Reutilizar card normal
             get_template_part("template-parts/cards/post-card"); ?>
         </div>
 
