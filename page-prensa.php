@@ -4,10 +4,6 @@ Template Name: Prensa
 */
 get_header(); ?>
 
-<?php get_template_part("template-parts/banners/banner-options", null, [
-    "handle" => "pagina_prensa",
-]); ?>
-
 <?php
 $pagina_prensa = get_field("pagina_prensa", "option");
 
@@ -15,150 +11,192 @@ if (!$pagina_prensa) {
     return;
 }
 
-/* =========================
-   Banner
-========================= */
+/* =====================================================
+   BANNER
+===================================================== */
 
-$banner = $pagina_prensa["banner"] ?? [];
-$banner_top = $banner["texto_superior"] ?? "";
-$banner_bottom = $banner["texto_inferior"] ?? "";
-$banner_img = $banner["imagen"] ?? "";
+$banner = $pagina_prensa["banner"] ?? null;
 
-/* =========================
-   Logos
-========================= */
-
-$logos_group = $pagina_prensa["logos"] ?? [];
-
-$logos = array_filter([
-    $logos_group["logo_1"] ?? "",
-    $logos_group["logo_2"] ?? "",
-    $logos_group["logo_3"] ?? "",
-    $logos_group["logo_4"] ?? "",
-]);
-
-/* =========================
-   Tarjetas
-========================= */
-
-$tarjetas_group = $pagina_prensa["tarjetas"] ?? [];
-
-$tarjetas = [];
-
-for ($i = 1; $i <= 5; $i++) {
-    $t = $tarjetas_group["tarjeta_" . $i] ?? null;
-
-    if (!$t) {
-        continue;
-    }
-
-    if (empty($t["icono"]) && empty($t["texto"]) && empty($t["archivo"])) {
-        continue;
-    }
-
-    $tarjetas[] = $t;
-}
+$banner_texto_superior = $banner["texto_superior"] ?? "";
+$banner_texto_inferior = $banner["texto_inferior"] ?? "";
+$banner_imagen = $banner["imagen"] ?? "";
 ?>
 
 <section class="pt-60 pb-30">
     <div class="container-fluid">
 
-        <!-- =========================
-             Header / Banner
-        ========================= -->
-
+        <!-- Header -->
         <div class="row mb-4">
             <div class="col-12">
 
-                <?php if ($banner_top): ?>
+                <?php if (!empty($banner_texto_superior)): ?>
                     <h1 data-aos="fade-up" data-aos-duration="1000">
-                        <?php echo wp_kses_post($banner_top); ?>
+                        <?php echo wp_kses_post($banner_texto_superior); ?>
                     </h1>
                 <?php endif; ?>
 
-                <?php if ($banner_bottom): ?>
-                    <p
+                <?php if (!empty($banner_texto_inferior)): ?>
+                    <div
                         data-aos="fade-up"
                         data-aos-duration="1000"
                         data-aos-delay="100"
                     >
-                        <?php echo wp_kses_post($banner_bottom); ?>
-                    </p>
+                        <?php echo wp_kses_post($banner_texto_inferior); ?>
+                    </div>
                 <?php endif; ?>
 
             </div>
         </div>
 
-        <!-- =========================
-             Logos
-        ========================= -->
-
-        <?php if (!empty($logos)): ?>
-
-            <div class="row">
-
-                <?php foreach ($logos as $logo): ?>
-
-                    <div class="col-lg-3 mb-4 text-center">
-                        <img
-                            src="<?php echo esc_url($logo); ?>"
-                            class="img-fluid"
-                            alt="Logotipo"
-                            loading="lazy"
-                            decoding="async"
-                        />
-                    </div>
-
-                <?php endforeach; ?>
-
+        <?php if (!empty($banner_imagen)): ?>
+            <div class="row mb-5">
+                <div class="col-12">
+                    <img
+                        src="<?php echo esc_url($banner_imagen); ?>"
+                        class="img-fluid rounded-5 w-100"
+                        alt="Banner prensa"
+                        loading="eager"
+                    />
+                </div>
             </div>
-
         <?php endif; ?>
 
-        <!-- =========================
-             Tarjetas Press Kit
-        ========================= -->
 
-        <?php if (!empty($tarjetas)): ?>
+        <?php
+        /* =====================================================
+           LOGOS
+        ===================================================== */
+
+        $logos_group = $pagina_prensa["logos"] ?? null;
+
+        if ($logos_group):
+            $logos = [
+                $logos_group["logo_1"] ?? "",
+                $logos_group["logo_2"] ?? "",
+                $logos_group["logo_3"] ?? "",
+                $logos_group["logo_4"] ?? "",
+            ];
+
+            $logos = array_filter($logos);
+
+            if (!empty($logos)): ?>
+
+                <div class="row mb-5">
+
+                    <?php foreach ($logos as $logo): ?>
+
+                        <div class="col-lg-3 col-md-4 col-6 mb-4 text-center">
+                            <img
+                                src="<?php echo esc_url($logo); ?>"
+                                class="img-fluid"
+                                alt="Logotipo"
+                                loading="lazy"
+                                decoding="async"
+                            />
+                        </div>
+
+                    <?php endforeach; ?>
+
+                </div>
+
+        <?php endif;
+        endif;
+        ?>
+
+
+        <?php
+        /* =====================================================
+           TARJETAS
+        ===================================================== */
+
+        $tarjetas_group = $pagina_prensa["tarjetas"] ?? null;
+
+        if (!$tarjetas_group) {
+            return;
+        }
+
+        $texto_sup = $tarjetas_group["texto_superior"] ?? "";
+        $texto_inf = $tarjetas_group["texto_inferior"] ?? "";
+        ?>
+
+        <!-- Intro tarjetas -->
+        <div class="row mb-4">
+            <div class="col-12">
+
+                <?php if (!empty($texto_sup)): ?>
+                    <h1 data-aos="fade-up" data-aos-duration="1000">
+                        <?php echo wp_kses_post($texto_sup); ?>
+                    </h1>
+                <?php endif; ?>
+
+                <?php if (!empty($texto_inf)): ?>
+                    <div
+                        data-aos="fade-up"
+                        data-aos-duration="1000"
+                        data-aos-delay="100"
+                    >
+                        <?php echo wp_kses_post($texto_inf); ?>
+                    </div>
+                <?php endif; ?>
+
+            </div>
+        </div>
+
+
+        <?php
+        /* Tarjetas individuales */
+        $cards = [
+            $tarjetas_group["tarjeta_1"] ?? null,
+            $tarjetas_group["tarjeta_2"] ?? null,
+            $tarjetas_group["tarjeta_3"] ?? null,
+            $tarjetas_group["tarjeta_4"] ?? null,
+            $tarjetas_group["tarjeta_5"] ?? null,
+        ];
+
+        $cards = array_filter($cards);
+
+        if (!empty($cards)): ?>
 
             <div
                 class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-3 mb-5"
             >
 
-                <?php foreach ($tarjetas as $index => $t):
+                <?php
+                $delay = 100;
+                foreach ($cards as $card):
 
-                    $icono = $t["icono"] ?? "";
-                    $texto = $t["texto"] ?? "";
-                    $archivo = $t["archivo"] ?? "";
+                    $icono = $card["icono"] ?? "";
+                    $texto = $card["texto"] ?? "";
+                    $archivo = $card["archivo"] ?? "";
                     ?>
 
                     <div class="col">
                         <div
-                            class="card card-ico-center rounded-5 mb-4 mb-lg-0"
+                            class="card card-ico-center rounded-5 h-100"
                             data-aos="fade-up"
                             data-aos-duration="1000"
-                            data-aos-delay="<?php echo ($index + 1) * 100; ?>"
+                            data-aos-delay="<?php echo esc_attr($delay); ?>"
                         >
                             <div>
 
-                                <?php if ($icono): ?>
+                                <?php if (!empty($icono)): ?>
                                     <img
                                         src="<?php echo esc_url($icono); ?>"
                                         class="ico"
-                                        alt="Recurso de prensa"
+                                        alt=""
                                         loading="lazy"
                                     />
                                 <?php endif; ?>
 
                                 <div class="card-body">
 
-                                    <?php if ($texto): ?>
-                                        <p class="card-text">
+                                    <?php if (!empty($texto)): ?>
+                                        <div class="card-text mb-3">
                                             <?php echo wp_kses_post($texto); ?>
-                                        </p>
+                                        </div>
                                     <?php endif; ?>
 
-                                    <?php if ($archivo): ?>
+                                    <?php if (!empty($archivo)): ?>
                                         <a
                                             class="btn btn-primary rounded-pill"
                                             href="<?php echo esc_url(
@@ -175,16 +213,18 @@ for ($i = 1; $i <= 5; $i++) {
                             </div>
                         </div>
                     </div>
-                <?php
-                endforeach; ?>
+
+                <?php $delay += 100;
+                endforeach;
+                ?>
+
             </div>
 
-        <?php endif; ?>
+        <?php endif;
+        ?>
 
-        <!-- =========================
-             Botón Comunicados
-        ========================= -->
 
+        <!-- CTA -->
         <div class="row">
             <div class="col-12 text-center">
                 <a
@@ -195,6 +235,7 @@ for ($i = 1; $i <= 5; $i++) {
                 </a>
             </div>
         </div>
+
     </div>
 </section>
 
