@@ -259,46 +259,76 @@ $banner_imagen = $banner["imagen"] ?? "";
     </div>
 </section>
 
+<?php
+$pagina_prensa = get_field("pagina_prensa", "option");
+
+if (!$pagina_prensa) {
+    return;
+}
+
+$contacto = $pagina_prensa["contacto"] ?? null;
+
+if (!$contacto) {
+    return;
+}
+
+$texto_superior = $contacto["texto_superior"] ?? "";
+$texto_inferior = $contacto["texto_inferior"] ?? "";
+$imagen = $contacto["imagen"] ?? "";
+?>
+
 <section class="pt-60 pb-30">
     <div class="container-fluid">
+        <!-- Header -->
         <div class="row mb-4">
             <div class="col-12">
-                <h1
-                    class="lh-1"
-                    data-aos="fade-up"
-                    data-aos-duration="1000"
-                >
-                    Contacto <span>para</span><br />
-                    medios
-                </h1>
+                <?php if (!empty($texto_superior)): ?>
+                    <div
+                        class="lh-1"
+                        data-aos="fade-up"
+                        data-aos-duration="1000"
+                    >
+                        <?php echo wp_kses_post($texto_superior); ?>
+                    </div>
+                <?php endif; ?>
+
             </div>
         </div>
+
         <div class="row">
+            <!-- Texto + Card -->
             <div class="col-lg-6">
-                <p
-                    data-aos="fade-up"
-                    data-aos-duration="1000"
-                    data-aos-delay="100"
-                >
-                    Para solicitudes de entrevista, información
-                    adicional o aclaraciones, favor de contactar a:
-                </p>
+
+                <?php if (!empty($texto_inferior)): ?>
+                    <div
+                        data-aos="fade-up"
+                        data-aos-duration="1000"
+                        data-aos-delay="100"
+                    >
+                        <?php echo wp_kses_post($texto_inferior); ?>
+                    </div>
+                <?php endif; ?>
+
                 <?php get_template_part(
                     "template-parts/contact/card-contact",
                 ); ?>
+
             </div>
+
+            <!-- Imagen -->
             <div class="col-lg-6">
-                <div
-                    class="arrow-right home-image container-image bp-center rounded-5 p-4"
-                    style="
-                        background-image: url(&quot;<?php echo esc_url(
-                            get_template_directory_uri(),
-                        ); ?>/assets/images/bg-prensa.png&quot;);
-                    "
-                    data-aos="fade-up"
-                    data-aos="fade-up"
-                    data-aos-duration="1000"
-                ></div>
+                <?php if (!empty($imagen)): ?>
+
+                    <div
+                        class="arrow-right home-image container-image bp-center rounded-5 p-4"
+                        style="background-image:url('<?php echo esc_url(
+                            $imagen,
+                        ); ?>');"
+                        data-aos="fade-up"
+                        data-aos-duration="1000"
+                    ></div>
+
+                <?php endif; ?>
             </div>
         </div>
     </div>
