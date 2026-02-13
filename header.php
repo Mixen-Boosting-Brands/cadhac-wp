@@ -233,9 +233,9 @@
                                         <li class="list-inline-item">
                                             <a class="<?php if (
                                                 is_page(2214)
-                                            ): ?>active bg-highlighted<?php endif; ?>rounded-pill" href="<?php echo esc_url(
-    get_permalink(2214),
-); ?>"
+                                            ): ?>active bg-highlighted<?php endif; ?> rounded-pill" href="<?php echo esc_url(
+     get_permalink(2214),
+ ); ?>"
                                                 ><?php echo esc_html(
                                                     get_the_title(2214),
                                                 ); ?></a
