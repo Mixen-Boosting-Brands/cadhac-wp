@@ -153,7 +153,148 @@ $img_alt = is_array($imagen) ? $imagen["alt"] ?? "" : "";
     </div>
 </section>
 
+<?php
+/* =========================
+   CF → pagina_amores → timeline
+========================= */
 
+$pagina_amores = get_field("pagina_amores");
+
+if (!$pagina_amores || !isset($pagina_amores["timeline"])) {
+    return;
+}
+
+$timeline = $pagina_amores["timeline"];
+
+/* =========================
+   Texto superior (WYSIWYG)
+========================= */
+
+$texto_superior = "";
+if (isset($timeline["texto_superior"])) {
+    $texto_superior = $timeline["texto_superior"];
+}
+
+/* =========================
+   Items
+========================= */
+
+function tl($t, $key)
+{
+    return isset($t[$key]) ? $t[$key] : "";
+}
+
+$t1 = tl($timeline, "titulo_1");
+$p1 = tl($timeline, "texto_1");
+
+$t2 = tl($timeline, "titulo_2");
+$p2 = tl($timeline, "texto_2");
+
+$t3 = tl($timeline, "titulo_3");
+$p3 = tl($timeline, "texto_3");
+
+$t4 = tl($timeline, "titulo_4");
+$p4 = tl($timeline, "texto_4");
+
+$t5 = tl($timeline, "titulo_5");
+$p5 = tl($timeline, "texto_5");
+
+$t6 = tl($timeline, "titulo_6");
+$p6 = tl($timeline, "texto_6");
+?>
+
+<section id="timeline" class="pt-60 pb-30">
+
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-12">
+
+                <h1 data-aos="fade-up" data-aos-duration="1000">
+                    <?php echo wp_kses_post($texto_superior); ?>
+                </h1>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container position-relative">
+
+        <div
+            class="vertical-line"
+            data-aos="zoom-in"
+            data-aos-duration="3000"
+            data-aos-delay="500"
+        ></div>
+
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+
+                <!-- ROW 1 -->
+                <div id="row-1" class="row my-3 my-md-4" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
+                    <div class="col-md-6 text-md-end my-md-auto px-md-5">
+                        <h2><?php echo esc_html($t1); ?></h2>
+                    </div>
+                    <div class="col-md-6 my-md-auto px-md-5">
+                        <p><?php echo esc_html($p1); ?></p>
+                    </div>
+                </div>
+
+                <!-- ROW 2 -->
+                <div id="row-2" class="row my-3 my-md-4" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                    <div class="col-md-6 my-md-auto px-md-5 order-md-2">
+                        <h2><?php echo esc_html($t2); ?></h2>
+                    </div>
+                    <div class="col-md-6 text-md-end my-md-auto px-md-5 order-md-1">
+                        <p><?php echo esc_html($p2); ?></p>
+                    </div>
+                </div>
+
+                <!-- ROW 3 -->
+                <div id="row-3" class="row my-3 my-md-4" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
+                    <div class="col-md-6 text-md-end my-md-auto px-md-5">
+                        <h2><?php echo esc_html($t3); ?></h2>
+                    </div>
+                    <div class="col-md-6 my-md-auto px-md-5">
+                        <p><?php echo esc_html($p3); ?></p>
+                    </div>
+                </div>
+
+                <!-- ROW 4 -->
+                <div id="row-4" class="row my-3 my-md-4" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                    <div class="col-md-6 my-md-auto px-md-5 order-md-2">
+                        <h2><?php echo esc_html($t4); ?></h2>
+                    </div>
+                    <div class="col-md-6 text-md-end my-md-auto px-md-5 order-md-1">
+                        <p><?php echo esc_html($p4); ?></p>
+                    </div>
+                </div>
+
+                <!-- ROW 5 -->
+                <div id="row-5" class="row my-3 my-md-4" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
+                    <div class="col-md-6 text-md-end my-md-auto px-md-5">
+                        <h2><?php echo esc_html($t5); ?></h2>
+                    </div>
+                    <div class="col-md-6 my-md-auto px-md-5">
+                        <p><?php echo esc_html($p5); ?></p>
+                    </div>
+                </div>
+
+                <!-- ROW 6 -->
+                <div id="row-6" class="row my-3 my-md-4" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                    <div class="col-md-6 my-md-auto px-md-5 order-md-2">
+                        <h2><?php echo esc_html($t6); ?></h2>
+                    </div>
+                    <div class="col-md-6 text-md-end my-md-auto px-md-5 order-md-1">
+                        <p><?php echo esc_html($p6); ?></p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</section>
 
 <section class="pt-60 pb-30">
     <div class="container-fluid">
