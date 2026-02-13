@@ -54,28 +54,18 @@ $img_alt = is_array($imagen) ? $imagen["alt"] ?? "" : "";
                         data-aos="fade-up"
                         data-aos-duration="1000"
                     >
-                        <?php /**
-                         * Permite highlights manuales desde WYSIWYG
-                         * Ej:
-                         * <span class="highlighted-amores">Un caminar</span><br>
-                         * <span>compartido</span>
-                         */
-                        echo wp_kses_post($titulo); ?>
+                <?php echo wp_kses_post($titulo); ?>
                     </h1>
                 <?php endif; ?>
 
                 <?php if ($contenido): ?>
-
-                    <div class="contenido-amores">
-
-                        <?php /**
-                         * El WYSIWYG ya devuelve <p>
-                         * solo lo imprimimos respetando markup
-                         */
-                        echo wp_kses_post($contenido); ?>
-
+                    <div
+                        data-aos="fade-up"
+                        data-aos-duration="1000"
+                        data-aos-delay="200"
+                    >
+                <?php echo wp_kses_post($contenido); ?>
                     </div>
-
                 <?php endif; ?>
 
             </div>
