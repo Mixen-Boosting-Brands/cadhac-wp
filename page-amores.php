@@ -97,34 +97,66 @@ $img_alt = is_array($imagen) ? $imagen["alt"] ?? "" : "";
     </div>
 </section>
 
+<?php
+/* ==========================================================
+   CF → pagina_amores / banner_amores
+========================================================== */
+
+$pagina_amores = get_field("pagina_amores", "option");
+
+if (!$pagina_amores) {
+    return;
+}
+
+$banner = $pagina_amores["banner_amores"] ?? null;
+
+if (!$banner) {
+    return;
+}
+
+/* ==========================================================
+   Subfields
+========================================================== */
+
+$texto = $banner["texto"] ?? "";
+$imagen = $banner["imagen"] ?? "";
+
+/* Imagen → URL compatible */
+$img_url = is_array($imagen) ? $imagen["url"] : $imagen;
+$img_alt = is_array($imagen) ? $imagen["alt"] ?? "" : "";
+?>
+
 <section
     class="cta py-60"
-    style="
-        background-image: url(&quot;<?php echo esc_url(
-            get_template_directory_uri(),
-        ); ?>/assets/images/bg-cta-amores.png&quot;);
-    "
+    <?php if ($img_url): ?>
+        style="background-image:url('<?php echo esc_url($img_url); ?>');"
+    <?php endif; ?>
 >
     <div class="container-fluid">
+
         <div class="row">
             <div class="col-12">
-                <div class="w-100 arrow-right p-5 text-center"">
-                    <h1>
-                        La organización<br />
-                        entre <span class="highlighted serif" data-aos="fade-in" data-aos-duration="1000">mujeres</span
-                        ><br />
-                        transforma el dolor en<br />
-                        <span class="highlighted" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">fuerza colectiva.</span
-                        >
-                    </h1>
-                    <p>
-                        <i
-                            class="fa-solid fa-star-of-life highlighted"
-                        ></i>
-                    </p>
+
+                <div class="w-100 arrow-right p-5 text-center">
+
+                    <?php if ($texto): ?>
+
+                        <?php /**
+                         * Permitimos HTML completo del WYSIWYG:
+                         * - <span>
+                         * - data-aos
+                         * - <i> íconos
+                         * - <br>
+                         */
+                        echo wp_kses_post($texto); ?>
+
+                    <?php endif; ?>
+
                 </div>
+
             </div>
         </div>
+
     </div>
 </section>
 
