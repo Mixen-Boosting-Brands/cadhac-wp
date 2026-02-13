@@ -344,13 +344,13 @@ if (empty($items)) {
                 <?php endif; ?>
 
                 <?php if ($texto_inferior): ?>
-                    <p
+                    <div
                         data-aos="fade-up"
                         data-aos-duration="1000"
                         data-aos-delay="100"
                     >
                         <?php echo wp_kses_post($texto_inferior); ?>
-                    </p>
+                    </div>
                 <?php endif; ?>
 
             </div>
@@ -408,18 +408,6 @@ if (empty($items)) {
             ?>
 
         </div>
-
-        <!-- Texto inferior opcional -->
-        <?php if ($texto_inferior): ?>
-            <div class="row">
-                <div class="col-12 text-center">
-                    <p class="text-tertiary">
-                        <?php echo wp_kses_post($texto_inferior); ?>
-                    </p>
-                </div>
-            </div>
-        <?php endif; ?>
-
     </div>
 </section>
 
