@@ -153,15 +153,14 @@ $img_alt = is_array($imagen) ? $imagen["alt"] ?? "" : "";
                          * - data-aos
                          * - <i> íconos
                          * - <br>
-                         */<?php
-                        /**
+                         */<?php /**
                           * Permitimos HTML completo del WYSIWYG:
                           * - <span>
                           * - data-aos
                           * - <i> íconos
                           * - <br>
                           */
-                        echo wp_kses_post($texto); ?>
+                         echo wp_kses_post($texto); ?>
 
                     <?php endif; ?>
 
@@ -174,94 +173,58 @@ $img_alt = is_array($imagen) ? $imagen["alt"] ?? "" : "";
 </section>
 
 <?php
-/* =========================================================
+/* =========================
    CF → pagina_amores → timeline
-========================================================= */
+========================= */
 
-$pagina_amores = get_field("pagina_amores", "option");
-
-if (!$pagina_amores) {
-    return;
-}
-
-$timeline = $pagina_amores["timeline"] ?? null;
+$timeline = get_field("timeline", "option");
 
 if (!$timeline) {
     return;
 }
 
-/* =========================================================
-   Header
-========================================================= */
+/* =========================
+   Texto superior
+========================= */
 
 $texto_superior = $timeline["texto_superior"] ?? "";
 
-/* =========================================================
+/* =========================
    Items
-========================================================= */
+========================= */
 
-$items = [
-    [
-        "titulo" => $timeline["titulo_1"] ?? "",
-        "texto" => $timeline["texto_1"] ?? "",
-        "delay" => 100,
-        "reverse" => false,
-    ],
-    [
-        "titulo" => $timeline["titulo_2"] ?? "",
-        "texto" => $timeline["texto_2"] ?? "",
-        "delay" => 200,
-        "reverse" => true,
-    ],
-    [
-        "titulo" => $timeline["titulo_3"] ?? "",
-        "texto" => $timeline["texto_3"] ?? "",
-        "delay" => 100,
-        "reverse" => false,
-    ],
-    [
-        "titulo" => $timeline["titulo_4"] ?? "",
-        "texto" => $timeline["texto_4"] ?? "",
-        "delay" => 200,
-        "reverse" => true,
-    ],
-    [
-        "titulo" => $timeline["titulo_5"] ?? "",
-        "texto" => $timeline["texto_5"] ?? "",
-        "delay" => 100,
-        "reverse" => false,
-    ],
-    [
-        "titulo" => $timeline["titulo_6"] ?? "",
-        "texto" => $timeline["texto_6"] ?? "",
-        "delay" => 200,
-        "reverse" => true,
-    ],
-];
+$items = [];
+
+for ($i = 1; $i <= 6; $i++) {
+    $items[] = [
+        "titulo" => $timeline["titulo_$i"] ?? "",
+        "texto" => $timeline["texto_$i"] ?? "",
+    ];
+}
 ?>
 
 <section id="timeline" class="pt-60 pb-30">
 
-    <!-- =========================
-         Header
-    ========================== -->
     <div class="container">
+
         <div class="row mb-4">
+
             <div class="col-12">
 
-                <?php if ($texto_superior): ?>
-                    <h1 data-aos="fade-up" data-aos-duration="1000">
+                <h1 data-aos="fade-up" data-aos-duration="1000">
+
+                    <?php if ($texto_superior): ?>
                         <?php echo wp_kses_post($texto_superior); ?>
-                    </h1>
-                <?php endif; ?>
+                    <?php endif; ?>
+
+                </h1>
 
             </div>
+
         </div>
+
     </div>
 
-    <!-- =========================
-         Timeline Body
-    ========================== -->
     <div class="container position-relative">
 
         <div
@@ -276,25 +239,27 @@ $items = [
 
                 <?php foreach ($items as $index => $item):
 
-                    if (empty($item["titulo"]) || empty($item["texto"])) {
+                    if (empty($item["titulo"]) && empty($item["texto"])) {
                         continue;
                     }
 
-                    $row_id = "row-" . ($index + 1);
-                    $delay = $item["delay"];
-                    $reverse = $item["reverse"];
+                    $row_id = $index + 1;
+
+                    /* Alternancia SOLO visual */
+                    $is_even = $row_id % 2 === 0;
+
+                    $delay = $is_even ? 200 : 100;
                     ?>
 
                 <div
-                    id="<?php echo esc_attr($row_id); ?>"
+                    id="row-<?php echo esc_attr($row_id); ?>"
                     class="row my-3 my-md-4"
                     data-aos="fade-up"
                     data-aos-duration="1000"
                     data-aos-delay="<?php echo esc_attr($delay); ?>"
                 >
 
-                    <?php if (!$reverse): ?>
-
+                    <?php if (!$is_even): ?>
                         <!-- LEFT → TITLE -->
                         <div class="col-md-6 text-md-end my-md-auto px-md-5">
                             <h2>
@@ -305,26 +270,24 @@ $items = [
                         <!-- RIGHT → TEXT -->
                         <div class="col-md-6 my-md-auto px-md-5">
                             <p>
-                                <?php echo nl2br(esc_html($item["texto"])); ?>
+                                <?php echo esc_html($item["texto"]); ?>
                             </p>
                         </div>
 
                     <?php else: ?>
-
-                        <!-- LEFT → TEXT -->
+                        <!-- LEFT → TEXT (order-md-1 visually right) -->
                         <div class="col-md-6 text-md-end my-md-auto px-md-5 order-md-1">
                             <p>
-                                <?php echo nl2br(esc_html($item["texto"])); ?>
+                                <?php echo esc_html($item["texto"]); ?>
                             </p>
                         </div>
 
-                        <!-- RIGHT → TITLE -->
+                        <!-- RIGHT → TITLE (order-md-2 visually left) -->
                         <div class="col-md-6 my-md-auto px-md-5 order-md-2">
                             <h2>
                                 <?php echo esc_html($item["titulo"]); ?>
                             </h2>
                         </div>
-
                     <?php endif; ?>
 
                 </div>
@@ -334,6 +297,7 @@ $items = [
 
             </div>
         </div>
+
     </div>
 
 </section>
