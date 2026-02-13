@@ -337,20 +337,19 @@ if (empty($items)) {
         <!-- Header -->
         <div class="row mb-4">
             <div class="col-12 text-center">
-
-                <h1 data-aos="fade-up" data-aos-duration="1000">
-                    Acompañamiento<br />
-                    <span class="highlighted-gray">de</span>
-                    <span class="highlighted-light-purple">CADHAC</span>
-                </h1>
-
                 <?php if ($texto_superior): ?>
+                    <h1 data-aos="fade-up" data-aos-duration="1000">
+                        <?php echo wp_kses_post($texto_superior); ?>
+                    </h1>
+                <?php endif; ?>
+
+                <?php if ($texto_inferior): ?>
                     <p
                         data-aos="fade-up"
                         data-aos-duration="1000"
                         data-aos-delay="100"
                     >
-                        <?php echo wp_kses_post($texto_superior); ?>
+                        <?php echo wp_kses_post($texto_inferior); ?>
                     </p>
                 <?php endif; ?>
 
