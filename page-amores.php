@@ -391,7 +391,9 @@ if (empty($items)) {
                             <?php if ($texto): ?>
                                 <div class="card-body">
                                     <p class="card-text">
-                                        <?php echo wp_kses_post($texto); ?>
+                                        <strong>
+                                            <?php echo wp_kses_post($texto); ?>
+                                        </strong>
                                     </p>
                                 </div>
                             <?php endif; ?>
