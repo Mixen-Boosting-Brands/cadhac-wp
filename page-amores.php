@@ -141,14 +141,20 @@ $img_alt = is_array($imagen) ? $imagen["alt"] ?? "" : "";
 
                     <?php if ($texto): ?>
 
-                        <?php /**
+                         /**
                          * Permitimos HTML completo del WYSIWYG:
                          * - <span>
                          * - data-aos
                          * - <i> íconos
                          * - <br>
-                         */
-                        echo wp_kses_post($texto); ?>
+                         */<?php /**
+                          * Permitimos HTML completo del WYSIWYG:
+                          * - <span>
+                          * - data-aos
+                          * - <i> íconos
+                          * - <br>
+                          */
+                         echo wp_kses_post($texto); ?>
 
                     <?php endif; ?>
 
@@ -160,7 +166,66 @@ $img_alt = is_array($imagen) ? $imagen["alt"] ?? "" : "";
     </div>
 </section>
 
+<?php
+/* =========================================================
+   CF → pagina_amores → timeline
+========================================================= */
+
+$pagina_amores = get_field("pagina_amores", "option");
+
+if (!$pagina_amores) {
+    return;
+}
+
+$timeline = $pagina_amores["timeline"] ?? null;
+
+if (!$timeline) {
+    return;
+}
+
+/* =========================================================
+   Items timeline (6 fijos)
+========================================================= */
+
+$items = [
+    [
+        "titulo" => $timeline["titulo_1"] ?? "",
+        "texto" => $timeline["texto_1"] ?? "",
+    ],
+    [
+        "titulo" => $timeline["titulo_2"] ?? "",
+        "texto" => $timeline["texto_2"] ?? "",
+    ],
+    [
+        "titulo" => $timeline["titulo_3"] ?? "",
+        "texto" => $timeline["texto_3"] ?? "",
+    ],
+    [
+        "titulo" => $timeline["titulo_4"] ?? "",
+        "texto" => $timeline["texto_4"] ?? "",
+    ],
+    [
+        "titulo" => $timeline["titulo_5"] ?? "",
+        "texto" => $timeline["texto_5"] ?? "",
+    ],
+    [
+        "titulo" => $timeline["titulo_6"] ?? "",
+        "texto" => $timeline["texto_6"] ?? "",
+    ],
+];
+
+/* Filtrar vacíos */
+$items = array_filter($items, function ($item) {
+    return !empty($item["titulo"]) || !empty($item["texto"]);
+});
+
+if (empty($items)) {
+    return;
+}
+?>
+
 <section id="timeline" class="pt-60 pb-30">
+
     <div class="container">
         <div class="row mb-4">
             <div class="col-12">
@@ -168,146 +233,88 @@ $img_alt = is_array($imagen) ? $imagen["alt"] ?? "" : "";
                     <span>El camino</span><br />
                     <span class="highlighted-amores">de AMORES</span>
                 </h1>
-
             </div>
         </div>
     </div>
+
     <div class="container position-relative">
+
+        <!-- Línea vertical -->
         <div
             class="vertical-line"
             data-aos="zoom-in"
             data-aos-duration="3000"
             data-aos-delay="500"
         ></div>
+
         <div class="row">
             <div class="col-md-8 offset-md-2">
-                <div
-                    id="row-1"
-                    class="row my-3 my-md-4"
-                    data-aos="fade-up"
-                    data-aos-duration="1000"
-                    data-aos-delay="100"
-                >
-                    <div
-                        class="col-md-6 text-md-end my-md-auto px-md-5"
-                    >
-                        <h2>
-                            2011 · El inicio del encuentro
-                        </h2>
-                    </div>
-                    <div class="col-md-6 my-md-auto px-md-5">
-                        <p>
-                            Mujeres que buscan a sus seres queridos comienzan a reunirse para acompañarse, compartir experiencias y no enfrentar solas la desaparición.
-                        </p>
-                    </div>
-                </div>
+
+                <?php
+                $delay_base = 100;
+
+                foreach ($items as $index => $item):
+
+                    $is_even = $index % 2 !== 0; // alternancia
+                    $delay = $delay_base + $index * 100;
+                    ?>
 
                 <div
-                    id="row-2"
+                    id="row-<?php echo $index + 1; ?>"
                     class="row my-3 my-md-4"
                     data-aos="fade-up"
                     data-aos-duration="1000"
-                    data-aos-delay="200"
+                    data-aos-delay="<?php echo esc_attr($delay); ?>"
                 >
-                    <div class="col-md-6 my-md-auto px-md-5 order-md-2">
-                        <h2>
-                            2012–2013 · Organización y acompañamiento
-                        </h2>
-                    </div>
-                    <div
-                        class="col-md-6 text-md-end my-md-auto px-md-5 order-md-1"
-                    >
-                        <p>
-                            El grupo se fortalece como espacio de apoyo mutuo y comienza su caminar acompañado por CADHAC, construyendo procesos colectivos de cuidado, búsqueda y exigencia de justicia.
-                        </p>
-                    </div>
+
+                    <?php if (!$is_even): ?>
+                        <!-- LEFT TITLE -->
+                        <div class="col-md-6 text-md-end my-md-auto px-md-5">
+                            <?php if (!empty($item["titulo"])): ?>
+                                <h2>
+                                    <?php echo esc_html($item["titulo"]); ?>
+                                </h2>
+                            <?php endif; ?>
+                        </div>
+
+                        <!-- RIGHT TEXT -->
+                        <div class="col-md-6 my-md-auto px-md-5">
+                            <?php if (!empty($item["texto"])): ?>
+                                <p>
+                                    <?php echo esc_html($item["texto"]); ?>
+                                </p>
+                            <?php endif; ?>
+                        </div>
+
+                    <?php else: ?>
+                        <!-- RIGHT TITLE -->
+                        <div class="col-md-6 my-md-auto px-md-5 order-md-2">
+                            <?php if (!empty($item["titulo"])): ?>
+                                <h2>
+                                    <?php echo esc_html($item["titulo"]); ?>
+                                </h2>
+                            <?php endif; ?>
+                        </div>
+
+                        <!-- LEFT TEXT -->
+                        <div class="col-md-6 text-md-end my-md-auto px-md-5 order-md-1">
+                            <?php if (!empty($item["texto"])): ?>
+                                <p>
+                                    <?php echo esc_html($item["texto"]); ?>
+                                </p>
+                            <?php endif; ?>
+                        </div>
+                    <?php endif; ?>
+
                 </div>
 
-                <div
-                    id="row-3"
-                    class="row my-3 my-md-4"
-                    data-aos="fade-up"
-                    data-aos-duration="1000"
-                    data-aos-delay="100"
-                >
-                    <div
-                        class="col-md-6 text-md-end my-md-auto px-md-5"
-                    >
-                        <h2>
-                            2014–2016 · Voz pública e incidencia
-                        </h2>
-                    </div>
-                    <div class="col-md-6 my-md-auto px-md-5">
-                        <p>
-                            AMORES participa activamente en espacios de diálogo con autoridades y en acciones públicas para visibilizar la desaparición y exigir respuestas del Estado.
-                        </p>
-                    </div>
-                </div>
+                <?php
+                endforeach;
+                ?>
 
-                <div
-                    id="row-4"
-                    class="row my-3 my-md-4"
-                    data-aos="fade-up"
-                    data-aos-duration="1000"
-                    data-aos-delay="200"
-                >
-                    <div class="col-md-6 my-md-auto px-md-5 order-md-2">
-                        <h2>
-                            2017–2019 · Fortalecimiento colectivo
-                        </h2>
-                    </div>
-                    <div
-                        class="col-md-6 text-md-end my-md-auto px-md-5 order-md-1"
-                    >
-                        <p>
-                            El grupo consolida su organización, comparte aprendizajes con otras familias y se posiciona como un referente en la lucha contra la desaparición en Nuevo León y a nivel nacional.
-                        </p>
-                    </div>
-                </div>
-
-                <div
-                    id="row-5"
-                    class="row my-3 my-md-4"
-                    data-aos="fade-up"
-                    data-aos-duration="1000"
-                    data-aos-delay="100"
-                >
-                    <div
-                        class="col-md-6 text-md-end my-md-auto px-md-5"
-                    >
-                        <h2>
-                            2020–2022 · Resistencia y memoria
-                        </h2>
-                    </div>
-                    <div class="col-md-6 my-md-auto px-md-5">
-                        <p>
-                            A pesar de contextos adversos, AMORES mantiene su organización, el cuidado entre mujeres y la construcción de memoria colectiva como forma de resistencia.
-                        </p>
-                    </div>
-                </div>
-
-                <div
-                    id="row-6"
-                    class="row my-3 my-md-4"
-                    data-aos="fade-up"
-                    data-aos-duration="1000"
-                    data-aos-delay="200"
-                >
-                    <div class="col-md-6 my-md-auto px-md-5 order-md-2">
-                        <h2>
-                            2023–Hoy · Continuidad del camino
-                        </h2>
-                    </div>
-                    <div
-                        class="col-md-6 text-md-end my-md-auto px-md-5 order-md-1"
-                    >
-                        <p>
-                            AMORES continúa organizándose, acompañándose y exigiendo verdad y justicia, reafirmando que la búsqueda es colectiva y que la dignidad se defiende juntas.
-                        </p>
-                    </div>
-                </div>
             </div>
         </div>
+
     </div>
 </section>
 
