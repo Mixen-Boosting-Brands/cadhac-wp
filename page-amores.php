@@ -296,148 +296,131 @@ $p6 = tl_val($timeline, "texto_6");
 
 </section>
 
+<?php
+/* =========================
+   CF → pagina_amores
+========================= */
+
+$pagina_amores = get_field("pagina_amores", "option");
+
+if (!$pagina_amores) {
+    return;
+}
+
+$tarjetas = $pagina_amores["tarjetas"] ?? null;
+
+if (!$tarjetas) {
+    return;
+}
+
+/* Textos */
+$texto_superior = $tarjetas["texto_superior"] ?? "";
+$texto_inferior = $tarjetas["texto_inferior"] ?? "";
+
+/* Tarjetas */
+$items = [];
+
+for ($i = 1; $i <= 5; $i++) {
+    if (!empty($tarjetas["tarjeta_" . $i])) {
+        $items[] = $tarjetas["tarjeta_" . $i];
+    }
+}
+
+if (empty($items)) {
+    return;
+}
+?>
+
 <section class="pt-60 pb-30">
     <div class="container-fluid">
+
+        <!-- Header -->
         <div class="row mb-4">
             <div class="col-12 text-center">
+
                 <h1 data-aos="fade-up" data-aos-duration="1000">
                     Acompañamiento<br />
-                    <span class="highlighted-gray">de</span> <span class="highlighted-light-purple">CADHAC</span>
+                    <span class="highlighted-gray">de</span>
+                    <span class="highlighted-light-purple">CADHAC</span>
                 </h1>
-                <p
-                    data-aos="fade-up"
-                    data-aos-duration="1000"
-                    data-aos-delay="100"
-                >
-                    CADHAC acompaña a AMORES desde un enfoque integral que combina el apoyo jurídico, psicosocial, la documentación de casos y la incidencia pública, respetando siempre la autonomía, el liderazgo y las decisiones del grupo.
-                </p>
-                <p
-                    data-aos="fade-up"
-                    data-aos-duration="1000"
-                    data-aos-delay="200"
-                >
-                    <strong>Acompañar es caminar juntas, sin reemplazar la voz de las mujeres.</strong>
-                </p>
+
+                <?php if ($texto_superior): ?>
+                    <p
+                        data-aos="fade-up"
+                        data-aos-duration="1000"
+                        data-aos-delay="100"
+                    >
+                        <?php echo wp_kses_post($texto_superior); ?>
+                    </p>
+                <?php endif; ?>
+
             </div>
+        </div>
+
+        <!-- Cards -->
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-3 mb-5">
+
+            <?php
+            $delay = 100;
+
+            foreach ($items as $item):
+
+                $icono = $item["icono"] ?? "";
+                $texto = $item["texto"] ?? "";
+                ?>
+
+                <div class="col">
+
+                    <div
+                        class="card card-ico-center rounded-5 mb-4 mb-lg-0"
+                        data-aos="fade-up"
+                        data-aos-duration="1000"
+                        data-aos-delay="<?php echo esc_attr($delay); ?>"
+                    >
+                        <div>
+
+                            <?php if ($icono): ?>
+                                <img
+                                    src="<?php echo esc_url($icono); ?>"
+                                    class="ico"
+                                    alt=""
+                                    loading="lazy"
+                                    decoding="async"
+                                />
+                            <?php endif; ?>
+
+                            <?php if ($texto): ?>
+                                <div class="card-body">
+                                    <p class="card-text">
+                                        <strong>
+                                            <?php echo wp_kses_post($texto); ?>
+                                        </strong>
+                                    </p>
+                                </div>
+                            <?php endif; ?>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            <?php $delay += 100;
+            endforeach;
+            ?>
 
         </div>
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-3 mb-5">
-            <div class="col">
-                <div
-                    class="card card-ico-center rounded-5 mb-4 mb-lg-0"
-                    data-aos="fade-up"
-                    data-aos-duration="1000"
-                    data-aos-delay="100"
-                >
-                    <div>
-                        <img
-                            src="<?php echo esc_url(
-                                get_template_directory_uri(),
-                            ); ?>/assets/images/acompanamiento/ico-1@2x.png"
-                            class="ico"
-                            alt=""
-                        />
-                        <div class="card-body">
-                            <p class="card-text">
-                                <strong>Incidencia en políticas públicas relacionadas con la desaparición</strong>
-                            </p>
-                        </div>
-                    </div>
+
+        <!-- Texto inferior opcional -->
+        <?php if ($texto_inferior): ?>
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="text-tertiary">
+                        <?php echo wp_kses_post($texto_inferior); ?>
+                    </p>
                 </div>
             </div>
-            <div class="col">
-                <div
-                    class="card card-ico-center rounded-5 mb-4 mb-lg-0"
-                    data-aos="fade-up"
-                    data-aos-duration="1000"
-                    data-aos-delay="200"
-                >
-                    <div>
-                        <img
-                            src="<?php echo esc_url(
-                                get_template_directory_uri(),
-                            ); ?>/assets/images/acompanamiento/ico-2@2x.png"
-                            class="ico"
-                            alt=""
-                        />
-                        <div class="card-body">
-                            <p class="card-text">
-                                <strong>Participación activa en espacios de diálogo institucional</strong>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div
-                    class="card card-ico-center rounded-5 mb-4 mb-lg-0"
-                    data-aos="fade-up"
-                    data-aos-duration="1000"
-                    data-aos-delay="300"
-                >
-                    <div>
-                        <img
-                            src="<?php echo esc_url(
-                                get_template_directory_uri(),
-                            ); ?>/assets/images/acompanamiento/ico-3@2x.png"
-                            class="ico"
-                            alt=""
-                        />
-                        <div class="card-body">
-                            <p class="card-text">
-                                <strong>Fortalecimiento de procesos de búsqueda y exigencia de justicia</strong>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div
-                    class="card card-ico-center rounded-5 mb-4 mb-lg-0"
-                    data-aos="fade-up"
-                    data-aos-duration="1000"
-                    data-aos-delay="400"
-                >
-                    <div>
-                        <img
-                            src="<?php echo esc_url(
-                                get_template_directory_uri(),
-                            ); ?>/assets/images/acompanamiento/ico-4@2x.png"
-                            class="ico"
-                            alt=""
-                        />
-                        <div class="card-body">
-                            <p class="card-text">
-                                <strong>Construcción de memoria colectiva</strong>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div
-                    class="card card-ico-center rounded-5 mb-4 mb-lg-0"
-                    data-aos="fade-up"
-                    data-aos-duration="1000"
-                    data-aos-delay="500"
-                >
-                    <div>
-                        <img
-                            src="<?php echo esc_url(
-                                get_template_directory_uri(),
-                            ); ?>/assets/images/acompanamiento/ico-5@2x.png"
-                            class="ico"
-                            alt=""
-                        />
-                        <div class="card-body">
-                            <p class="card-text">
-                                <strong>Reconocimiento como grupo referente a nivel nacional</strong>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <?php endif; ?>
+
     </div>
 </section>
 
