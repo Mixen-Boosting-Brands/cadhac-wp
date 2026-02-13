@@ -141,26 +141,7 @@ $img_alt = is_array($imagen) ? $imagen["alt"] ?? "" : "";
 
                     <?php if ($texto): ?>
 
-                         /**
-                         * Permitimos HTML completo del WYSIWYG:
-                         * - <span>
-                         * - data-aos
-                         * - <i> íconos
-                         * - <br>
-                         */ /**
-                         * Permitimos HTML completo del WYSIWYG:
-                         * - <span>
-                         * - data-aos
-                         * - <i> íconos
-                         * - <br>
-                         */<?php /**
-                          * Permitimos HTML completo del WYSIWYG:
-                          * - <span>
-                          * - data-aos
-                          * - <i> íconos
-                          * - <br>
-                          */
-                         echo wp_kses_post($texto); ?>
+                        <?php echo wp_kses_post($texto); ?>
 
                     <?php endif; ?>
 
