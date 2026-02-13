@@ -156,9 +156,10 @@ $img_alt = is_array($imagen) ? $imagen["alt"] ?? "" : "";
 <?php
 /* =========================
    CF → pagina_amores → timeline
+   (OPTIONS PAGE)
 ========================= */
 
-$pagina_amores = get_field("pagina_amores");
+$pagina_amores = get_field("pagina_amores", "option");
 
 if (!$pagina_amores || !isset($pagina_amores["timeline"])) {
     return;
@@ -170,37 +171,36 @@ $timeline = $pagina_amores["timeline"];
    Texto superior (WYSIWYG)
 ========================= */
 
-$texto_superior = "";
-if (isset($timeline["texto_superior"])) {
-    $texto_superior = $timeline["texto_superior"];
-}
+$texto_superior = isset($timeline["texto_superior"])
+    ? $timeline["texto_superior"]
+    : "";
 
 /* =========================
-   Items
+   Helper seguro
 ========================= */
 
-function tl($t, $key)
+function tl_val($arr, $key)
 {
-    return isset($t[$key]) ? $t[$key] : "";
+    return isset($arr[$key]) ? $arr[$key] : "";
 }
 
-$t1 = tl($timeline, "titulo_1");
-$p1 = tl($timeline, "texto_1");
+$t1 = tl_val($timeline, "titulo_1");
+$p1 = tl_val($timeline, "texto_1");
 
-$t2 = tl($timeline, "titulo_2");
-$p2 = tl($timeline, "texto_2");
+$t2 = tl_val($timeline, "titulo_2");
+$p2 = tl_val($timeline, "texto_2");
 
-$t3 = tl($timeline, "titulo_3");
-$p3 = tl($timeline, "texto_3");
+$t3 = tl_val($timeline, "titulo_3");
+$p3 = tl_val($timeline, "texto_3");
 
-$t4 = tl($timeline, "titulo_4");
-$p4 = tl($timeline, "texto_4");
+$t4 = tl_val($timeline, "titulo_4");
+$p4 = tl_val($timeline, "texto_4");
 
-$t5 = tl($timeline, "titulo_5");
-$p5 = tl($timeline, "texto_5");
+$t5 = tl_val($timeline, "titulo_5");
+$p5 = tl_val($timeline, "texto_5");
 
-$t6 = tl($timeline, "titulo_6");
-$p6 = tl($timeline, "texto_6");
+$t6 = tl_val($timeline, "titulo_6");
+$p6 = tl_val($timeline, "texto_6");
 ?>
 
 <section id="timeline" class="pt-60 pb-30">
