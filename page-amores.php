@@ -8,69 +8,102 @@ get_header(); ?>
     "handle" => "pagina_amores",
 ]); ?>
 
+<?php
+/* ==========================================================
+   CF → pagina_amores / bloque_2
+========================================================== */
+
+$pagina_amores = get_field("pagina_amores", "option");
+
+if (!$pagina_amores) {
+    return;
+}
+
+$bloque = $pagina_amores["bloque_2"] ?? null;
+
+if (!$bloque) {
+    return;
+}
+
+/* ==========================================================
+   Subfields
+========================================================== */
+
+$titulo = $bloque["texto_superior"] ?? "";
+$contenido = $bloque["texto_inferior"] ?? "";
+$imagen = $bloque["imagen"] ?? "";
+
+/* Imagen → URL compatible */
+$img_url = is_array($imagen) ? $imagen["url"] : $imagen;
+$img_alt = is_array($imagen) ? $imagen["alt"] ?? "" : "";
+?>
+
 <section class="pt-60 pb-30">
     <div class="container-fluid">
+
         <div class="row">
+
+            <!-- =====================================================
+                 Columna izquierda
+            ====================================================== -->
             <div class="col-lg-6">
-                <h1
-                    class="lh-1"
-                    data-aos="fade-up"
-                    data-aos-duration="1000"
-                >
-                    <span class="highlighted-amores">Un caminar</span
-                    ><br />
-                    <span>compartido</span>
-                </h1>
-                <p
-                    data-aos="fade-up"
-                    data-aos-duration="1000"
-                    data-aos-delay="100"
-                >
-                    AMORES es un grupo de mujeres que se organiza para
-                    enfrentar la desaparición de sus seres queridos de
-                    manera colectiva.
-                    <strong
-                        >Es un espacio de encuentro, cuidado y acción
-                        ciudadana</strong
+
+                <?php if ($titulo): ?>
+                    <h1
+                        class="lh-1"
+                        data-aos="fade-up"
+                        data-aos-duration="1000"
                     >
-                    donde las mujeres fortalecen su voz, su autonomía y
-                    su capacidad de incidencia.
-                </p>
-                <p
-                    data-aos="fade-up"
-                    data-aos-duration="1000"
-                    data-aos-delay="200"
-                >
-                    <strong
-                        >Surge de la necesidad de no caminar solas
-                        frente a la desaparición.</strong
-                    >
-                </p>
-                <p
-                    data-aos="fade-up"
-                    data-aos-duration="1000"
-                    data-aos-delay="300"
-                >
-                    A través del encuentro entre mujeres, se construye
-                    un espacio de apoyo mutuo, aprendizaje y
-                    organización que, con el tiempo, se fortalece y se
-                    mantiene activo hasta hoy.
-                </p>
+                        <?php /**
+                         * Permite highlights manuales desde WYSIWYG
+                         * Ej:
+                         * <span class="highlighted-amores">Un caminar</span><br>
+                         * <span>compartido</span>
+                         */
+                        echo wp_kses_post($titulo); ?>
+                    </h1>
+                <?php endif; ?>
+
+                <?php if ($contenido): ?>
+
+                    <div class="contenido-amores">
+
+                        <?php /**
+                         * El WYSIWYG ya devuelve <p>
+                         * solo lo imprimimos respetando markup
+                         */
+                        echo wp_kses_post($contenido); ?>
+
+                    </div>
+
+                <?php endif; ?>
+
             </div>
+
+            <!-- =====================================================
+                 Imagen derecha
+            ====================================================== -->
             <div class="col-lg-6">
-                <div
-                    class="arrow-right home-image container-image bp-center rounded-5 p-4"
-                    style="
-                        background-image: url(&quot;<?php echo esc_url(
-                            get_template_directory_uri(),
-                        ); ?>/assets/images/bg-caminar.png&quot;);
-                    "
-                    data-aos="fade-up"
-                    data-aos="fade-up"
-                    data-aos-duration="1000"
-                ></div>
+
+                <?php if ($img_url): ?>
+
+                    <div
+                        class="arrow-right home-image container-image bp-center rounded-5 p-4"
+                        style="background-image:url('<?php echo esc_url(
+                            $img_url,
+                        ); ?>');"
+                        data-aos="fade-up"
+                        data-aos-duration="1000"
+                        role="img"
+                        aria-label="<?php echo esc_attr($img_alt); ?>"
+                    ></div>
+
+                <?php endif; ?>
+
             </div>
+
         </div>
+
     </div>
 </section>
 
