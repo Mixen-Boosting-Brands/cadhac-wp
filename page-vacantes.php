@@ -286,9 +286,9 @@ $banner_vacantes = $pagina_vacantes["banner_vacantes"] ?? null;
                 <div class="col-12">
                     <div class="w-100 arrow-right p-5 text-center">
                         <?php if (!empty($texto)): ?>
-                            <div class="cta-text">
+                            <h1>
                                 <?php echo wp_kses_post($texto); ?>
-                            </div>
+                            </h1>
                         <?php endif; ?>
                     </div>
                 </div>
