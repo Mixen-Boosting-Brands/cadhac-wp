@@ -232,7 +232,11 @@
                                         <nav>
                                             <ul class="list-unstyled mb-md-0">
                                                 <li>
-                                                    <a href="#">Mediateca</a>
+                                                    <a href="<?php echo esc_url(
+                                                        get_permalink(9002),
+                                                    ); ?>"><?php echo esc_html(
+    get_the_title(9002),
+); ?></a>
                                                 </li>
                                                 <li>
                                                     <a href="#">Vacantes</a>

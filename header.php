@@ -110,8 +110,10 @@
 ); ?></a>
                         </li>
                         <li>
-                            <a href="#"
-                                >Mediateca</a
+                            <a href="<?php echo esc_url(
+                                get_permalink(9002),
+                            ); ?>"
+                                ><?php echo esc_html(get_the_title(9002)); ?></a
                             >
                         </li>
                         <li>
@@ -242,8 +244,12 @@
                                             >
                                         </li>
                                         <li class="list-inline-item">
-                                            <a class="rounded-pill" href="#"
-                                                >Mediateca</a
+                                            <a class="rounded-pill" href="<?php echo esc_url(
+                                                get_permalink(9002),
+                                            ); ?>"
+                                                ><?php echo esc_html(
+                                                    get_the_title(9002),
+                                                ); ?></a
                                             >
                                         </li>
                                         <li class="list-inline-item">
