@@ -274,7 +274,7 @@ $banner_vacantes = $pagina_vacantes["banner_vacantes"] ?? null;
 
     <?php if (!empty($imagen)): ?>
         <section
-            class="cta py-60"
+            class="cta-vacantes py-60"
             style="background-image:url('<?php echo esc_url($imagen); ?>');"
         >
     <?php else: ?>
