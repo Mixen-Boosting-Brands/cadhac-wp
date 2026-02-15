@@ -262,14 +262,14 @@ if (empty($items)) {
 
 <?php
 $pagina_vacantes = get_field("pagina_vacantes", "option");
-$banner = $pagina_vacantes["banner"] ?? null;
+$banner_vacantes = $pagina_vacantes["banner_vacantes"] ?? null;
 ?>
 
 <?php if ($banner): ?>
 
     <?php
-    $texto = $banner["texto"] ?? "";
-    $imagen = $banner["imagen"] ?? "";
+    $texto = $banner_vacantes["texto"] ?? "";
+    $imagen = $banner_vacantes"imagen"] ?? "";
     ?>
 
     <?php if (!empty($imagen)): ?>
