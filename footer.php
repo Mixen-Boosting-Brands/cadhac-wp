@@ -239,7 +239,11 @@
 ); ?></a>
                                                 </li>
                                                 <li>
-                                                    <a href="#">Vacantes</a>
+                                                    <a href="<?php echo esc_url(
+                                                        get_permalink(4724),
+                                                    ); ?>"><?php echo esc_html(
+    get_the_title(4724),
+); ?></a>
                                                 </li>
                                                 <li>
                                                     <a href="<?php echo esc_url(

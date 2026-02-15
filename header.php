@@ -117,8 +117,10 @@
                             >
                         </li>
                         <li>
-                            <a href="#"
-                                >Vacantes</a
+                            <a href="<?php echo esc_url(
+                                get_permalink(4724),
+                            ); ?>"
+                                ><?php echo esc_html(get_the_title(4724)); ?></a
                             >
                         </li>
                         <li>
@@ -255,8 +257,14 @@
                                             >
                                         </li>
                                         <li class="list-inline-item">
-                                            <a class="rounded-pill" href="#"
-                                                >Vacantes</a
+                                            <a class="<?php if (
+                                                is_page(4724)
+                                            ): ?>active<?php endif; ?> rounded-pill" href="<?php echo esc_url(
+     get_permalink(4724),
+ ); ?>"
+                                                ><?php echo esc_html(
+                                                    get_the_title(4724),
+                                                ); ?></a
                                             >
                                         </li>
                                         <li class="list-inline-item">
