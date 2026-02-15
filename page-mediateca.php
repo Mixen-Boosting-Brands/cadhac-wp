@@ -8,11 +8,7 @@ get_header(); ?>
     "handle" => "pagina_mediateca",
 ]); ?>
 
- /* ==========================================================
-   CATEGORÍAS MEDIATECA
-========================================================== */<?php
-
-$cats = get_categories([
+<?php $cats = get_categories([
     "taxonomy" => "category",
     "include" => [32, 93], // Publicaciones, Videos
     "orderby" => "include",
