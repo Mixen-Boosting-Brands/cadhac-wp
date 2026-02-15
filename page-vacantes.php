@@ -265,7 +265,7 @@ $pagina_vacantes = get_field("pagina_vacantes", "option");
 $banner_vacantes = $pagina_vacantes["banner_vacantes"] ?? null;
 ?>
 
-<?php if ($banner): ?>
+<?php if ($banner_vacantes): ?>
 
     <?php
     $texto = $banner_vacantes["texto"] ?? "";
