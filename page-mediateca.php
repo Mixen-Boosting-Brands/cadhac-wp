@@ -8,64 +8,237 @@ get_header(); ?>
     "handle" => "pagina_mediateca",
 ]); ?>
 
-<?php
-$is_publicacion = has_category(32, get_the_ID());
-$is_video = has_category(93, get_the_ID());
-$pdf = get_field("pdf_file", get_the_ID());
-?>
+<?php /* ==========================================================
+   CATEGORÍAS MEDIATECA
+========================================================== */
 
-<div class="text-end">
+$cats = get_categories([
+    "taxonomy" => "category",
+    "include" => [32, 93], // Publicaciones, Videos
+    "orderby" => "include",
+    "hide_empty" => false,
+]); ?>
 
-    <?php if ($is_publicacion): ?>
+<!-- Mediateca -->
+<section class="tabulador pt-60 pb-30">
+    <div class="container-fluid">
 
-        <?php if ($pdf): ?>
+        <!-- Header -->
+        <div class="row" data-aos="fade-up" data-aos-duration="1000">
 
-            <!-- Descargar PDF -->
-            <a
-                href="<?php echo esc_url($pdf); ?>"
-                class="btn btn-primary rounded-pill"
-                download
+            <div class="col-6 my-auto">
+                <h1>Mediateca</h1>
+            </div>
+
+            <div class="col-6 my-auto text-end">
+                <ul class="nav nav-pills mb-0" id="pills-mediateca" role="tablist">
+
+                    <?php
+                    $i = 0;
+                    foreach ($cats as $cat): ?>
+                        <?php $active = $i === 0 ? "active" : ""; ?>
+
+                        <li class="nav-item" role="presentation">
+                            <button
+                                class="nav-link rounded-pill <?php echo $active; ?>"
+                                data-bs-toggle="pill"
+                                data-bs-target="#pills-<?php echo esc_attr(
+                                    $cat->slug,
+                                ); ?>"
+                                type="button"
+                                role="tab"
+                            >
+                                <?php echo esc_html($cat->name); ?>
+                            </button>
+                        </li>
+
+                    <?php $i++;endforeach;
+                    ?>
+
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="row" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
+            <div class="col-12">
+                <hr />
+            </div>
+        </div>
+
+        <!-- Tabs Content -->
+        <div class="tab-content" id="pills-mediatecaContent">
+
+            <?php
+            $i = 0;
+
+            foreach ($cats as $cat):
+
+                $active = $i === 0 ? "show active" : "";
+
+                /* ==========================================
+                   CACHE
+                ========================================== */
+                $cache_key = "mediateca_cat_" . $cat->term_id;
+                $posts = get_transient($cache_key);
+
+                if ($posts === false) {
+                    $q = new WP_Query([
+                        "post_type" => "post",
+                        "posts_per_page" => 6,
+                        "cat" => $cat->term_id,
+                        "no_found_rows" => true,
+                        "update_post_meta_cache" => false,
+                        "update_post_term_cache" => false,
+                    ]);
+
+                    $posts = $q->posts;
+
+                    set_transient($cache_key, $posts, HOUR_IN_SECONDS * 6);
+                }
+                ?>
+
+            <!-- TAB PANE -->
+            <div
+                class="tab-pane fade <?php echo $active; ?>"
+                id="pills-<?php echo esc_attr($cat->slug); ?>"
+                role="tabpanel"
             >
-                <i class="fa-solid fa-file-pdf"></i>
-                Descargar PDF
-            </a>
 
-        <?php else: ?>
+                <div class="row">
 
-            <!-- Ver más (fallback publicaciones) -->
-            <a
-                href="<?php the_permalink(); ?>"
-                class="btn btn-primary rounded-pill"
-            >
-                <i class="fa-solid fa-arrow-right"></i>
-                Ver más
-            </a>
+                    <?php if (!empty($posts)): ?>
 
-        <?php endif; ?>
+                        <?php
+                        foreach ($posts as $post):
 
-    <?php elseif ($is_video): ?>
+                            setup_postdata($post);
 
-        <!-- Ver video -->
-        <a
-            href="<?php the_permalink(); ?>"
-            class="btn btn-primary rounded-pill"
-        >
-            <i class="fa-solid fa-play"></i>
-            Ver video
-        </a>
+                            $image = get_post_card_image(get_the_ID());
 
-    <?php else: ?>
+                            /* ===============================
+                               CONTEXTO CATEGORÍA
+                            =============================== */
+                            $is_publicacion = $cat->term_id == 32;
+                            $is_video = $cat->term_id == 93;
 
-        <!-- Fallback global -->
-        <a
-            href="<?php the_permalink(); ?>"
-            class="btn-card"
-        >
-            <i class="fas fa-arrow-right"></i>
-        </a>
+                            $pdf = get_field("pdf_file", get_the_ID());
+                            ?>
 
-    <?php endif; ?>
+                        <div class="col-lg-4">
+                            <div class="card rounded-5 mb-4 mb-lg-0">
 
-</div>
+                                <?php if (!empty($image)): ?>
+                                    <a href="<?php the_permalink(); ?>">
+                                        <img
+                                            src="<?php echo esc_url($image); ?>"
+                                            class="card-img-top rounded-5"
+                                            alt="<?php echo esc_attr(
+                                                get_the_title(),
+                                            ); ?>"
+                                            loading="lazy"
+                                            decoding="async"
+                                        />
+                                    </a>
+                                <?php endif; ?>
+
+                                <div class="card-body">
+
+                                    <date class="card-date">
+                                        <?php echo get_the_date("d M Y"); ?>
+                                    </date>
+
+                                    <a href="<?php the_permalink(); ?>">
+                                        <h1 class="card-title">
+                                            <?php the_title(); ?>
+                                        </h1>
+                                    </a>
+
+                                    <p class="card-text">
+                                        <?php echo wp_trim_words(
+                                            get_the_excerpt(),
+                                            18,
+                                        ); ?>
+                                    </p>
+
+                                    <!-- ===============================
+                                         BOTÓN DINÁMICO
+                                    =============================== -->
+                                    <div class="text-end">
+
+                                        <?php if ($is_publicacion): ?>
+
+                                            <?php if ($pdf): ?>
+
+                                                <!-- Descargar PDF -->
+                                                <a
+                                                    href="<?php echo esc_url(
+                                                        $pdf,
+                                                    ); ?>"
+                                                    class="btn btn-primary rounded-pill"
+                                                    download
+                                                >
+                                                    <i class="fa-solid fa-file-pdf"></i>
+                                                    Descargar PDF
+                                                </a>
+
+                                            <?php else: ?>
+
+                                                <!-- Ver más -->
+                                                <a
+                                                    href="<?php the_permalink(); ?>"
+                                                    class="btn btn-primary rounded-pill"
+                                                >
+                                                    <i class="fa-solid fa-arrow-right"></i>
+                                                    Ver más
+                                                </a>
+
+                                            <?php endif; ?>
+
+                                        <?php elseif ($is_video): ?>
+
+                                            <!-- Ver video -->
+                                            <a
+                                                href="<?php the_permalink(); ?>"
+                                                class="btn btn-primary rounded-pill"
+                                            >
+                                                <i class="fa-solid fa-play"></i>
+                                                Ver video
+                                            </a>
+
+                                        <?php endif; ?>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <?php
+                        endforeach;
+                        wp_reset_postdata();
+                        ?>
+
+                    <?php else: ?>
+
+                        <!-- TAB VACÍO -->
+                        <div class="col-12 text-center py-5">
+                            <p class="mb-0">
+                                No hay contenido disponible en esta categoría por el momento.
+                            </p>
+                        </div>
+
+                    <?php endif; ?>
+
+                </div>
+            </div>
+
+            <?php $i++;
+            endforeach;
+            ?>
+
+        </div>
+    </div>
+</section>
 
 <?php get_footer(); ?>
