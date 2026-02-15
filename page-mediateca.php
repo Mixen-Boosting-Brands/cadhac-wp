@@ -8,9 +8,9 @@ get_header(); ?>
     "handle" => "pagina_mediateca",
 ]); ?>
 
-<?php /* ==========================================================
+ /* ==========================================================
    CATEGORÍAS MEDIATECA
-========================================================== */
+========================================================== */<?php
 
 $cats = get_categories([
     "taxonomy" => "category",
@@ -27,7 +27,7 @@ $cats = get_categories([
         <div class="row" data-aos="fade-up" data-aos-duration="1000">
 
             <div class="col-6 my-auto">
-                <h1>Mediateca</h1>
+                <h1>Voces y acciones</h1>
             </div>
 
             <div class="col-6 my-auto text-end">
@@ -65,6 +65,10 @@ $cats = get_categories([
                 <hr />
             </div>
         </div>
+
+        <p>
+            Información reciente, comunicados públicos y actividades de CADHAC en el contexto actual de los derechos humanos.
+        </p>
 
         <!-- Tabs Content -->
         <div class="tab-content" id="pills-mediatecaContent">
