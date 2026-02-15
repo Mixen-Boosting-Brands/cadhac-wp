@@ -269,7 +269,7 @@ $banner_vacantes = $pagina_vacantes["banner_vacantes"] ?? null;
 
     <?php
     $texto = $banner_vacantes["texto"] ?? "";
-    $imagen = $banner_vacantes"imagen"] ?? "";
+    $imagen = $banner_vacantes["imagen"] ?? "";
     ?>
 
     <?php if (!empty($imagen)): ?>
