@@ -16,7 +16,7 @@ $cats = get_categories([
     "taxonomy" => "category",
     "include" => [32, 93], // Publicaciones / Videos
     "orderby" => "include",
-    "hide_empty" => true,
+    "hide_empty" => false,
 ]); ?>
 
 <section class="tabulador pt-60 pb-30">
@@ -150,11 +150,11 @@ foreach ($posts as $post):
             <!-- CTA -->
             <div class="mt-auto text-end">
 
-            <?php /* =========================
+             /* =========================
                BOTÓN DINÁMICO
-            ========================= */
+            ========================= */<?php
 
-            if ($cat->slug === "publicaciones" && $pdf_url): ?>
+    if ($cat->slug === "publicaciones" && $pdf_url): ?>
 
                 <a
                     href="<?php echo esc_url($pdf_url); ?>"
