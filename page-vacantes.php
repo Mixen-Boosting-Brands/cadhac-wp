@@ -225,7 +225,7 @@ if (empty($items)) {
                                 <p class="card-text">
                                     <?php echo wp_trim_words(
                                         get_the_excerpt(),
-                                        150,
+                                        250,
                                     ); ?>
                                 </p>
 
