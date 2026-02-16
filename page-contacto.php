@@ -91,6 +91,10 @@ $texto_inferior = $bloque_3["texto_inferior"] ?? "";
         <?php endif; ?>
         <div class="row">
             <div class="col-lg-6 mb-4 mb-xl-0">
+                <?php echo do_shortcode(
+                    '[contact-form-7 id="b686994" title="Contacto"]',
+                ); ?>
+
                 <div id="form-messages"></div>
 
                 <form
