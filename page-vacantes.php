@@ -144,121 +144,137 @@ if (empty($items)) {
 
 </section>
 
+<?php /* =========================================
+   QUERY → Vacantes
+========================================= */
+$q = new WP_Query([
+    "post_type" => "post",
+    "posts_per_page" => 2,
+    "cat" => 94,
+    "no_found_rows" => true,
+]); ?>
+
+<?php if ($q->have_posts()): ?>
+
 <section id="listado-vacantes" class="pt-30 pb-60">
     <div class="container-fluid">
+
         <div class="row">
-            <!-- Full Width Card -->
-            <div class="col-12">
-                <div class="card rounded-5 mb-4">
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                            <img
-                                src="./assets/images/vacantes/thumb-card.png"
-                                class="img-fluid rounded-start"
-                                alt=""
-                            />
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <span>
-                                    Monterrey, Nuevo León
-                                </span>
-                                <a href="#">
-                                    <h1
-                                        class="card-title"
-                                    >
-                                        Vacante - <span>Área Jurídica</span>
-                                    </h1>
-                                </a>
-                                <p class="card-text">
-                                    <strong>
-                                        Únete a la promoción y defensa de los derechos humanos desde el acompañamiento jurídico integral.
-                                    </strong>
-                                </p>
-                                <p class="card-text">
-                                    En CADHAC buscamos a una persona comprometida con los derechos humanos para integrarse al área jurídica, acompañando a víctimas y familias en procesos de exigencia de verdad y justicia, con una mirada ética, sensible y profesional.
-                                </p>
-                                <ul class="list-unstyled">
-                                    <li>
-                                        📩 Envía tu CV a <a href="mailto:nadia.gh@cadhac.org">nadia.gh@cadhac.org</a>
-                                    </li>
-                                    <li>
-                                        📌 Asunto: "Jurídico"
-                                    </li>
-                                </ul>
-                                <div class="text-end">
-                                    <a
-                                        href="#"
-                                        class="btn-card"
-                                    >
-                                        <i
-                                            class="fas fa-arrow-right"
-                                        ></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+            <?php
+            while ($q->have_posts()):
+
+                $q->the_post();
+
+                /* ================================
+                   CF
+                ================================ */
+                $ubicacion = get_field("ubicacion") ?: "";
+
+                /* ================================
+                   Imagen fallback
+                ================================ */
+                if (has_post_thumbnail()) {
+                    $image = get_the_post_thumbnail_url(get_the_ID(), "large");
+                } else {
+                    // Buscar primera imagen del contenido
+                    preg_match(
+                        '/<img.+src=[\'"]([^\'"]+)[\'"].*>/i',
+                        get_the_content(),
+                        $matches,
+                    );
+
+                    $image =
+                        $matches[1] ??
+                        get_template_directory_uri() .
+                            "/assets/images/vacantes/thumb-card.png";
+                }
+                ?>
 
             <!-- Full Width Card -->
             <div class="col-12">
                 <div class="card rounded-5 mb-4">
+
                     <div class="row g-0">
+
+                        <!-- Image -->
                         <div class="col-md-4">
                             <img
-                                src="./assets/images/vacantes/thumb-card.png"
+                                src="<?php echo esc_url($image); ?>"
                                 class="img-fluid rounded-start"
-                                alt=""
+                                alt="<?php echo esc_attr(get_the_title()); ?>"
+                                loading="lazy"
+                                decoding="async"
                             />
                         </div>
+
+                        <!-- Content -->
                         <div class="col-md-8">
                             <div class="card-body">
-                                <span>
-                                    Monterrey, Nuevo León
-                                </span>
-                                <a href="#">
-                                    <h1
-                                        class="card-title"
-                                    >
-                                        Vacante - <span>Abogada/Abogado</span>
+
+                                <?php if ($ubicacion): ?>
+                                    <span>
+                                        <?php echo esc_html($ubicacion); ?>
+                                    </span>
+                                <?php endif; ?>
+
+                                <a href="<?php the_permalink(); ?>">
+                                    <h1 class="card-title">
+                                        Vacante - <span><?php the_title(); ?></span>
                                     </h1>
                                 </a>
+
                                 <p class="card-text">
-                                    <strong>
-                                        Para integrarse al área jurídica de CADHAC.
-                                    </strong>
+                                    <?php echo wp_trim_words(
+                                        get_the_excerpt(),
+                                        35,
+                                    ); ?>
                                 </p>
-                                <p class="card-text">
-                                    En CADHAC buscamos a una persona comprometida con los derechos humanos para integrarse al área jurídica, acompañando a víctimas y familias en procesos de exigencia de verdad y justicia, con una mirada ética, sensible y profesional.
-                                </p>
-                                <ul class="list-unstyled">
-                                    <li>
-                                        📩 Envía tu CV a <a href="mailto:nadia.gh@cadhac.org">nadia.gh@cadhac.org</a>
-                                    </li>
-                                    <li>
-                                        📌 Asunto: "Jurídico"
-                                    </li>
-                                </ul>
+
                                 <div class="text-end">
                                     <a
-                                        href="#"
+                                        href="<?php the_permalink(); ?>"
                                         class="btn-card"
                                     >
-                                        <i
-                                            class="fas fa-arrow-right"
-                                        ></i>
+                                        <i class="fas fa-arrow-right"></i>
                                     </a>
                                 </div>
+
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
+
+            <?php
+            endwhile;
+            wp_reset_postdata();
+            ?>
+
         </div>
+
+        <!-- CTA -->
+        <div class="row">
+            <div class="col-12 text-center">
+
+                <?php $cat_link = get_category_link(94); ?>
+
+                <a
+                    class="btn btn-primary rounded-pill"
+                    href="<?php echo esc_url($cat_link); ?>"
+                    target="_blank"
+                >
+                    Ver más vacantes
+                </a>
+
+            </div>
+        </div>
+
     </div>
 </section>
+
+<?php endif; ?>
 
 <?php
 $pagina_vacantes = get_field("pagina_vacantes", "option");
