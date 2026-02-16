@@ -144,9 +144,10 @@ if (empty($items)) {
 
 </section>
 
-<?php /* =========================================
+ /* =========================================
    QUERY → Vacantes
-========================================= */
+========================================= */<?php
+
 $q = new WP_Query([
     "post_type" => "post",
     "posts_per_page" => 2,
@@ -227,7 +228,7 @@ $q = new WP_Query([
                                 <p class="card-text">
                                     <?php echo wp_trim_words(
                                         get_the_excerpt(),
-                                        35,
+                                        50,
                                     ); ?>
                                 </p>
 
