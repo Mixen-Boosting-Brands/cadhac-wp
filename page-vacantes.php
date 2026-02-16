@@ -144,7 +144,6 @@ if (empty($items)) {
 
 </section>
 
-
 <?php $q = new WP_Query([
     "post_type" => "post",
     "posts_per_page" => 2,
@@ -152,12 +151,12 @@ if (empty($items)) {
     "no_found_rows" => true,
 ]); ?>
 
-<?php if ($q->have_posts()): ?>
-
 <section id="listado-vacantes" class="pt-30 pb-60">
     <div class="container-fluid">
 
         <div class="row">
+
+        <?php if ($q->have_posts()): ?>
 
             <?php
             while ($q->have_posts()):
@@ -175,7 +174,6 @@ if (empty($items)) {
                 if (has_post_thumbnail()) {
                     $image = get_the_post_thumbnail_url(get_the_ID(), "large");
                 } else {
-                    // Buscar primera imagen del contenido
                     preg_match(
                         '/<img.+src=[\'"]([^\'"]+)[\'"].*>/i',
                         get_the_content(),
@@ -189,7 +187,7 @@ if (empty($items)) {
                 }
                 ?>
 
-            <!-- Full Width Card -->
+            <!-- Card -->
             <div class="col-12">
                 <div class="card rounded-5 mb-4">
 
@@ -250,9 +248,45 @@ if (empty($items)) {
             wp_reset_postdata();
             ?>
 
+        <?php else: ?>
+
+            <!-- ================================
+                 EMPTY STATE
+            ================================ -->
+            <div class="col-12">
+
+                <div class="card rounded-5 p-5 text-center">
+
+                    <h2 class="mb-3">
+                        No hay vacantes disponibles por el momento
+                    </h2>
+
+                    <p class="mb-4 text-muted">
+                        Actualmente no contamos con convocatorias abiertas.
+                        Te invitamos a volver pronto o seguir nuestras redes
+                        para futuras oportunidades.
+                    </p>
+
+                    <div>
+                        <a
+                            href="<?php echo esc_url(home_url("/contacto")); ?>"
+                            class="btn btn-primary rounded-pill"
+                        >
+                            Envíanos tu CV
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        <?php endif; ?>
+
         </div>
 
-        <!-- CTA -->
+        <!-- CTA solo si hay posts -->
+        <?php if ($q->have_posts()): ?>
+
         <div class="row">
             <div class="col-12 text-center">
 
@@ -269,10 +303,10 @@ if (empty($items)) {
             </div>
         </div>
 
+        <?php endif; ?>
+
     </div>
 </section>
-
-<?php endif; ?>
 
 <?php
 $pagina_vacantes = get_field("pagina_vacantes", "option");
