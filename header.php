@@ -160,7 +160,9 @@
                             </a>
                         </div>
                         <div class="col-6 col-md-3">
-                            <a class="rounded-pill" href="#" target="_blank">
+                            <a class="rounded-pill" href="<?php echo esc_url(
+                                get_permalink(5329),
+                            ); ?>">
                                 <i class="fa-solid fa-hand-holding-heart"></i>
                                 <?php if (is_home()): ?>
                                     Quiero ayudar
