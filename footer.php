@@ -180,89 +180,74 @@
                 <div class="row mb-3 mb-md-5" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
                     <div class="col-md-7 mb-2 mb-md-0">
                         <div class="row">
+                            <?php
+                            /* ==========================================
+                               Obtener menú footer
+                            ========================================== */
+                            $locations = get_nav_menu_locations();
+
+                            if (!isset($locations["footer-menu"])) {
+                                return;
+                            }
+
+                            $menu_id = $locations["footer-menu"];
+                            $menu_items = wp_get_nav_menu_items($menu_id);
+
+                            if (!$menu_items) {
+                                return;
+                            }
+
+                            /* ==========================================
+                               Partir en grupos de 5
+                            ========================================== */
+                            $chunks = array_chunk($menu_items, 5);
+                            ?>
+
                             <div class="col-6 col-md-4">
+
+                                <!-- Title -->
                                 <div class="row">
                                     <div class="col-12">
                                         <h5 class="mb-2 mb-md-4">Menú</h5>
                                     </div>
                                 </div>
+
+                                <!-- Columns wrapper -->
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <nav>
-                                            <ul
-                                                class="list-unstyled mb-0 mb-md-4"
-                                            >
-                                                <li>
-                                                    <a href="<?php echo esc_url(
-                                                        home_url(),
-                                                    ); ?>">Inicio</a>
-                                                </li>
-                                                <li>
-                                                    <a href="<?php echo esc_url(
-                                                        get_permalink(8862),
-                                                    ); ?>"><?php echo esc_html(
-    get_the_title(8862),
-); ?></a>
-                                                </li>
-                                                <li>
-                                                    <a href="<?php echo esc_url(
-                                                        get_permalink(373),
-                                                    ); ?>"><?php echo esc_html(
-    get_the_title(373),
-); ?></a>
-                                                </li>
-                                                <li>
-                                                    <a href="<?php echo esc_url(
-                                                        get_permalink(8900),
-                                                    ); ?>"><?php echo esc_html(
-    get_the_title(8900),
-); ?></a>
-                                                </li>
-                                                <li>
-                                                    <a href="<?php echo esc_url(
-                                                        get_permalink(2214),
-                                                    ); ?>"><?php echo esc_html(
-    get_the_title(2214),
-); ?></a>
-                                                </li>
-                                            </ul>
-                                        </nav>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <nav>
-                                            <ul class="list-unstyled mb-md-0">
-                                                <li>
-                                                    <a href="<?php echo esc_url(
-                                                        get_permalink(9002),
-                                                    ); ?>"><?php echo esc_html(
-    get_the_title(9002),
-); ?></a>
-                                                </li>
-                                                <li>
-                                                    <a href="<?php echo esc_url(
-                                                        get_permalink(4724),
-                                                    ); ?>"><?php echo esc_html(
-    get_the_title(4724),
-); ?></a>
-                                                </li>
-                                                <li>
-                                                    <a href="<?php echo esc_url(
-                                                        get_permalink(8693),
-                                                    ); ?>"><?php echo esc_html(
-    get_the_title(8693),
-); ?></a>
-                                                </li>
-                                                <li>
-                                                    <a href="<?php echo esc_url(
-                                                        get_permalink(5334),
-                                                    ); ?>"><?php echo esc_html(
-    get_the_title(5334),
-); ?></a>
-                                                </li>
-                                            </ul>
-                                        </nav>
-                                    </div>
+
+                                    <?php foreach ($chunks as $chunk): ?>
+
+                                        <div class="col-md-6">
+
+                                            <nav>
+                                                <ul class="list-unstyled mb-0 mb-md-4">
+
+                                                    <?php foreach (
+                                                        $chunk
+                                                        as $item
+                                                    ): ?>
+
+                                                        <li>
+                                                            <a href="<?php echo esc_url(
+                                                                $item->url,
+                                                            ); ?>">
+                                                                <?php echo esc_html(
+                                                                    $item->title,
+                                                                ); ?>
+                                                            </a>
+                                                        </li>
+
+                                                    <?php endforeach; ?>
+
+                                                </ul>
+                                            </nav>
+
+                                        </div>
+
+                                    <?php endforeach; ?>
+
                                 </div>
+
                             </div>
                             <div class="col-6 offset-md-2">
                                 <h5 class="mb-2 mb-md-4">Contacto</h5>
