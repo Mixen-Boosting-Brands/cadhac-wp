@@ -80,7 +80,7 @@ get_header(); ?>
                    CACHE
                 ========================================== */
                 $cache_key = "mediateca_cat_" . $cat->term_id;
-                $posts = false;
+                $posts = get_transient($cache_key);
 
                 if ($posts === false) {
                     $q = new WP_Query([
