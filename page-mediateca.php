@@ -223,10 +223,10 @@ get_header(); ?>
 
                         <!-- TAB VACÍO -->
                         <div class="col-12 text-center py-5">
-                            <div class="card">
+                            <div class="card rounded-5">
                                 <div class="card-body">
                                     <h5 class="card-title">No hay contenido disponible en esta categoría por el momento.</h5>
-                                    <p class="card-text">Por favor, inténtalo más tarde.</p>
+                                    <p class="card-text mb-0">Por favor, inténtalo más tarde.</p>
                                 </div>
                             </div>
                         </div>
