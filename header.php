@@ -76,68 +76,17 @@
                         ); ?>/assets/images/logo-dark@2x.png"
                     />
                 </a>
+                <!-- Mobile navigation -->
                 <nav role="navigation">
-                    <ul id="navmenu" class="list-unstyled mb-0">
-                        <li>
-                            <a href="#"
-                                >Inicio</a
-                            >
-                        </li>
-                        <li>
-                            <a href="<?php echo esc_url(
-                                get_permalink(8862),
-                            ); ?>"
-                                ><?php echo esc_html(get_the_title(8862)); ?></a
-                            >
-                        </li>
-                        <li>
-                            <a href="<?php echo esc_url(get_permalink(373)); ?>"
-                                ><?php echo esc_html(get_the_title(373)); ?></a
-                            >
-                        </li>
-                        <li>
-                            <a href="<?php echo esc_url(
-                                get_permalink(8900),
-                            ); ?>"
-                                ><?php echo esc_html(get_the_title(8900)); ?></a
-                            >
-                        </li>
-                        <li>
-                            <a href="<?php echo esc_url(
-                                get_permalink(2214),
-                            ); ?>"><?php echo esc_html(
-    get_the_title(2214),
-); ?></a>
-                        </li>
-                        <li>
-                            <a href="<?php echo esc_url(
-                                get_permalink(9002),
-                            ); ?>"
-                                ><?php echo esc_html(get_the_title(9002)); ?></a
-                            >
-                        </li>
-                        <li>
-                            <a href="<?php echo esc_url(
-                                get_permalink(4724),
-                            ); ?>"
-                                ><?php echo esc_html(get_the_title(4724)); ?></a
-                            >
-                        </li>
-                        <li>
-                            <a href="<?php echo esc_url(
-                                get_permalink(8693),
-                            ); ?>"><?php echo esc_html(
-    get_the_title(8693),
-); ?></a>
-                        </li>
-                        <li>
-                            <a href="<?php echo esc_url(
-                                get_permalink(5334),
-                            ); ?>"
-                                ><?php echo esc_html(get_the_title(5334)); ?></a
-                            >
-                        </li>
-                    </ul>
+
+                    <?php wp_nav_menu([
+                        "theme_location" => "header-menu", // mismo location que desktop
+                        "container" => false,
+                        "menu_id" => "navmenu", // respeta tu ID actual
+                        "menu_class" => "list-unstyled mb-0",
+                        "fallback_cb" => false,
+                    ]); ?>
+
                 </nav>
                 <a href="<?php echo esc_url(
                     get_permalink(5334),
