@@ -155,7 +155,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-6 col-md-9">
-                            <a class="rounded-pill" href="#" target="_blank">
+                            <a class="rounded-pill" href="#necesitas-ayuda" target="_blank">
                                 <i class="fa-solid fa-heart"></i> Necesito ayuda
                             </a>
                         </div>
