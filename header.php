@@ -198,104 +198,16 @@
                         </div>
                         <div class="col-6 col-lg-9 my-auto">
                             <div class="nav-wrapper d-flex align-items-center justify-content-end">
+                                <!-- Navigation -->
                                 <nav class="d-none d-lg-block" role="navigation">
-                                    <ul class="list-inline mb-0">
-                                        <li class="list-inline-item">
-                                            <a class="<?php if (
-                                                is_home()
-                                            ): ?>active<?php endif; ?> rounded-pill" href="<?php echo esc_url(
-     home_url(),
- ); ?>"
-                                                >Inicio</a
-                                            >
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="<?php if (
-                                                is_page(8862)
-                                            ): ?>active<?php endif; ?> rounded-pill" href="<?php echo esc_url(
-     get_permalink(8862),
- ); ?>"
-                                                ><?php echo esc_html(
-                                                    get_the_title(8862),
-                                                ); ?></a
-                                            >
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="<?php if (
-                                                is_page(373)
-                                            ): ?>active<?php endif; ?> rounded-pill" href="<?php echo esc_url(
-     get_permalink(373),
- ); ?>"
-                                                ><?php echo esc_html(
-                                                    get_the_title(373),
-                                                ); ?></a
-                                            >
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="rounded-pill" href="<?php echo esc_url(
-                                                get_permalink(8900),
-                                            ); ?>"
-                                                ><?php echo esc_html(
-                                                    get_the_title(8900),
-                                                ); ?></a
-                                            >
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="<?php if (
-                                                is_page(2214)
-                                            ): ?>active bg-highlighted<?php endif; ?> rounded-pill" href="<?php echo esc_url(
-     get_permalink(2214),
- ); ?>"
-                                                ><?php echo esc_html(
-                                                    get_the_title(2214),
-                                                ); ?></a
-                                            >
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="<?php if (
-                                                is_page(9002)
-                                            ): ?>active<?php endif; ?> rounded-pill" href="<?php echo esc_url(
-     get_permalink(9002),
- ); ?>"
-                                                ><?php echo esc_html(
-                                                    get_the_title(9002),
-                                                ); ?></a
-                                            >
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="<?php if (
-                                                is_page(4724)
-                                            ): ?>active<?php endif; ?> rounded-pill" href="<?php echo esc_url(
-     get_permalink(4724),
- ); ?>"
-                                                ><?php echo esc_html(
-                                                    get_the_title(4724),
-                                                ); ?></a
-                                            >
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="<?php if (
-                                                is_page(8693)
-                                            ): ?>active<?php endif; ?> rounded-pill" href="<?php echo esc_url(
-     get_permalink(8693),
- ); ?>"
-                                                ><?php echo esc_html(
-                                                    get_the_title(8693),
-                                                ); ?></a
-                                            >
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="<?php if (
-                                                is_page(5334)
-                                            ): ?>active<?php endif; ?> rounded-pill" href="<?php echo esc_url(
-     get_permalink(5334),
- ); ?>"
-                                                ><?php echo esc_html(
-                                                    get_the_title(5334),
-                                                ); ?></a
-                                            >
-                                        </li>
-                                    </ul>
+
+                                <?php wp_nav_menu([
+                                    "theme_location" => "primary_menu",
+                                    "container" => false,
+                                    "menu_class" => "list-inline mb-0",
+                                    "fallback_cb" => false,
+                                ]); ?>
+
                                 </nav>
 
                                 <!-- Search -->
