@@ -202,7 +202,7 @@
                                 <nav class="d-none d-lg-block" role="navigation">
 
                                     <?php wp_nav_menu([
-                                        "theme_location" => "primary_menu",
+                                        "theme_location" => "header-menu",
                                         "container" => false,
                                         "menu_class" => "list-inline mb-0",
                                         "fallback_cb" => false,
