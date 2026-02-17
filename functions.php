@@ -556,3 +556,25 @@ require get_template_directory() . '/inc/acf-helpers.php';
 require get_template_directory() . '/inc/contact-helpers.php';
 require get_template_directory() . '/inc/get-post-card-image.php';
 require get_template_directory() . '/inc/cache-helpers.php';
+
+/*------------------------------------*\
+     Limpiar caché de Mediateca al guardar posts
+\*------------------------------------*/
+
+add_action("save_post", function ($post_id) {
+
+    // Evitar autosaves / revisiones
+    if (wp_is_post_autosave($post_id) || wp_is_post_revision($post_id)) {
+        return;
+    }
+
+    $cats = wp_get_post_categories($post_id);
+
+    if (empty($cats)) {
+        return;
+    }
+
+    foreach ($cats as $cat_id) {
+        delete_transient("mediateca_cat_" . $cat_id);
+    }
+});
