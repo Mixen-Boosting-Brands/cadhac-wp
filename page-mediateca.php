@@ -223,9 +223,12 @@ get_header(); ?>
 
                         <!-- TAB VACÍO -->
                         <div class="col-12 text-center py-5">
-                            <p class="mb-0">
-                                No hay contenido disponible en esta categoría por el momento.
-                            </p>
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">No hay contenido disponible en esta categoría por el momento.</h5>
+                                    <p class="card-text">Por favor, inténtalo más tarde.</p>
+                                </div>
+                            </div>
                         </div>
 
                     <?php endif; ?>
