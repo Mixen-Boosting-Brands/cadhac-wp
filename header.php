@@ -80,9 +80,9 @@
                 <nav role="navigation">
 
                     <?php wp_nav_menu([
-                        "theme_location" => "header-menu", // mismo location que desktop
+                        "theme_location" => "header-menu",
                         "container" => false,
-                        "menu_id" => "navmenu", // respeta tu ID actual
+                        "menu_id" => "navmenu",
                         "menu_class" => "list-unstyled mb-0",
                         "fallback_cb" => false,
                     ]); ?>
