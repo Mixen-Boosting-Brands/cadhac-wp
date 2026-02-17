@@ -15,7 +15,7 @@ $icono_1 = $tarjeta_1["icono"] ?? "";
 $icono_2 = $tarjeta_2["icono"] ?? "";
 ?>
 
-<section class="<?php if (
+<section id="necesitas-ayuda" class="<?php if (
     is_home()
 ): ?>pt-60 pb-30<?php else: ?>py-60<?php endif; ?>">
     <div class="container-fluid">
