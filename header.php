@@ -201,13 +201,13 @@
                                 <!-- Navigation -->
                                 <nav class="d-none d-lg-block" role="navigation">
 
-                                <?php wp_nav_menu([
-                                    "theme_location" => "primary_menu",
-                                    "container" => false,
-                                    "menu_class" => "list-inline mb-0",
-                                    "fallback_cb" => false,
-                                    "walker" => new CADHAC_Header_Walker(),
-                                ]); ?>
+                                    <?php wp_nav_menu([
+                                        "theme_location" => "primary_menu",
+                                        "container" => false,
+                                        "menu_class" => "list-inline mb-0",
+                                        "fallback_cb" => false,
+                                        "walker" => new CADHAC_Header_Walker(),
+                                    ]); ?>
 
                                 </nav>
 
