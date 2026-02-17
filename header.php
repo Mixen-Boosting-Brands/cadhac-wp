@@ -206,6 +206,7 @@
                                     "container" => false,
                                     "menu_class" => "list-inline mb-0",
                                     "fallback_cb" => false,
+                                    "walker" => new CADHAC_Header_Walker(),
                                 ]); ?>
 
                                 </nav>
