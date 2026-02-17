@@ -578,3 +578,29 @@ add_action("save_post", function ($post_id) {
         delete_transient("mediateca_cat_" . $cat_id);
     }
 });
+
+
+/*------------------------------------*\
+     Walker para el menú del header
+\*------------------------------------*/
+
+class CADHAC_Header_Walker extends Walker_Nav_Menu
+{
+    function start_el(&$output, $item, $depth = 0, $args = null, $id = 0)
+    {
+        $classes = implode(" ", $item->classes);
+
+        $active = in_array("current-menu-item", $item->classes) ||
+                  in_array("current_page_item", $item->classes)
+                  ? "active"
+                  : "";
+
+        $output .= '<li class="list-inline-item">';
+
+        $output .= '<a class="rounded-pill ' . $active . ' ' . esc_attr($classes) . '" href="' . esc_url($item->url) . '">';
+
+        $output .= esc_html($item->title);
+
+        $output .= '</a></li>';
+    }
+}
